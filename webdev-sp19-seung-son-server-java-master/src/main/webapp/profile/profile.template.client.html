@@ -1,0 +1,35 @@
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="profile.style.client.css">
+</head>
+<body class="container">
+	<div id="profile">
+		<h1 class="title">Profile</h1>
+		<div class="alert alert-success" role="alert">
+			Profile successfully saved!
+		</div>
+		<p>Username:</p>
+		<input class="form-control myinput" id="usernameFld"
+			placeholder="Alice" readonly />
+		<p>Phone:</p>
+		<input class="form-control myinput" id="phoneFld"
+			placeholder="(555)123-4324" />
+		<p>Email:</p>
+		<input class="form-control myinput" id="emailFld"
+			placeholder="alice@wonderland.com" />
+		<p>Role:</p>
+		<select class="selectpicker myinput" id="roleFld">
+			<option>Faculty</option>
+			<option>Student</option>
+			<option>Admin</option>
+		</select>
+		<p>Date of Birth:</p>
+		<input class="form-control myinput" id="dobFld"
+			placeholder="mm/dd/yyyy" type="date" />
+	</div>
+	<button id="updateBtn" class="btn btn-success">Update</button>
+	<a class="btn btn-danger" href="/index.html">Logout</a>
+</body>
+</html>
