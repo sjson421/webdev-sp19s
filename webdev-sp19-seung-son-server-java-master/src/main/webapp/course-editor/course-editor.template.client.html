@@ -244,9 +244,7 @@
 				<br>
 			</form>
 			<h4>Preview</h4>
-			<ul>
-				<li>Image would show here</li>
-			</ul>
+			<p>Image would show here</p>
 		</div>
 		<br><br>
 		<div class="border container">
@@ -280,12 +278,12 @@
 				</a>
 			</div>
 			<form class="form-group">
-				<textarea class="form-control" col="4" placeholder="Enter one list item per line"></textarea>
+				<input class="form-control" type="text" id="linkText"
+					placeholder="Link text">
 				<br>
-				<select class = "form-control">
-					<option selected>Unordered list</option>
-					<option>Ordered list</option>
-				</select>
+				<label for = "linkUrl">Enter the link URL</label>
+				<input class="form-control" type="text" id="linkUrl"
+					placeholder="Link URL">
 				<br>
 				<label for="listWidgetName">Enter the name for the widget</label>
 				<input class="form-control" type="text" id="listWidgetName"
@@ -293,9 +291,7 @@
 				<br>
 			</form>
 			<h4>Preview</h4>
-			<ul>
-				<li>Enter one list item per line</li>
-			</ul>
+			<a href = "#">Link text</a>
 		</div>
 	</div>
 </body>
