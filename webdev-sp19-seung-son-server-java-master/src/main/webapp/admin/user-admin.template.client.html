@@ -17,6 +17,7 @@
 </head>
 <body>
 	<div class="container-fluid">
+		<h1 id="h1">User Admin</h1>
 		<table class="table">
 			<thead>
 				<tr class="thead">
@@ -25,69 +26,44 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Role</th>
-					<th>DOB</th>
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="wbdv-form">
-					<th><input id="usernameFld" class="form-control"
-						placeholder="username" /></th>
-					<th><input id="passwordFld" class="form-control"
-						placeholder="password" /></th>
-					<th><input id="firstNameFld" class="form-control"
-						placeholder="first name" /></th>
-					<th><input id="lastNameFld" class="form-control"
-						placeholder="last name" /></th>
-					<th><select id="roleFld" class="form-control">
-							<option value = "FACULTY">Faculty</option>
-							<option value = "STUDENT">Student</option>
-							<option value = "ADMIN">Admin</option>
-					</select></th>
-					<th><input class="form-control" type="date" /></th>
-					<th><a class="btn btn-light">
-							<i class="fas fa-search wbdv-search"></i>
-						</a></th>
-					<th><a class="btn btn-light">
-							<i class="fas fa-plus wbdv-create"></i>
-						</a></th>
-					<th><a class="btn btn-light">
-							<i class="fas fa-check wbdv-update"></i>
-						</a></th>
-				</tr>
-				<tr>
-					<td>alice</td>
-					<td>****</td>
-					<td>Alice</td>
-					<td>Wonderland</td>
-					<td>Faculty</td>
-					<td>11/22/1968</td>
-					<td></td>
-					<td><a class="btn btn-light">
-							<i class="fas fa-times"></i>
-						</a></td>
-					<td><a class="btn btn-light">
-							<i class="fas fa-pencil-alt"></i>
-						</a></td>
-				</tr>
-				<tr>
-					<td>bob</td>
-					<td>****</td>
-					<td>Bob</td>
-					<td>Marley</td>
-					<td>Student</td>
-					<td>10/12/1982</td>
-					<td></td>
-					<td><a class="btn btn-light">
-							<i class="fas fa-times"></i>
-						</a></td>
-					<td><a class="btn btn-light">
-							<i class="fas fa-pencil-alt"></i>
-						</a></td>
+			<tr class="wbdv-form">
+				<td><input id="usernameFld" class="form-control"
+					placeholder="username" /></td>
+				<td><input id="passwordFld" class="form-control"
+					placeholder="password" /></td>
+				<td><input id="firstNameFld" class="form-control"
+					placeholder="first name" /></td>
+				<td><input id="lastNameFld" class="form-control"
+					placeholder="last name" /></td>
+				<td><select id="roleFld" class="form-control">
+						<option value="FACULTY">Faculty</option>
+						<option value="STUDENT">Student</option>
+						<option value="ADMIN">Admin</option>
+				</select></td>
+				<td><span class="float-right" style="white-space: nowrap">
+						<i class="fa-2x fa fa-search wbdv-search icon"></i> <i
+						class="fa-2x fa fa-plus wbdv-create icon"></i> <i
+						class="fa-2x fa fa-check wbdv-update icon"></i>
+				</span></td>
+
+			</tr>
+			<tbody class="wbdv-tbody">
+				<tr class="wbdv-template wbdv-user wbdv-hidden">
+					<td class="wbdv-username">ada</td>
+					<td>&nbsp;</td>
+					<td class="wbdv-first-name">Ada</td>
+					<td class="wbdv-last-name">Lovelace</td>
+					<td class="wbdv-role">FACULTY</td>
+					<td class="wbdv-actions"><span class="float-right"> <i
+							id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove icon"></i>
+							<i id="wbdv-edit" class="fa-2x fa fa-pencil-alt wbdv-edit icon"></i>
+					</span></td>
 				</tr>
 			</tbody>
+
 		</table>
 	</div>
 </body>

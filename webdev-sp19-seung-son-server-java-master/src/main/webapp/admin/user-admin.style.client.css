@@ -1,3 +1,11 @@
+#h1 {
+	margin-bottom: 20
+}
+
 .thead {
 	background-color: #AFFDFF;
+}
+
+.icon {
+	margin: 0px 10px
 }
