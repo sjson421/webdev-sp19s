@@ -7,8 +7,9 @@ function AdminUserServiceClient() {
 	this.url = 'http://localhost:8080/api/user';
 	var self = this;
 	function createUser(user) {
-		return fetch(url + '/' + userId, {
-		    method: 'PUT'
+		return fetch(url, {
+		    method: 'POST',
+		    body: user
 		  })
 		  .then(response => response.json());
 	}
@@ -25,7 +26,7 @@ function AdminUserServiceClient() {
 	function updateUser(userId, user) {
 		return fetch(url + '/' + userId, {
 		    method: 'PUT',
-	    	body: JSON.stringify(user)
+	    	body: user
 		  })
 		  .then(response => response.json());
 	}
