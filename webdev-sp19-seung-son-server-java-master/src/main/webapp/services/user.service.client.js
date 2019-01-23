@@ -1,3 +1,4 @@
+
 function AdminUserServiceClient() {
 	this.createUser = createUser;
 	this.findAllUsers = findAllUsers;
@@ -5,11 +6,14 @@ function AdminUserServiceClient() {
 	this.deleteUser = deleteUser;
 	this.updateUser = updateUser;
 	this.url = 'http://localhost:8080/api/user';
-	var self = this;
+	
 	function createUser(user) {
-		return fetch(url, {
-		    method: 'POST',
-		    body: user
+		return fetch(this.url, {
+			method: 'POST',
+	    	headers : {
+	    		'Content-Type' : 'application/json'
+	    	},
+	    	body: JSON.stringify(user)
 		  })
 		  .then(response => response.json());
 	}
@@ -24,16 +28,27 @@ function AdminUserServiceClient() {
 		});
 	}
 	function updateUser(userId, user) {
-		return fetch(url + '/' + userId, {
+		return fetch(this.url + '/' + userId, {
 		    method: 'PUT',
-	    	body: user
+	    	headers : {
+	    		'Content-Type' : 'application/json'
+	    	},
+	    	body: JSON.stringify(user)
 		  })
 		  .then(response => response.json());
 	}
 	function deleteUser(userId) {
-		return fetch(url + '/' + userId, {
+		return fetch(this.url + '/' + userId, {
 		    method: 'DELETE'
 		  })
-		  .then(response => response.json());
+		  .then(response => {
+			  response.json()
+	});
 	}
+// function searchUsers(query) {
+// return fetch(this.url {
+// body: query
+// })
+// .then(response => response.json());
+// }
 }
