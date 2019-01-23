@@ -40,7 +40,6 @@ public class UserService {
 		String role = query.getRole();
 
 		List<User> searchedUsers = new ArrayList<User>();
-
 		for (int i = 0; i < users.length; i++) {
 			searchedUsers.add(users[i]);
 		}
@@ -48,36 +47,46 @@ public class UserService {
 		if (username != "") {
 			for (int i = 0; i < searchedUsers.size(); i++) {
 				User user = searchedUsers.get(i);
-				if (!user.getUsername().equals(username))
+				if (!user.getUsername().equals(username)) {
 					searchedUsers.remove(user);
+					i -= 1;
+				}
 			}
 		}
 		if (password != "") {
 			for (int i = 0; i < searchedUsers.size(); i++) {
 				User user = searchedUsers.get(i);
-				if (!user.getPassword().equals(password))
+				if (!user.getPassword().equals(password)) {
 					searchedUsers.remove(user);
+					i -= 1;
+				}
 			}
 		}
 		if (firstName != "") {
 			for (int i = 0; i < searchedUsers.size(); i++) {
 				User user = searchedUsers.get(i);
-				if (!user.getFirstName().equals(firstName))
+				if (!user.getFirstName().equals(firstName)) {
 					searchedUsers.remove(user);
+					i -= 1;
+				}
 			}
 		}
 		if (lastName != "") {
 			for (int i = 0; i < searchedUsers.size(); i++) {
 				User user = searchedUsers.get(i);
-				if (!user.getLastName().equals(lastName))
+				if (!user.getLastName().equals(lastName)) {
 					searchedUsers.remove(user);
+					i -= 1;
+				}
 			}
 		}
 		if (role != "") {
 			for (int i = 0; i < searchedUsers.size(); i++) {
 				User user = searchedUsers.get(i);
-				if (!user.getRole().equals(role))
+				if (!user.getRole().equals(role)) {
 					searchedUsers.remove(user);
+					i -= 1;
+				}
 			}
 		}
 		User[] newUsers = new User[searchedUsers.size()];
@@ -111,7 +120,7 @@ public class UserService {
 				}
 
 				allUsers.remove(user);
-				
+
 				User[] newUsers = new User[allUsers.size()];
 				for (int i = 0; i < allUsers.size(); i++) {
 					newUsers[i] = allUsers.get(i);
@@ -134,13 +143,13 @@ public class UserService {
 					allUsers.add(users[i]);
 				}
 				allUsers.set(i, newUser);
-				
+
 				for (int j = 0; j < allUsers.size(); j++) {
 					users[i] = allUsers.get(i);
 				}
 				break;
 			}
-			
+
 		}
 		return newUser;
 	}

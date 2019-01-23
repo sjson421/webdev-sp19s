@@ -110,6 +110,6 @@
 			lastName : $lastNameFld.val(),
 			role : $roleFld.val()
 		}
-		userService.searchUser(query).then(findAllUsers);
+		userService.searchUser(query).then(renderUsers);
 	}
 })();

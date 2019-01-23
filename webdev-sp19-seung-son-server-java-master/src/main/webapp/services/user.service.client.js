@@ -54,8 +54,6 @@ function AdminUserServiceClient() {
 	    	},
 			body: JSON.stringify(query)
 		})
-		.then(response => {
-			response.json()
-		})
+		.then(response => response.json());
 	}
 }
