@@ -35,7 +35,6 @@
 			lastName : $lastNameFld.val(),
 			role : $roleFld.val()
 		}
-		console.log(user);
 		userService.createUser(user).then(findAllUsers)
 		
 	}
