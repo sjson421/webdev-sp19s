@@ -88,7 +88,8 @@ public class UserService {
 		for (int i = 0; i < users.length; i++) {
 			newUsers[i] = users[i];
 		}
-		newUsers[users.length] = user;
+		int n = users.length;
+		newUsers[n] = user;
 		users = newUsers;
 
 		return user;
