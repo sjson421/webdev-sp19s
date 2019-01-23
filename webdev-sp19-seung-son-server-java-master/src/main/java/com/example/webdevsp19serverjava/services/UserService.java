@@ -132,7 +132,9 @@ public class UserService {
 				for (int j = 0; j < allUsers.size(); j++) {
 					users[i] = allUsers.get(i);
 				}
+				break;
 			}
+			
 		}
 		return newUser;
 	}
