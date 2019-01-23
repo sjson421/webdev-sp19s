@@ -31,7 +31,8 @@ public class UserService {
 		return null;
 	}
 
-	public User[] searchUsers(@RequestBody User query) {
+	@RequestMapping("api/user")
+	public User[] searchUser(@RequestBody User query) {
 		String username = query.getUsername();
 		String password = query.getPassword();
 		String firstName = query.getFirstName();
@@ -45,32 +46,37 @@ public class UserService {
 		}
 
 		if (username != "") {
-			for (User user : users) {
-				if (user.getUsername() == username)
+			for (int i = 0; i < searchedUsers.size(); i++) {
+				User user = searchedUsers.get(i);
+				if (!user.getUsername().equals(username))
 					searchedUsers.remove(user);
 			}
 		}
 		if (password != "") {
-			for (User user : users) {
-				if (user.getPassword() == password)
+			for (int i = 0; i < searchedUsers.size(); i++) {
+				User user = searchedUsers.get(i);
+				if (!user.getPassword().equals(password))
 					searchedUsers.remove(user);
 			}
 		}
 		if (firstName != "") {
-			for (User user : users) {
-				if (user.getFirstName() == firstName)
+			for (int i = 0; i < searchedUsers.size(); i++) {
+				User user = searchedUsers.get(i);
+				if (!user.getFirstName().equals(firstName))
 					searchedUsers.remove(user);
 			}
 		}
 		if (lastName != "") {
-			for (User user : users) {
-				if (user.getLastName() == lastName)
+			for (int i = 0; i < searchedUsers.size(); i++) {
+				User user = searchedUsers.get(i);
+				if (!user.getLastName().equals(lastName))
 					searchedUsers.remove(user);
 			}
 		}
 		if (role != "") {
-			for (User user : users) {
-				if (user.getRole() == role)
+			for (int i = 0; i < searchedUsers.size(); i++) {
+				User user = searchedUsers.get(i);
+				if (!user.getRole().equals(role))
 					searchedUsers.remove(user);
 			}
 		}
@@ -78,8 +84,7 @@ public class UserService {
 		for (int i = 0; i < searchedUsers.size(); i++) {
 			newUsers[i] = searchedUsers.get(i);
 		}
-		users = newUsers;
-		return users;
+		return newUsers;
 	}
 
 	@PostMapping("/api/user")

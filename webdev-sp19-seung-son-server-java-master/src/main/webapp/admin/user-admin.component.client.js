@@ -11,7 +11,7 @@
 		$firstNameFld = $("#firstNameFld");
 		$lastNameFld = $("#lastNameFld");
 		$roleFld = $("#roleFld")
-		$searchBtn = $("#wbdv-search");
+		$searchBtn = $(".wbdv-search");
 		$removeBtn = $("#wbdv-remove");
 		$editBtn = $("#wbdv-edit");
 		$createBtn = $(".wbdv-create");
@@ -20,7 +20,7 @@
 
 		findAllUsers();
 
-		$searchBtn.click(searchUsers);
+		$searchBtn.click(searchUser);
 		$createBtn.click(createUser);
 	}
 	function createUser(event) {
@@ -101,15 +101,15 @@
 			$editIcon.click(findUserById);
 		}
 	}
-	function searchUsers() {
+	function searchUser() {
 		const query = {
 			id : 0,
-			username : $usernameFld,
-			password : $passwordFld,
-			firstName : $firstNameFld,
-			lastName : $lastNameFld,
-			role : $roleFld
+			username : $usernameFld.val(),
+			password : $passwordFld.val(),
+			firstName : $firstNameFld.val(),
+			lastName : $lastNameFld.val(),
+			role : $roleFld.val()
 		}
-		userService.searchUsers(query).then(renderUsers);
+		userService.searchUser(query).then(findAllUsers);
 	}
 })();
