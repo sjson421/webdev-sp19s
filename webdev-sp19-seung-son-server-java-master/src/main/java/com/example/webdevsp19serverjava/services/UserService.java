@@ -105,6 +105,7 @@ public class UserService {
 					allUsers.add(users[i]);
 				}
 
+				allUsers.remove(user);
 				
 				User[] newUsers = new User[allUsers.size()];
 				for (int i = 0; i < allUsers.size(); i++) {
