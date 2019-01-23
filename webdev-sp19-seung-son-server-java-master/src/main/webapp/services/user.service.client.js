@@ -19,15 +19,14 @@ function AdminUserServiceClient() {
 		  .then(response => response.json());
 	}
 	function findAllUsers() {
-		return fetch(this.url, {
-			mode: "no-cors"
-		})
-		.then(response => response.json());
+		return fetch(this.url).then(function(response) {
+			return response.json();
+		});
 	}
 	function findUserById(userId) {
-		return fetch(this.url + "/" + userId, {
-			mode: "no-cors"
-		}).then(response => response.json());
+		return fetch(this.url + "/" + userId).then(function(response) {
+			return response.json();
+		});
 	}
 	function updateUser(userId, user) {
 		return fetch(this.url + '/' + userId, {
@@ -41,7 +40,7 @@ function AdminUserServiceClient() {
 	}
 	function deleteUser(userId) {
 		return fetch(this.url + '/' + userId, {
-		    method: 'DELETE',
+		    method: 'DELETE'
 		})
 		.then(response => {
 			response.json()
