@@ -1,7 +1,6 @@
 import React from 'react'
 import CourseCard from './CourseCard'
 import NewCourseCard from "./NewCourseCard";
-
 const CourseGrid = ({courses, deleteCourse, addCourse}) =>
   <div className="card-deck">
     {
