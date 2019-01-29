@@ -8,12 +8,12 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-primary"
              style={navStyle}>
-            <form className="form-inline my-2 my-lg-0">
+            <form className="input-group my-2 my-lg-0">
                 <a className="btn btn-primary" href="#"><i className="fa fa-bars"></i></a><a
                 className="navbar-brand" href="#">Course Manager</a>
             </form>
 
-            <form className="form-inline my-2 my-lg-0 ml-auto">
+            <form className="input-group my-2 my-lg-0">
                 <input id="courseTitle" className="form-control mr-sm-2" type="text"
                        placeholder="New Course Title"/>
                 <a className="btn btn-primary"
