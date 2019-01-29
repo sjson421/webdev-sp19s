@@ -2,8 +2,7 @@ import React from 'react'
 import CourseRow from './CourseRow'
 import NewCourseRow from "./NewRow";
 
-const CourseTable = ({courses, deleteCourse, addCourse}) =>
-
+const CourseTable = ({courses, deleteCourse}) =>
     <div className="table-responsive">
         <table className="table">
             <thead>
@@ -18,16 +17,15 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
             </tr>
             </thead>
             <tbody>
-                {
-                    courses.map(course =>
-                        <CourseRow
-                            deleteCourse={deleteCourse}
-                            course={course}
-                            key={course.id}/>
-                    )
-                }
+            {
+                courses.map(course =>
+                    <CourseRow
+                        deleteCourse={deleteCourse}
+                        course={course}
+                        key={course.id}/>
+                )
+            }
             </tbody>
-            <NewCourseRow addCourse={addCourse}/>
         </table>
     </div>
 
