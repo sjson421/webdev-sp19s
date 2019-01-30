@@ -117,7 +117,7 @@ class ModuleList extends React.Component {
                         )
                     }
                     <li className="list-group-item" style={{color: "green"}}>
-                        <div className="float-right" title="To edit a module, lesson, or topic, type in the new title in the field above then click
+                        <div className="float-right" title="To edit the course title, module, lesson, or topic, type in the new title in the field above then click
                                 the corresponding edit button. The above input field also works for adding new modules, lessons, or topics
                                 as well."><i className="fa fa-question-circle"> Hover for Help!</i></div>
                     </li>

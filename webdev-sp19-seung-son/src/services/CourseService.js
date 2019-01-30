@@ -28,7 +28,6 @@ class CourseService {
 
     updateCourse = (id, course) => {
         let courses = this.courses;
-
         for (let i = 0; i < courses.length; i++) {
             if (id === courses[i].id){
                 courses[i] = course;

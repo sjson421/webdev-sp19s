@@ -209,14 +209,20 @@ class CourseEditor extends React.Component {
     editCourse = () => {
         const title = this.getTitle();
         const id = parseInt(this.props.match.params.id);
-        this.courseService.updateCourse(id, )
+        const course = this.state.course;
+        course.title = title;
+        this.courseService.updateCourse(id, course);
+        this.setState({
+            course: {
+                title: title
+            }
+        })
     }
-
 
 render() {
     return (
         <div>
-            <h2>Course Editor: {this.state.course.title}
+            <h2 style = {{marginBottom: "2em"}}>Course Editor: {this.state.course.title}
                 <i className="fa fa-pencil"
                    style={{margin: "0 1%", cursor: "pointer"}}
                    onClick={() => {
