@@ -31,13 +31,13 @@ class ModuleList extends React.Component {
                     title: title
                 }
             }, () => this.setState(
-                    {
-                        modules: [
-                            ...this.state.modules,
-                            this.state.module
-                        ]
-                    }
-                ));
+                {
+                    modules: [
+                        ...this.state.modules,
+                        this.state.module
+                    ]
+                }
+            ));
     }
     titleChanged = (event) => {
         const newTitle = event.target.value;
@@ -49,17 +49,24 @@ class ModuleList extends React.Component {
         this.props.setTitle(newTitle);
     }
     deleteModule = (dModule) => {
+        const myModules = this.state.modules;
+        let index = 0;
+
+        for (var i = 0; i < myModules.length; i++) {
+            if (myModules[i].id == dModule.id) {
+                index = i;
+                break;
+            }
+        }
+        this.props.deleteModuleCascade(myModules[index]);
         const newModules = this.state.modules.filter(
             module => module.id !== dModule.id
         )
         this.setState(
             {
-                modules: [
-                    ...newModules
-                ]
+                modules: [...newModules]
             }
         )
-        this.props.deleteModuleCascade();
     }
     editModule = (module) => {
         if (this.newTitle === '' || !this.newTitle) {
@@ -110,10 +117,9 @@ class ModuleList extends React.Component {
                         )
                     }
                     <li className="list-group-item" style={{color: "green"}}>
-                        <b>Help</b>
-                        <br/>
-                        To edit a module, lesson, or topic, type in the new title in the field above then click the corresponding
-                        edit button. The above input field also works for adding new modules, lessons, or topics as well.
+                        <div className="float-right" title="To edit a module, lesson, or topic, type in the new title in the field above then click
+                                the corresponding edit button. The above input field also works for adding new modules, lessons, or topics
+                                as well."><i className="fa fa-question-circle"> Hover for Help!</i></div>
                     </li>
                 </ul>
             </div>

@@ -25,6 +25,18 @@ class CourseService {
         this.courses = this.courses.filter(
             course => course.id !== deleteCourse.id
         )
+
+    updateCourse = (id, course) => {
+        let courses = this.courses;
+
+        for (let i = 0; i < courses.length; i++) {
+            if (id === courses[i].id){
+                courses[i] = course;
+                break;
+            }
+        }
+        this.courses = courses;
+    }
 }
 
 export default CourseService

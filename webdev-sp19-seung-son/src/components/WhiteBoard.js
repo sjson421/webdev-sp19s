@@ -12,6 +12,9 @@ class WhiteBoard extends Component {
             courses: this.courseService.deleteCourse(course)
         })
     addCourse = (courseTitle) => {
+        if (courseTitle === '') {
+            courseTitle = "New Course"
+        }
         const course =
             {
                 id: (new Date()).getTime(),
@@ -37,6 +40,7 @@ class WhiteBoard extends Component {
                     <div>
                         <Link to="/">Course Grid</Link> |
                         <Link to="/table"> Course Table</Link>
+                        <br/><br/>
                         <Route path='/' exact
                                render={() =>
                                    <CourseGrid

@@ -12,13 +12,10 @@ class CourseEditor extends React.Component {
         const course = this.courseService.findCourseById(courseId)
         this.state = {
             course: course,
-            module: course.modules[0],
-            title: ''
-        }
-        if (this.state.module.lessons) {
-            this.state.lesson = this.state.module.lessons[0];
-        } else {
-            this.state.lesson = undefined;
+            module: '',
+            title: '',
+            lesson: '',
+            topic: ''
         }
     }
 
@@ -39,13 +36,14 @@ class CourseEditor extends React.Component {
     }
     selectModule = module => {
         this.setState({
-            module: module
+            module: module,
+            lesson: ''
         })
     }
-    deleteModuleCascade = () => {
-        this.state.lesson = undefined;
-        if (this.state.lesson) {
-            this.state.lesson.topics = undefined;
+    deleteModuleCascade = (deleteModule) => {
+        if (this.state.module === deleteModule) {
+            this.state.lesson = '';
+            this.state.module = ''
         }
         this.setState({
             module: this.state.module,
@@ -78,6 +76,11 @@ class CourseEditor extends React.Component {
             title: title
         }
 
+
+        if (!this.state.module) {
+            alert("You cannot create a lesson without a selected module!");
+            return;
+        }
         if (!this.state.module.lessons) {
             this.state.module.lessons = [newLesson]
         } else {
@@ -90,13 +93,23 @@ class CourseEditor extends React.Component {
         });
     }
     deleteLesson = (dLesson) => {
+        const myLessons = this.state.module.lessons;
+        let index = 0;
+
+        for (var i = 0; i < myLessons.length; i++) {
+            if (myLessons[i].id == dLesson.id) {
+                index = i;
+                break;
+            }
+        }
+        if (this.state.lesson === myLessons[i]) {
+            this.state.lesson = '';
+        }
         const newLessons = this.state.module.lessons.filter(
             lesson => lesson.id !== dLesson.id
         )
         this.state.module.lessons = newLessons;
-        this.state.lesson.topics = undefined;
         this.setState({
-            module: this.state.module,
             lesson: this.state.lesson
         })
     }
@@ -148,6 +161,7 @@ class CourseEditor extends React.Component {
 
         if (!this.state.lesson) {
             alert("You cannot create a topic without a selected lesson!");
+            return;
         } else {
             if (!this.state.lesson.topics) {
                 this.state.lesson.topics = [newTopic]
@@ -192,40 +206,52 @@ class CourseEditor extends React.Component {
         )
     }
 
-    render() {
-        return (
-            <div>
-                <h2>Course Editor: {this.state.course.title}</h2>
-                <div className="row">
-                    <div className="col-4">
-                        <ModuleList
-                            modules={this.state.course.modules}
-                            highlightModule={this.highlightModule}
-                            selectModule={this.selectModule}
-                            setTitle={this.setTitle}
-                            deleteModuleCascade={this.deleteModuleCascade}/>
-                    </div>
-                    <div className="col-8">
-                        <LessonTabs
-                            lessons={this.state.module.lessons}
-                            createLesson={this.createLesson}
-                            deleteLesson={this.deleteLesson}
-                            editLesson={this.editLesson}
-                            highlightLesson={this.highlightLesson}
-                            selectLesson={this.selectLesson}/>
-                        <hr/>
-                        <TopicPills
-                            topics={this.state.lesson.topics}
-                            createTopic={this.createTopic}
-                            deleteTopic={this.deleteTopic}
-                            editTopic={this.editTopic}
-                            highlightTopic={this.highlightTopic}
-                            selectTopic={this.selectTopic}/>
-                    </div>
+    editCourse = () => {
+        const title = this.getTitle();
+        const id = parseInt(this.props.match.params.id);
+        this.courseService.updateCourse(id, )
+    }
+
+
+render() {
+    return (
+        <div>
+            <h2>Course Editor: {this.state.course.title}
+                <i className="fa fa-pencil"
+                   style={{margin: "0 1%", cursor: "pointer"}}
+                   onClick={() => {
+                       this.editCourse(module)
+                   }}></i></h2>
+            <div className="row">
+                <div className="col-4">
+                    <ModuleList
+                        modules={this.state.course.modules}
+                        highlightModule={this.highlightModule}
+                        selectModule={this.selectModule}
+                        setTitle={this.setTitle}
+                        deleteModuleCascade={this.deleteModuleCascade}/>
+                </div>
+                <div className="col-8">
+                    <LessonTabs
+                        lessons={this.state.module.lessons}
+                        createLesson={this.createLesson}
+                        deleteLesson={this.deleteLesson}
+                        editLesson={this.editLesson}
+                        highlightLesson={this.highlightLesson}
+                        selectLesson={this.selectLesson}/>
+                    <hr/>
+                    <TopicPills
+                        topics={this.state.lesson.topics}
+                        createTopic={this.createTopic}
+                        deleteTopic={this.deleteTopic}
+                        editTopic={this.editTopic}
+                        highlightTopic={this.highlightTopic}
+                        selectTopic={this.selectTopic}/>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 }
 
 export default CourseEditor
