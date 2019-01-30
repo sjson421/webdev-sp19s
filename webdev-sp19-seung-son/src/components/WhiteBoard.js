@@ -4,6 +4,7 @@ import CourseGrid from './CourseGrid'
 import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
 import CourseEditor from "./CourseEditor";
+import WidgetList from "./WidgetList";
 
 class WhiteBoard extends Component {
     deleteCourse = course =>
@@ -51,6 +52,10 @@ class WhiteBoard extends Component {
                         <Route path="/course/:id"
                                exact
                                component={CourseEditor}/>
+                        <Route path='/widgetlist'
+                               render={() =>
+                                   <WidgetList/>}/>
+                        <Link to="/widgetlist">Widget List</Link>
                     </div>
                 </Router>
             </div>
