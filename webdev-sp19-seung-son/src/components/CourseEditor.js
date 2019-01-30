@@ -17,14 +17,8 @@ class CourseEditor extends React.Component {
         }
         if (this.state.module.lessons) {
             this.state.lesson = this.state.module.lessons[0];
-            if (this.state.module.lessons[0].topics) {
-                this.state.topic = this.state.module.lessons[0].topics[0];
-            } else {
-                this.state.topic = null;
-            }
         } else {
-            this.state.lesson = null;
-            this.state.topic = null;
+            this.state.lesson = undefined;
         }
     }
 
@@ -45,8 +39,17 @@ class CourseEditor extends React.Component {
     }
     selectModule = module => {
         this.setState({
-            module: module,
-            lessons: module.lessons
+            module: module
+        })
+    }
+    deleteModuleCascade = () => {
+        this.state.lesson = undefined;
+        if (this.state.lesson) {
+            this.state.lesson.topics = undefined;
+        }
+        this.setState({
+            module: this.state.module,
+            lesson: this.state.lesson
         })
     }
     highlightLesson = (event) => {
@@ -91,8 +94,10 @@ class CourseEditor extends React.Component {
             lesson => lesson.id !== dLesson.id
         )
         this.state.module.lessons = newLessons;
+        this.state.lesson.topics = undefined;
         this.setState({
-            module: this.state.module
+            module: this.state.module,
+            lesson: this.state.lesson
         })
     }
     editLesson = (lesson) => {
@@ -115,29 +120,19 @@ class CourseEditor extends React.Component {
             }
         )
     }
-
-    createLesson = () => {
-        let title = this.getTitle();
-
-        if (title === '') {
-            title = "New Lesson";
-        }
-
-        const newLesson = {
-            id: (new Date()).getTime(),
-            title: title
-        }
-
-        if (!this.state.module.lessons) {
-            this.state.module.lessons = [newLesson]
-        } else {
-            this.state.module.lessons.push(newLesson);
-        }
+    selectTopic = topic => {
         this.setState({
-            lessons: {
-                ...this.state.module.lessons
+            topic: topic
+        })
+    }
+    highlightTopic = (event) => {
+        const topicsList = event.target.parentElement.parentElement.getElementsByTagName("li")
+        for (let i = 0; i < topicsList.length; i++) {
+            if (topicsList[i].className === "nav-group-item bg-warning") {
+                topicsList[i].className = "nav-group-item"
             }
-        });
+        }
+        event.target.parentElement.className = "nav-group-item bg-warning";
     }
     createTopic = () => {
         let title = this.getTitle();
@@ -151,8 +146,8 @@ class CourseEditor extends React.Component {
             title: title
         }
 
-        if (!this.state.module.lessons) {
-            alert("You cannot create a topic without any lessons!");
+        if (!this.state.lesson) {
+            alert("You cannot create a topic without a selected lesson!");
         } else {
             if (!this.state.lesson.topics) {
                 this.state.lesson.topics = [newTopic]
@@ -166,6 +161,36 @@ class CourseEditor extends React.Component {
             }
         });
     }
+    deleteTopic = (dTopic) => {
+        const newTopics = this.state.lesson.topics.filter(
+            topic => topic.id !== dTopic.id
+        )
+        this.state.lesson.topics = newTopics;
+        this.setState({
+            lesson: this.state.lesson
+        })
+    }
+    editTopic = (topic) => {
+        const topics = this.state.lesson.topics;
+        let title = this.getTitle();
+        if (title === '') {
+            title = "No Title"
+        }
+        for (let i = 0; i < topics.length; i++) {
+            if (topics[i].id === topic.id) {
+                topics[i].title = title;
+                break;
+            }
+        }
+        console.log(topics)
+        this.setState(
+            {
+                lesson: {
+                    topics: [...topics]
+                }
+            }
+        )
+    }
 
     render() {
         return (
@@ -177,7 +202,8 @@ class CourseEditor extends React.Component {
                             modules={this.state.course.modules}
                             highlightModule={this.highlightModule}
                             selectModule={this.selectModule}
-                            setTitle={this.setTitle}/>
+                            setTitle={this.setTitle}
+                            deleteModuleCascade={this.deleteModuleCascade}/>
                     </div>
                     <div className="col-8">
                         <LessonTabs

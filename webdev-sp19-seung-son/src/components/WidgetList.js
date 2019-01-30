@@ -2,7 +2,7 @@ import React from 'react'
 
 const WidgetList = () =>
     <div><a className="btn btn-light">
-        <i className="fas fa-plus"></i> Add Widget
+        <i className="fa fa-plus"></i> Add Widget
     </a>
 
         <div
@@ -15,16 +15,16 @@ const WidgetList = () =>
                             <a className="btn btn-success margin-right"> Save </a>
                             Preview
                             <a type="checkbox" className="btn btn-light">
-                                <i className="fas fa-toggle-off"></i>
+                                <i className="fa fa-toggle-off"></i>
                             </a>
                             <br/>
                         </div>
 
                         <a className="btn btn-warning">
-                            <i className="fas fa-arrow-up"></i>
+                            <i className="fa fa-arrow-up"></i>
                         </a>
                         <a className="btn btn-warning">
-                            <i className="fas fa-arrow-down"></i>
+                            <i className="fa fa-arrow-down"></i>
                         </a>
 
                         <select>
@@ -34,7 +34,7 @@ const WidgetList = () =>
                             <option>Image</option>
                         </select>
                         <a className="btn btn-danger">
-                            <i className="fas fa-times"></i>
+                            <i className="fa fa-times"></i>
                         </a>
                     </div>
                     <form className="form-group">
@@ -68,16 +68,16 @@ const WidgetList = () =>
                                 <a className="btn btn-success margin-right"> Save </a>
                                 Preview
                                 <a type="checkbox" className="btn btn-light">
-                                    <i className="fas fa-toggle-off"></i>
+                                    <i className="fa fa-toggle-off"></i>
                                 </a>
                                 <br/>
                             </div>
 
                             <a className="btn btn-warning">
-                                <i className="fas fa-arrow-up"></i>
+                                <i className="fa fa-arrow-up"></i>
                             </a>
                             <a className="btn btn-warning">
-                                <i className="fas fa-arrow-down"></i>
+                                <i className="fa fa-arrow-down"></i>
                             </a>
 
                             <select>
@@ -87,7 +87,7 @@ const WidgetList = () =>
                                 <option>Image</option>
                             </select>
                             <a className="btn btn-danger">
-                                <i className="fas fa-times"></i>
+                                <i className="fa fa-times"></i>
                             </a>
                         </div>
                         <form className="form-group">
@@ -110,16 +110,16 @@ const WidgetList = () =>
                                     <a className="btn btn-success margin-right"> Save </a>
                                     Preview
                                     <a type="checkbox" className="btn btn-light">
-                                        <i className="fas fa-toggle-off"></i>
+                                        <i className="fa fa-toggle-off"></i>
                                     </a>
                                     <br/>
                                 </div>
 
                                 <a className="btn btn-warning">
-                                    <i className="fas fa-arrow-up"></i>
+                                    <i className="fa fa-arrow-up"></i>
                                 </a>
                                 <a className="btn btn-warning">
-                                    <i className="fas fa-arrow-down"></i>
+                                    <i className="fa fa-arrow-down"></i>
                                 </a>
 
                                 <select>
@@ -129,7 +129,7 @@ const WidgetList = () =>
                                     <option>Image</option>
                                 </select>
                                 <a className="btn btn-danger">
-                                    <i className="fas fa-times"></i>
+                                    <i className="fa fa-times"></i>
                                 </a>
                             </div>
                             <form className="form-group">
@@ -160,16 +160,16 @@ const WidgetList = () =>
                                         <a className="btn btn-success margin-right"> Save </a>
                                         Preview
                                         <a type="checkbox" className="btn btn-light">
-                                            <i className="fas fa-toggle-off"></i>
+                                            <i className="fa fa-toggle-off"></i>
                                         </a>
                                         <br/>
                                     </div>
 
                                     <a className="btn btn-warning">
-                                        <i className="fas fa-arrow-up"></i>
+                                        <i className="fa fa-arrow-up"></i>
                                     </a>
                                     <a className="btn btn-warning">
-                                        <i className="fas fa-arrow-down"></i>
+                                        <i className="fa fa-arrow-down"></i>
                                     </a>
 
                                     <select>
@@ -179,7 +179,7 @@ const WidgetList = () =>
                                         <option>Image</option>
                                     </select>
                                     <a className="btn btn-danger">
-                                        <i className="fas fa-times"></i>
+                                        <i className="fa fa-times"></i>
                                     </a>
                                 </div>
                                 <form className="form-group">
@@ -203,16 +203,16 @@ const WidgetList = () =>
                                             <a className="btn btn-success margin-right"> Save </a>
                                             Preview
                                             <a type="checkbox" className="btn btn-light">
-                                                <i className="fas fa-toggle-off"></i>
+                                                <i className="fa fa-toggle-off"></i>
                                             </a>
                                             <br/>
                                         </div>
 
                                         <a className="btn btn-warning">
-                                            <i className="fas fa-arrow-up"></i>
+                                            <i className="fa fa-arrow-up"></i>
                                         </a>
                                         <a className="btn btn-warning">
-                                            <i className="fas fa-arrow-down"></i>
+                                            <i className="fa fa-arrow-down"></i>
                                         </a>
 
                                         <select>
@@ -222,7 +222,7 @@ const WidgetList = () =>
                                             <option>Image</option>
                                         </select>
                                         <a className="btn btn-danger">
-                                            <i className="fas fa-times"></i>
+                                            <i className="fa fa-times"></i>
                                         </a>
                                     </div>
                                     <form className="form-group">

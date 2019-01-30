@@ -59,6 +59,7 @@ class ModuleList extends React.Component {
                 ]
             }
         )
+        this.props.deleteModuleCascade();
     }
     editModule = (module) => {
         if (this.newTitle === '' || !this.newTitle) {

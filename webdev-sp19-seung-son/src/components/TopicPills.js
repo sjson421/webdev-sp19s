@@ -18,7 +18,6 @@ const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, edit
                        onClick={() => {
                            editTopic(topic)
                        }}></i>
-
                 </li>
             )
         }
