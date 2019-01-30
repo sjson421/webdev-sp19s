@@ -46,7 +46,6 @@ class ModuleList extends React.Component {
             {
                 module: {title: newTitle}
             });
-        this.props.setTitle(newTitle);
     }
     deleteModule = (dModule) => {
         const myModules = this.state.modules;

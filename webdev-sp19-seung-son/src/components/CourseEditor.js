@@ -15,15 +15,25 @@ class CourseEditor extends React.Component {
             module: '',
             title: '',
             lesson: '',
-            topic: ''
+            topic: '',
+            lessonTitle: '',
+            topicTitle: ''
         }
     }
 
-    setTitle = (title) => {
-        this.state.title = title;
+    lessonTitleChanged = (event) => {
+        const newTitle = event.target.value;
+        this.setState(
+            {
+                lessonTitle: newTitle
+            });
     }
-    getTitle = () => {
-        return this.state.title;
+    topicTitleChanged = (event) => {
+        const newTitle = event.target.value;
+        this.setState(
+            {
+                topicTitle: newTitle
+            });
     }
     highlightModule = (event) => {
         const modulesList = event.target.parentElement.parentElement.getElementsByTagName("li")
@@ -65,7 +75,7 @@ class CourseEditor extends React.Component {
         })
     }
     createLesson = () => {
-        let title = this.getTitle();
+        let title = this.state.lessonTitle;
 
         if (title === '') {
             title = "New Lesson";
@@ -115,7 +125,8 @@ class CourseEditor extends React.Component {
     }
     editLesson = (lesson) => {
         const lessons = this.state.module.lessons;
-        let title = this.getTitle();
+
+        let title = this.state.lessonTitle;
         if (title === '') {
             title = "No Title"
         }
@@ -148,7 +159,8 @@ class CourseEditor extends React.Component {
         event.target.parentElement.className = "nav-group-item bg-warning";
     }
     createTopic = () => {
-        let title = this.getTitle();
+
+        let title = this.state.topicTitle;
 
         if (title === '') {
             title = "New Topic";
@@ -186,7 +198,8 @@ class CourseEditor extends React.Component {
     }
     editTopic = (topic) => {
         const topics = this.state.lesson.topics;
-        let title = this.getTitle();
+
+        let title = this.state.topicTitle;
         if (title === '') {
             title = "No Title"
         }
@@ -219,45 +232,47 @@ class CourseEditor extends React.Component {
         })
     }
 
-render() {
-    return (
-        <div>
-            <h2 style = {{marginBottom: "2em"}}>Course Editor: {this.state.course.title}
-                <i className="fa fa-pencil"
-                   style={{margin: "0 1%", cursor: "pointer"}}
-                   onClick={() => {
-                       this.editCourse(module)
-                   }}></i></h2>
-            <div className="row">
-                <div className="col-4">
-                    <ModuleList
-                        modules={this.state.course.modules}
-                        highlightModule={this.highlightModule}
-                        selectModule={this.selectModule}
-                        setTitle={this.setTitle}
-                        deleteModuleCascade={this.deleteModuleCascade}/>
-                </div>
-                <div className="col-8">
-                    <LessonTabs
-                        lessons={this.state.module.lessons}
-                        createLesson={this.createLesson}
-                        deleteLesson={this.deleteLesson}
-                        editLesson={this.editLesson}
-                        highlightLesson={this.highlightLesson}
-                        selectLesson={this.selectLesson}/>
-                    <hr/>
-                    <TopicPills
-                        topics={this.state.lesson.topics}
-                        createTopic={this.createTopic}
-                        deleteTopic={this.deleteTopic}
-                        editTopic={this.editTopic}
-                        highlightTopic={this.highlightTopic}
-                        selectTopic={this.selectTopic}/>
+    render() {
+        return (
+            <div>
+                <h2 style={{marginBottom: "2em"}}>Course Editor: {this.state.course.title}
+                    <i className="fa fa-pencil"
+                       style={{margin: "0 1%", cursor: "pointer"}}
+                       onClick={() => {
+                           this.editCourse(module)
+                       }}></i></h2>
+                <div className="row">
+                    <div className="col-4">
+                        <ModuleList
+                            modules={this.state.course.modules}
+                            highlightModule={this.highlightModule}
+                            selectModule={this.selectModule}
+                            setTitle={this.setTitle}
+                            deleteModuleCascade={this.deleteModuleCascade}/>
+                    </div>
+                    <div className="col-8">
+                        <LessonTabs
+                            lessons={this.state.module.lessons}
+                            createLesson={this.createLesson}
+                            deleteLesson={this.deleteLesson}
+                            editLesson={this.editLesson}
+                            highlightLesson={this.highlightLesson}
+                            selectLesson={this.selectLesson}
+                            lessonTitleChanged={this.lessonTitleChanged}/>
+                        <hr/>
+                        <TopicPills
+                            topics={this.state.lesson.topics}
+                            createTopic={this.createTopic}
+                            deleteTopic={this.deleteTopic}
+                            editTopic={this.editTopic}
+                            highlightTopic={this.highlightTopic}
+                            selectTopic={this.selectTopic}
+                            topicTitleChanged={this.topicTitleChanged}/>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
-}
+        )
+    }
 }
 
 export default CourseEditor

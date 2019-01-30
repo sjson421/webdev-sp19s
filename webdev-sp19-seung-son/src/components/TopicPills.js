@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, editTopic, createTopic}) =>
+const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, editTopic, createTopic, topicTitleChanged}) =>
     <ul className="nav nav-pills">
         {
             topics.map(topic =>
@@ -23,6 +23,11 @@ const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, edit
         }
         <li className="nav-link" style={{cursor: "pointer"}} onClick={() => createTopic()}>
             <i className="fa fa-plus"></i>
+        </li>
+        <li className = "nav-item">
+            <input
+                onChange={topicTitleChanged}
+                className="form-control"/>
         </li>
     </ul>
 
