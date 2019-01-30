@@ -7,8 +7,8 @@ const CourseRow = ({course, deleteCourse}) =>
         <td>
             <Link to={`/course/${course.id}`}>{course.title}</Link>
         </td>
-        <td>me</td>
-        <td>6:45 PM</td>
+        <td className = "d-none d-md-table-cell">me</td>
+        <td className = "d-none d-md-table-cell">6:45 PM</td>
         <td></td>
         <td></td>
         <td><a onClick={() => deleteCourse(course)} className="btn btn-light">

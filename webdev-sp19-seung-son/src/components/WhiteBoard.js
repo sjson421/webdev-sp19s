@@ -42,15 +42,15 @@ class WhiteBoard extends Component {
                                        addCourse = {this.addCourse}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
-                        <Route path="/course/:id"
-                               exact
-                               component={CourseEditor}/>
                         <Route path='/table'
                                render={() =>
                                    <CourseTable
                                        addCourse = {this.addCourse}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
+                        <Route path="/course/:id"
+                               exact
+                               component={CourseEditor}/>
                     </div>
                 </Router>
             </div>

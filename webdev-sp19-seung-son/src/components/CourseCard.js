@@ -2,8 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const buttonStyle = {
-    marginRight: '1%',
-    marginBottom:'2%'
+    margin: "2% 1%"
 };
 
 const CourseCard = ({course, deleteCourse}) =>

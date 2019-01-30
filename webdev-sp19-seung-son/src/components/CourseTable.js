@@ -28,8 +28,8 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
                 <tr>
                     <th></th>
                     <th>Title</th>
-                    <th>Owned by</th>
-                    <th>Last modified by me</th>
+                    <th className = "d-none d-md-table-cell">Owned by</th>
+                    <th className = "d-none d-md-table-cell">Last modified by me</th>
                     <th><i className="fa fa-th-large"></i></th>
                     <th><i className="fa fa-sort"></i></th>
                     <th></th>
