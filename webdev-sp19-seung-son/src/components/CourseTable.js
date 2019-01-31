@@ -1,5 +1,6 @@
 import React from 'react'
 import CourseRow from './CourseRow'
+import {Link} from "react-router-dom";
 
 const navStyle = {
     marginBottom: '2%'
@@ -30,7 +31,7 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
                     <th>Title</th>
                     <th className = "d-none d-md-table-cell">Owned by</th>
                     <th className = "d-none d-md-table-cell">Last modified by me</th>
-                    <th><i className="fa fa-th-large"></i></th>
+                    <th><Link to="/"><i className="fa fa-th-large"></i></Link></th>
                     <th><i className="fa fa-sort"></i></th>
                     <th></th>
                 </tr>

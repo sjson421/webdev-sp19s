@@ -38,9 +38,6 @@ class WhiteBoard extends Component {
             <div>
                 <Router>
                     <div>
-                        <Link to="/">Course Grid</Link> |
-                        <Link to="/table"> Course Table</Link>
-                        <br/><br/>
                         <Route path='/' exact
                                render={() =>
                                    <CourseGrid

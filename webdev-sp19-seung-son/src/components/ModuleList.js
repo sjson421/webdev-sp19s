@@ -46,6 +46,7 @@ class ModuleList extends React.Component {
             {
                 module: {title: newTitle}
             });
+        this.props.setTitle(newTitle);
     }
     deleteModule = (dModule) => {
         const myModules = this.state.modules;
@@ -118,9 +119,9 @@ class ModuleList extends React.Component {
                         )
                     }
                     <li className="list-group-item" style={{color: "green"}}>
-                        <div className="float-right" title="To edit the course title, module, lesson, or topic, type in the new title in the field above then click
-                                the corresponding edit button. The above input field also works for adding new modules, lessons, or topics
-                                as well."><i className="fa fa-question-circle"> Hover for Help!</i></div>
+                        <div className="float-right" title="To edit the course title, or module title, type in the new title in the field above then click
+                                the corresponding edit button. Modifying or adding lessons or topics use their own input fields.">
+                            <i className="fa fa-question-circle"> Hover for Help!</i></div>
                     </li>
                 </ul>
             </div>

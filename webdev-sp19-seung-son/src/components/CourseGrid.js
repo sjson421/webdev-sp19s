@@ -1,5 +1,6 @@
 import React from 'react'
 import CourseCard from './CourseCard'
+import {Link} from "react-router-dom";
 
 const navStyle = {
     marginBottom: '2%'
@@ -22,8 +23,20 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
                    onClick={() => addCourse(document.getElementById('courseTitle').value)}>
                     <i className="fa fa-plus-circle"></i></a>
             </form>
-
         </nav>
+        <div className="table-responsive">
+            <table className="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th><Link to="/table"><i className="fa fa-list"></i></Link></th>
+                    <th><i className="fa fa-sort"></i></th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
         <div className="card-deck row">
             {
                 courses.map(course =>

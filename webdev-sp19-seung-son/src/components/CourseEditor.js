@@ -3,6 +3,7 @@ import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
 import CourseService from "../services/CourseService"
+import {Link} from "react-router-dom";
 
 class CourseEditor extends React.Component {
     constructor(props) {
@@ -220,7 +221,7 @@ class CourseEditor extends React.Component {
     }
 
     editCourse = () => {
-        const title = this.getTitle();
+        const title = this.state.title;
         const id = parseInt(this.props.match.params.id);
         const course = this.state.course;
         course.title = title;
@@ -232,15 +233,22 @@ class CourseEditor extends React.Component {
         })
     }
 
+    setTitle = (title) => {
+        this.setState({
+            title: title
+        })
+    }
     render() {
         return (
             <div>
-                <h2 style={{marginBottom: "2em"}}>Course Editor: {this.state.course.title}
+                <h2>Course Editor: {this.state.course.title}
                     <i className="fa fa-pencil"
                        style={{margin: "0 1%", cursor: "pointer"}}
                        onClick={() => {
                            this.editCourse(module)
                        }}></i></h2>
+                <Link to="/"><h6 style={{marginBottom: "2em"}}>Return home</h6></Link>
+                <hr/>
                 <div className="row">
                     <div className="col-4">
                         <ModuleList
