@@ -3,284 +3,50 @@ import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
 import CourseService from "../services/CourseService"
-import {Link} from "react-router-dom";
+
+import WidgetListContainer from '../containers/WidgetListContainer'
+import widgetReducer from '../reducers/WidgetReducer'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const store = createStore(widgetReducer);
 
 class CourseEditor extends React.Component {
-    constructor(props) {
-        super(props)
-        this.courseService = new CourseService()
-        const courseId = parseInt(props.match.params.id)
-        const course = this.courseService.findCourseById(courseId)
-        this.state = {
-            course: course,
-            module: '',
-            title: '',
-            lesson: '',
-            topic: '',
-            lessonTitle: '',
-            topicTitle: ''
-        }
+  constructor(props) {
+    super(props)
+    this.courseService = new CourseService()
+    const courseId = parseInt(props.match.params.id)
+    const course = this.courseService.findCourseById(courseId)
+    this.state = {
+      course: course,
+      module: course.modules[0]
     }
-
-    lessonTitleChanged = (event) => {
-        const newTitle = event.target.value;
-        this.setState(
-            {
-                lessonTitle: newTitle
-            });
-    }
-    topicTitleChanged = (event) => {
-        const newTitle = event.target.value;
-        this.setState(
-            {
-                topicTitle: newTitle
-            });
-    }
-    highlightModule = (event) => {
-        const modulesList = event.target.parentElement.parentElement.getElementsByTagName("li")
-        for (let i = 0; i < modulesList.length; i++) {
-            if (modulesList[i].className === "list-group-item bg-warning") {
-                modulesList[i].className = "list-group-item"
-            }
-        }
-        event.target.parentElement.className = "list-group-item bg-warning";
-    }
-    selectModule = module => {
-        this.setState({
-            module: module,
-            lesson: ''
-        })
-    }
-    deleteModuleCascade = (deleteModule) => {
-        if (this.state.module === deleteModule) {
-            this.state.lesson = '';
-            this.state.module = ''
-        }
-        this.setState({
-            module: this.state.module,
-            lesson: this.state.lesson
-        })
-    }
-    highlightLesson = (event) => {
-        const lessonsList = event.target.parentElement.parentElement.getElementsByTagName("li")
-        for (let i = 0; i < lessonsList.length; i++) {
-            if (lessonsList[i].className === "nav-group-item bg-warning") {
-                lessonsList[i].className = "nav-group-item"
-            }
-        }
-        event.target.parentElement.className = "nav-group-item bg-warning";
-    }
-    selectLesson = lesson => {
-        this.setState({
-            lesson: lesson
-        })
-    }
-    createLesson = () => {
-        let title = this.state.lessonTitle;
-
-        if (title === '') {
-            title = "New Lesson";
-        }
-
-        const newLesson = {
-            id: (new Date()).getTime(),
-            title: title
-        }
-
-
-        if (!this.state.module) {
-            alert("You cannot create a lesson without a selected module!");
-            return;
-        }
-        if (!this.state.module.lessons) {
-            this.state.module.lessons = [newLesson]
-        } else {
-            this.state.module.lessons.push(newLesson);
-        }
-        this.setState({
-            lessons: {
-                ...this.state.module.lessons
-            }
-        });
-    }
-    deleteLesson = (dLesson) => {
-        const myLessons = this.state.module.lessons;
-        let index = 0;
-
-        for (var i = 0; i < myLessons.length; i++) {
-            if (myLessons[i].id == dLesson.id) {
-                index = i;
-                break;
-            }
-        }
-        if (this.state.lesson === myLessons[i]) {
-            this.state.lesson = '';
-        }
-        const newLessons = this.state.module.lessons.filter(
-            lesson => lesson.id !== dLesson.id
-        )
-        this.state.module.lessons = newLessons;
-        this.setState({
-            lesson: this.state.lesson
-        })
-    }
-    editLesson = (lesson) => {
-        const lessons = this.state.module.lessons;
-
-        let title = this.state.lessonTitle;
-        if (title === '') {
-            title = "No Title"
-        }
-        for (let i = 0; i < lessons.length; i++) {
-            if (lessons[i].id === lesson.id) {
-                lessons[i].title = title;
-                break;
-            }
-        }
-        this.setState(
-            {
-                module: {
-                    lessons: [...lessons]
-                }
-            }
-        )
-    }
-    selectTopic = topic => {
-        this.setState({
-            topic: topic
-        })
-    }
-    highlightTopic = (event) => {
-        const topicsList = event.target.parentElement.parentElement.getElementsByTagName("li")
-        for (let i = 0; i < topicsList.length; i++) {
-            if (topicsList[i].className === "nav-group-item bg-warning") {
-                topicsList[i].className = "nav-group-item"
-            }
-        }
-        event.target.parentElement.className = "nav-group-item bg-warning";
-    }
-    createTopic = () => {
-
-        let title = this.state.topicTitle;
-
-        if (title === '') {
-            title = "New Topic";
-        }
-
-        const newTopic = {
-            id: (new Date()).getTime(),
-            title: title
-        }
-
-        if (!this.state.lesson) {
-            alert("You cannot create a topic without a selected lesson!");
-            return;
-        } else {
-            if (!this.state.lesson.topics) {
-                this.state.lesson.topics = [newTopic]
-            } else {
-                this.state.lesson.topics.push(newTopic);
-            }
-        }
-        this.setState({
-            topics: {
-                ...this.state.lesson.topics
-            }
-        });
-    }
-    deleteTopic = (dTopic) => {
-        const newTopics = this.state.lesson.topics.filter(
-            topic => topic.id !== dTopic.id
-        )
-        this.state.lesson.topics = newTopics;
-        this.setState({
-            lesson: this.state.lesson
-        })
-    }
-    editTopic = (topic) => {
-        const topics = this.state.lesson.topics;
-
-        let title = this.state.topicTitle;
-        if (title === '') {
-            title = "No Title"
-        }
-        for (let i = 0; i < topics.length; i++) {
-            if (topics[i].id === topic.id) {
-                topics[i].title = title;
-                break;
-            }
-        }
-        console.log(topics)
-        this.setState(
-            {
-                lesson: {
-                    topics: [...topics]
-                }
-            }
-        )
-    }
-
-    editCourse = () => {
-        const title = this.state.title;
-        const id = parseInt(this.props.match.params.id);
-        const course = this.state.course;
-        course.title = title;
-        this.courseService.updateCourse(id, course);
-        this.setState({
-            course: {
-                title: title
-            }
-        })
-    }
-
-    setTitle = (title) => {
-        this.setState({
-            title: title
-        })
-    }
-    render() {
-        return (
-            <div>
-                <h2>Course Editor: {this.state.course.title}
-                    <i className="fa fa-pencil"
-                       style={{margin: "0 1%", cursor: "pointer"}}
-                       onClick={() => {
-                           this.editCourse(module)
-                       }}></i></h2>
-                <Link to="/"><h6 style={{marginBottom: "2em"}}>Return home</h6></Link>
-                <hr/>
-                <div className="row">
-                    <div className="col-4">
-                        <ModuleList
-                            modules={this.state.course.modules}
-                            highlightModule={this.highlightModule}
-                            selectModule={this.selectModule}
-                            setTitle={this.setTitle}
-                            deleteModuleCascade={this.deleteModuleCascade}/>
-                    </div>
-                    <div className="col-8">
-                        <LessonTabs
-                            lessons={this.state.module.lessons}
-                            createLesson={this.createLesson}
-                            deleteLesson={this.deleteLesson}
-                            editLesson={this.editLesson}
-                            highlightLesson={this.highlightLesson}
-                            selectLesson={this.selectLesson}
-                            lessonTitleChanged={this.lessonTitleChanged}/>
-                        <hr/>
-                        <TopicPills
-                            topics={this.state.lesson.topics}
-                            createTopic={this.createTopic}
-                            deleteTopic={this.deleteTopic}
-                            editTopic={this.editTopic}
-                            highlightTopic={this.highlightTopic}
-                            selectTopic={this.selectTopic}
-                            topicTitleChanged={this.topicTitleChanged}/>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+  }
+  selectModule = module =>
+    this.setState({
+      module: module
+    })
+  render() {
+    return (
+      <div>
+        <h2>Course Editor: {this.state.course.title}</h2>
+      <div className="row">
+        <div className="col-4">
+          <ModuleList
+            selectModule={this.selectModule}
+            modules={this.state.course.modules}/>
+        </div>
+        <div className="col-8">
+          <LessonTabs
+            lessons={this.state.module.lessons}/>
+          <TopicPills/>
+          <Provider store={store}>
+            <WidgetListContainer/>
+          </Provider>
+        </div>
+      </div>
+      </div>
+    )
+  }
 }
-
 export default CourseEditor
