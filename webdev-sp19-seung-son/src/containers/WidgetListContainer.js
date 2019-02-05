@@ -7,20 +7,35 @@ const stateToPropertyMapper = state => ({
 })
 
 const dispatchToPropertyMapper = dispatch => ({
+    createWidget: () =>
+        dispatch({
+            type: 'CREATE_WIDGET'
+        }),
     deleteWidget: widget =>
         dispatch({
             type: 'DELETE_WIDGET',
             widget: widget
         }),
-    addWidget: () =>
-        dispatch({
-            type: 'ADD_WIDGET'
-        }),
+
     updateWidget: widget =>
         dispatch({
             type: 'UPDATE_WIDGET',
             widget: widget
         }),
+    findWidget: widget =>
+        dispatch({
+            type: 'FIND_WIDGET',
+            widget:widget
+        }),
+    findAllWidgetsForTopic: topic =>
+        dispatch({
+            type:'FIND_ALL_WIDGETS_FOR_TOPIC',
+            topic: topic
+        }),
+    findAllWidgets: () =>
+        dispatch({
+            type: 'FIND_ALL_WIDGETS'
+        })
 })
 
 const WidgetListContainer = connect(

@@ -15,11 +15,11 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
             <option value="IMAGE">Image</option>
         </select>
         {
-            widget.type=='HEADING' &&
-                <HeadingWidget
-                    updateWidget={updateWidget}
-                    widget={widget}/> ||
-            widget.type=='IMAGE'   && <ImageWidget   widget={widget}/>
+            widget.type == 'HEADING' &&
+            <HeadingWidget
+                updateWidget={updateWidget}
+                widget={widget}/> ||
+            widget.type == 'IMAGE' && <ImageWidget widget={widget}/>
         }
     </div>
 

@@ -1,27 +1,14 @@
-const widgets =
-    {
-        widgets: [
-            {
-                id: 123,
-                title: 'Widget 1',
-                type: 'HEADING',
-                text: 'This is a heading',
-                size: 2
-            },
-            {
-                id: 234,
-                title: 'Widget 2',
-                type: 'IMAGE'
-            }
-        ]
-    }
+import CourseService from '../services/CourseService'
+
+const service = new CourseService();
+const widgets = {
+    widgets: service.findAllWidgets()
+};
+
 const widgetReducer = (state = widgets, action) => {
-    switch(action.type) {
-        case 'DELETE_WIDGET':
-            return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widget.id)
-            }
-        case 'ADD_WIDGET':
+    console.log(widgets)
+    switch (action.type) {
+        case 'CREATE_WIDGET':
             return {
                 widgets: [
                     ...state.widgets,
@@ -32,6 +19,11 @@ const widgetReducer = (state = widgets, action) => {
                     }
                 ]
             }
+        case 'DELETE_WIDGET':
+            return {
+                widgets: state.widgets.filter(widget => widget.id !== action.widget.id)
+            }
+
         case 'UPDATE_WIDGET':
             // replace the old widget with the new widget
             return {
@@ -39,6 +31,18 @@ const widgetReducer = (state = widgets, action) => {
                     widget.id === action.widget.id ? action.widget : widget
                 )
             }
+        case 'FIND_WIDGET':
+            return widgets.find(widget =>
+                widget.id === action.widget.id
+            )
+
+        //TODO
+        case 'FIND_ALL_WIDGETS_FOR_TOPIC':
+            return {
+                widgets: state.widgets.filter()
+            };
+        case 'FIND_ALL_WIDGETS':
+            return state.widgets;
         default:
             return state;
     }

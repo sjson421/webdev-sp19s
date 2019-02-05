@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HelloWorld from './components/hello'
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import WhiteBoard from './components/WhiteBoard'
-import WidgetList from './components/WidgetList'
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import WidgetListContainer from './containers/WidgetListContainer'
 import widgetReducer from './reducers/WidgetReducer'
 import {createStore} from 'redux'
