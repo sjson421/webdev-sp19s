@@ -24,9 +24,9 @@ const ParagraphWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style = {buttonMargin}>
+            <select style = {buttonMargin} value = "Paragraph">
                 <option>Heading</option>
-                <option defaultValue>Paragraph</option>
+                <option>Paragraph</option>
                 <option>List</option>
                 <option>Image</option>
                 <option>Link</option>

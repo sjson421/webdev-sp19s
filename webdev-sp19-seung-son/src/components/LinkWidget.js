@@ -27,9 +27,9 @@ const LinkWidget = ({widget, updateWidget}) =>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style={buttonMargin}>
+                <select style={buttonMargin} value = "Link">
 
-                    <option defaultValue>Heading</option>
+                    <option>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>
                     <option>Image</option>
@@ -54,7 +54,7 @@ const LinkWidget = ({widget, updateWidget}) =>
                     widget.size = parseInt(event.target.value)
                     updateWidget(widget)
                 }}>
-                    <option value="1" defaultValue>Heading 1</option>
+                    <option value="1">Heading 1</option>
                     <option value="2">Heading 2</option>
                     <option value="3">Heading 3</option>
                 </select>

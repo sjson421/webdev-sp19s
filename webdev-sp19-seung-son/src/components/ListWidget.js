@@ -8,16 +8,22 @@ const getNewlineItems = ({widget}) => {
     let valueItems = "";
     const myItems = widget.items.split(',');
     for (let i = 0; i < myItems.length; i++) {
-        valueItems = valueItems + myItems[i] + "\n";
+        if (i === myItems.length - 1)
+            valueItems = valueItems + myItems[i]
+        else
+            valueItems = valueItems + myItems[i] + "\n";
     }
     return valueItems;
 }
 
-const getCommaItems = ({widget}) => {
+const getCommaItems = (widget) => {
     let valueItems = "";
-    const myItems = widget.split('\n');
+    let myItems = widget.split('\n');
     for (let i = 0; i < myItems.length; i++) {
-        valueItems = valueItems + myItems[i] + ",";
+        if (i === myItems.length - 1)
+            valueItems = valueItems + myItems[i]
+        else
+            valueItems = valueItems + myItems[i] + ",";
     }
     return valueItems;
 }
@@ -47,10 +53,10 @@ const ListWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style={buttonMargin}>
+            <select style={buttonMargin} value = "List">
                 <option>Heading</option>
                 <option>Paragraph</option>
-                <option defaultValue>List</option>
+                <option>List</option>
                 <option>Image</option>
                 <option>Link</option>
             </select>
@@ -68,11 +74,12 @@ const ListWidget = ({widget, updateWidget}) =>
                       }}/>
             <br/>
             <select className="form-control"
+                    value = "Unordered list"
                     onChange={event => {
                         widget.listType = event.target.value;
                         updateWidget(widget);
                     }}>
-                <option value="UNORDERED" defaultValue>Unordered list</option>
+                <option value="UNORDERED">Unordered list</option>
                 <option value="ORDERED">Ordered list</option>
             </select>
             <br/>
@@ -91,11 +98,13 @@ const ListWidget = ({widget, updateWidget}) =>
         {
             widget.listType === 'UNORDERED' &&
             <ul>
-
+                {getArrayItems({widget}).map((item) =>
+                    <li>{item}</li>)}
             </ul> ||
             widget.listType === 'ORDERED' &&
             <ol>
-
+                {getArrayItems({widget}).map((item) =>
+                    <li>{item}</li>)}
             </ol>
         }
     </div>

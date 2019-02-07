@@ -29,6 +29,7 @@
                   {
                     "id" : 3,
                     "type": "LIST",
+                    "listType": "UNORDERED",
                     "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
                   },
                   {

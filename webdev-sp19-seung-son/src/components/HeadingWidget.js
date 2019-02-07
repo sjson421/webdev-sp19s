@@ -27,9 +27,9 @@ const HeadingWidget = ({widget, updateWidget}) =>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style={buttonMargin}>
+                <select style={buttonMargin} value = "Heading">
 
-                    <option defaultValue>Heading</option>
+                    <option>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>
                     <option>Image</option>
@@ -50,13 +50,18 @@ const HeadingWidget = ({widget, updateWidget}) =>
                     placeholder="Heading text"/>
                 <br/>
                 <label htmlFor="size">Size</label>
-                <select className="form-control" id="size" onChange={event => {
+                <select className="form-control"
+                        id="size"
+                        value = "Heading 1"
+                        onChange={event => {
                     widget.size = parseInt(event.target.value)
                     updateWidget(widget)
                 }}>
-                    <option value="1" defaultValue>Heading 1</option>
+                    <option value="1">Heading 1</option>
                     <option value="2">Heading 2</option>
                     <option value="3">Heading 3</option>
+                    <option value="4">Heading 4</option>
+                    <option value="5">Heading 5</option>
                 </select>
                 <br/>
                 <label htmlFor="headingWidgetName">Enter the name for the widget</label>
