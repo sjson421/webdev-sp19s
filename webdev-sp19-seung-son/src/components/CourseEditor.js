@@ -2,8 +2,12 @@ import React from 'react'
 import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
-import CourseService from "../../../../../../Downloads/webdev-sp19s1-seung-son-server-java-assignment3/webdev-sp19s1-seung-son-server-java-assignment3/webdev-sp19-seung-son/src/services/CourseService"
+import CourseService from "../services/CourseService";
 import {Link} from "react-router-dom";
+import WidgetListContainer from "../containers/WidgetListContainer";
+import widgetReducer from '../reducers/WidgetReducer'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
 
 class CourseEditor extends React.Component {
     constructor(props) {
@@ -20,6 +24,7 @@ class CourseEditor extends React.Component {
             lessonTitle: '',
             topicTitle: ''
         }
+        this.store = createStore(widgetReducer);
     }
 
     lessonTitleChanged = (event) => {
@@ -238,6 +243,7 @@ class CourseEditor extends React.Component {
             title: title
         })
     }
+
     render() {
         return (
             <div>
@@ -276,6 +282,10 @@ class CourseEditor extends React.Component {
                             highlightTopic={this.highlightTopic}
                             selectTopic={this.selectTopic}
                             topicTitleChanged={this.topicTitleChanged}/>
+                        <hr/>
+                        <Provider store={this.store}>
+                            <WidgetListContainer/>
+                        </Provider>
                     </div>
                 </div>
             </div>
