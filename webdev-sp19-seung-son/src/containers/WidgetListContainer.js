@@ -25,11 +25,11 @@ const dispatchToPropertyMapper = dispatch => ({
     findWidget: widget =>
         dispatch({
             type: 'FIND_WIDGET',
-            widget:widget
+            widget: widget
         }),
     findAllWidgetsForTopic: topic =>
         dispatch({
-            type:'FIND_ALL_WIDGETS_FOR_TOPIC',
+            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
             topic: topic
         }),
     findAllWidgets: () =>

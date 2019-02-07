@@ -6,7 +6,6 @@ const widgets = {
 };
 
 const widgetReducer = (state = widgets, action) => {
-    console.log(widgets)
     switch (action.type) {
         case 'CREATE_WIDGET':
             return {
@@ -36,10 +35,9 @@ const widgetReducer = (state = widgets, action) => {
                 widget.id === action.widget.id
             )
 
-        //TODO
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
             return {
-                widgets: state.widgets.filter()
+                widgets: service.findWidgets(action.topic.id)
             };
         case 'FIND_ALL_WIDGETS':
             return state.widgets;

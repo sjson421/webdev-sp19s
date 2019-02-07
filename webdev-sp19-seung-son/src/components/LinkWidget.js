@@ -4,14 +4,14 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-const HeadingWidget = ({widget, updateWidget}) =>
+const LinkWidget = ({widget, updateWidget}) =>
     <div>
         <a className="btn btn-light">
             <i className="fa fa-plus"></i> Add Widget
         </a>
 
         <div className="container">
-            <h3> Heading Widget </h3>
+            <h3> Link Widget </h3>
             <hr/>
             <div className="float-right">
                 <a className="btn btn-success" style={buttonMargin}> Save </a>
@@ -81,4 +81,4 @@ const HeadingWidget = ({widget, updateWidget}) =>
         </div>
     </div>
 
-export default HeadingWidget
+export default LinkWidget

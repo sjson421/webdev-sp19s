@@ -1,14 +1,37 @@
 import React from 'react'
 
-export default class TopicPills
-  extends React.Component {
-  render() {
-    return(
+const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, editTopic, createTopic, topicTitleChanged}) =>
     <ul className="nav nav-pills">
-      <li className="nav-item">
-        <a className="nav-link active"
-           href="#">Topic 1</a></li>
-      <li className="nav-item">
-        <a className="nav-link"
-           href="#">Topic 2</a></li></ul>
-    );}}
+        {
+            topics.map(topic =>
+                <li key={topic.id} className="nav-item" style={{padding: "1em"}}>
+                    <span onClick={(event) => {
+                        highlightTopic(event);
+                        selectTopic(topic);
+                    }} style={{cursor: "pointer"}}>{topic.title}</span>
+                    <br/>
+                    <div className="float-right">
+                        <i className="fa fa-pencil"
+                           style={{margin: "0 0.2em 0 0", cursor: "pointer"}}
+                           onClick={() => {
+                               editTopic(topic)
+                           }}></i>
+                        <i className="fa fa-times"
+                           style={{margin: "0 0.2em 0 0", cursor: "pointer"}}
+                           onClick={() => deleteTopic(topic)}></i>
+                    </div>
+                </li>
+            )
+        }
+        <li className="nav-item">
+            <input
+                style={{marginLeft:"0.5em"}}
+                onChange={topicTitleChanged}
+                className="form-control center-block"/>
+        </li>
+        <li className="nav-link" style={{cursor: "pointer"}} onClick={() => createTopic()}>
+            <i className="fa fa-plus"></i>
+        </li>
+    </ul>
+
+export default TopicPills

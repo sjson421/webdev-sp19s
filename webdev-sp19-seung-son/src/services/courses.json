@@ -1,35 +1,43 @@
 [
   {
-    "id": "123",
+    "id": 123,
     "title": "CS5610",
     "modules": [
       {
+        "id" : 1,
         "title": "Week 1",
         "lessons": [
           {
+            "id" : 1,
             "title": "HTML",
             "topics": [
               {
+                "id" : 1,
                 "title": "DOM",
                 "widgets": [
                   {
+                    "id" : 1,
                     "type": "HEADING",
                     "size": 1,
                     "text": "The Document Object Model"
                   },
                   {
+                    "id" : 2,
                     "type": "PARAGRAPH",
                     "text": "This topic introduces the DOM"
                   },
                   {
+                    "id" : 3,
                     "type": "LIST",
                     "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
                   },
                   {
+                    "id" : 4,
                     "type": "IMAGE",
                     "src": "https://picsum.photos/200"
                   },
                   {
+                    "id" : 5,
                     "type": "LINK",
                     "title": "The DOM",
                     "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
@@ -37,29 +45,33 @@
                 ]
               },
               {
+                "id" : 2,
                 "title": "Tags",
                 "widgets": []
               },
               {
+                "id" : 3,
                 "title": "Attributes",
                 "widgets": []
               }
             ]
           },
           {
+            "id" : 2,
             "title": "CSS",
             "topics": []
           }
         ]
       },
       {
+        "id" : 2,
         "title": "Week 2",
         "lessons": []
       }
     ]
   },
   {
-    "id": "234",
+    "id": 234,
     "title": "CS5200",
     "modules": []
   }
