@@ -13,27 +13,27 @@ const WidgetList = () =>
             <h3> Heading Widget </h3>
             <hr/>
             <div className="float-right">
-                <a className="btn btn-success" style = {buttonMargin}> Save </a>
+                <a className="btn btn-success" style={buttonMargin}> Save </a>
                 Preview
-                <a type="checkbox" className="btn btn-light" style = {buttonMargin}>
+                <a type="checkbox" className="btn btn-light" style={buttonMargin}>
                     <i className="fa fa-toggle-off"></i>
                 </a>
                 <br/>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style = {buttonMargin}>
+                <select style={buttonMargin}>
                     <option selected>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>
                     <option>Image</option>
                     <option>Link</option>
                 </select>
-                <a className="btn btn-danger" style = {buttonMargin}>
+                <a className="btn btn-danger" style={buttonMargin}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>
@@ -62,29 +62,29 @@ const WidgetList = () =>
             <hr/>
             <div className="float-right margin-bottom">
                 <div className="margin-bottom">
-                    <a className="btn btn-success margin-right" style = {buttonMargin}> Save </a>
+                    <a className="btn btn-success margin-right" style={buttonMargin}> Save </a>
                     Preview
-                    <a type="checkbox" className="btn btn-light" style = {buttonMargin}>
+                    <a type="checkbox" className="btn btn-light" style={buttonMargin}>
                         <i className="fa fa-toggle-off"></i>
                     </a>
                     <br/>
                 </div>
 
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style = {buttonMargin}>
+                <select style={buttonMargin}>
                     <option>Heading</option>
                     <option selected>Paragraph</option>
                     <option>List</option>
                     <option>Image</option>
                     <option>Link</option>
                 </select>
-                <a className="btn btn-danger" style = {buttonMargin}>
+                <a className="btn btn-danger" style={buttonMargin}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>
@@ -105,7 +105,7 @@ const WidgetList = () =>
             <hr/>
             <div className="float-right margin-bottom">
                 <div className="margin-bottom">
-                    <a className="btn btn-success margin-right" style = {buttonMargin}> Save </a>
+                    <a className="btn btn-success margin-right" style={buttonMargin}> Save </a>
                     Preview
                     <a type="checkbox" className="btn btn-light">
                         <i className="fa fa-toggle-off"></i>
@@ -113,21 +113,21 @@ const WidgetList = () =>
                     <br/>
                 </div>
 
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style = {buttonMargin}>
+                <select style={buttonMargin}>
                     <option>Heading</option>
                     <option>Paragraph</option>
                     <option selected>List</option>
                     <option>Image</option>
                     <option>Link</option>
                 </select>
-                <a className="btn btn-danger" style = {buttonMargin}>
+                <a className="btn btn-danger" style={buttonMargin}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>
@@ -156,29 +156,29 @@ const WidgetList = () =>
             <hr/>
             <div className="float-right margin-bottom">
                 <div className="margin-bottom">
-                    <a className="btn btn-success margin-right" style = {buttonMargin}> Save </a>
+                    <a className="btn btn-success margin-right" style={buttonMargin}> Save </a>
                     Preview
-                    <a type="checkbox" className="btn btn-light" style = {buttonMargin}>
+                    <a type="checkbox" className="btn btn-light" style={buttonMargin}>
                         <i className="fa fa-toggle-off"></i>
                     </a>
                     <br/>
                 </div>
 
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style = {buttonMargin}>
+                <select style={buttonMargin}>
                     <option>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>
                     <option selected>Image</option>
                     <option>Link</option>
                 </select>
-                <a className="btn btn-danger" style = {buttonMargin}>
+                <a className="btn btn-danger" style={buttonMargin}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>
@@ -191,8 +191,9 @@ const WidgetList = () =>
                 <br/>
             </form>
             <h4>Preview</h4>
-            <img src="https://images.pexels.com/photos/1833441/pexels-photo-1833441.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                 alt="Abstract Art"></img>
+            <img
+                src="https://images.pexels.com/photos/1833441/pexels-photo-1833441.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                alt="Abstract Art"></img>
         </li>
         <br/><br/>
         <li className="border container">
@@ -200,29 +201,29 @@ const WidgetList = () =>
             <hr/>
             <div className="float-right margin-bottom">
                 <div className="margin-bottom">
-                    <a className="btn btn-success margin-right" style = {buttonMargin}> Save </a>
+                    <a className="btn btn-success margin-right" style={buttonMargin}> Save </a>
                     Preview
-                    <a type="checkbox" className="btn btn-light" style = {buttonMargin}>
+                    <a type="checkbox" className="btn btn-light" style={buttonMargin}>
                         <i className="fa fa-toggle-off"></i>
                     </a>
                     <br/>
                 </div>
 
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style = {buttonMargin}>
+                <a className="btn btn-warning" style={buttonMargin}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
-                <select style = {buttonMargin}>
+                <select style={buttonMargin}>
                     <option>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>
                     <option>Image</option>
                     <option selected>Link</option>
                 </select>
-                <a className="btn btn-danger" style = {buttonMargin}>
+                <a className="btn btn-danger" style={buttonMargin}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>

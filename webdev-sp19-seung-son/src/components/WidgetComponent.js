@@ -34,11 +34,13 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
                 updateWidget={updateWidget}
                 widget={widget}/> ||
             widget.type == 'IMAGE' &&
-            <ImageWidget widget={widget}/> ||
+            <ImageWidget
+                widget={widget}
+                updateWidget={updateWidget}/> ||
             widget.type == 'LINK' &&
             <LinkWidget
-            updateWidget={updateWidget}
-            widget={widget}/>
+                updateWidget={updateWidget}
+                widget={widget}/>
 
         }
     </div>

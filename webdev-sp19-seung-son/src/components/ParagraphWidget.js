@@ -24,7 +24,7 @@ const ParagraphWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style = {buttonMargin} value = "Paragraph">
+            <select style = {buttonMargin} defaultValue = "Paragraph">
                 <option>Heading</option>
                 <option>Paragraph</option>
                 <option>List</option>
@@ -48,9 +48,10 @@ const ParagraphWidget = ({widget, updateWidget}) =>
             <br/>
             <label htmlFor="paragraphWidgetName">Enter the name for the widget</label>
             <input
-                value={widget.title}
+                id = "paragraphWidgetName"
+                value={widget.name}
                 onChange={event => {
-                    widget.title = event.target.value;
+                    widget.name = event.target.value;
                     updateWidget(widget);
                 }}
                 className="form-control"/>

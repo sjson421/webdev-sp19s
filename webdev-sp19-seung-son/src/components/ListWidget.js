@@ -74,7 +74,7 @@ const ListWidget = ({widget, updateWidget}) =>
                       }}/>
             <br/>
             <select className="form-control"
-                    value = "Unordered list"
+                    defaultValue = "Unordered list"
                     onChange={event => {
                         widget.listType = event.target.value;
                         updateWidget(widget);
@@ -85,9 +85,10 @@ const ListWidget = ({widget, updateWidget}) =>
             <br/>
             <label htmlFor="listWidgetName">Enter the name for the widget</label>
             <input
-                value={widget.title}
+                id = "listWidgetName"
+                value={widget.name}
                 onChange={event => {
-                    widget.title = event.target.value;
+                    widget.name = event.target.value;
                     updateWidget(widget);
                 }}
                 className="form-control"
