@@ -11,10 +11,19 @@ const ImageWidget = ({widget, updateWidget}) =>
         <div className="float-right">
             <div>
                 <a className="btn btn-success" style={buttonMargin}> Save </a>
-                Preview
-                <a type="checkbox" className="btn btn-light" style={buttonMargin}>
-                    <i className="fa fa-toggle-off"></i>
-                </a>
+                <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
+                <i className="fa fa-toggle-off"
+                   onClick={event => {
+                       if (event.target.className == "fa fa-toggle-off") {
+                           event.target.className = "fa fa-toggle-on"
+                           widget.preview = {}
+                           updateWidget(widget)
+                       } else {
+                           event.target.className = "fa fa-toggle-off"
+                           widget.preview = {display: 'none'}
+                           updateWidget(widget)
+                       }
+                   }}></i>
                 <br/>
             </div>
 
@@ -25,12 +34,17 @@ const ImageWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style={buttonMargin} defaultValue="Image">
-                <option>Heading</option>
-                <option>Paragraph</option>
-                <option>List</option>
-                <option>Image</option>
-                <option>Link</option>
+            <select style={buttonMargin}
+                    defaultValue="IMAGE"
+                    onChange={event => {
+                        widget.type = event.target.value
+                        updateWidget(widget)
+                    }}>
+                <option value="HEADING">Heading</option>
+                <option value="PARAGRAPH">Paragraph</option>
+                <option value="LIST">List</option>
+                <option value="IMAGE">Image</option>
+                <option value="LINK">Link</option>
             </select>
             <a className="btn btn-danger" style={buttonMargin}>
                 <i className="fa fa-times"></i>
@@ -58,10 +72,13 @@ const ImageWidget = ({widget, updateWidget}) =>
                 placeholder="Widget Name"/>
             <br/>
         </form>
-        <h4>Preview</h4>
-        {
-            <img src={widget.src}
-                 alt={widget.src}></img>
-        }
+
+        <div style={widget.preview}>
+            <h4>Preview</h4>
+            {
+                <img src={widget.src}
+                     alt={widget.src}></img>
+            }
+        </div>
     </div>
 export default ImageWidget

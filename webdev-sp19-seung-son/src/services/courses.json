@@ -19,29 +19,34 @@
                     "id" : 1,
                     "type": "HEADING",
                     "size": 1,
-                    "text": "The Document Object Model"
+                    "text": "The Document Object Model",
+                    "preview": {"display" : "none"}
                   },
                   {
                     "id" : 2,
                     "type": "PARAGRAPH",
-                    "text": "This topic introduces the DOM"
+                    "text": "This topic introduces the DOM",
+                    "preview": {"display" : "none"}
                   },
                   {
                     "id" : 3,
                     "type": "LIST",
                     "listType": "UNORDERED",
-                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
+                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes",
+                    "preview": {"display" : "none"}
                   },
                   {
                     "id" : 4,
                     "type": "IMAGE",
-                    "src": "https://picsum.photos/200"
+                    "src": "https://picsum.photos/200",
+                    "preview": {"display" : "none"}
                   },
                   {
                     "id" : 5,
                     "type": "LINK",
                     "title": "The DOM",
-                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
+                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model",
+                    "preview": {"display" : "none"}
                   }
                 ]
               },

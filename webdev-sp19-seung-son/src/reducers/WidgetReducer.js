@@ -5,6 +5,11 @@ const widgets = {
     widgets: service.findAllWidgets()
 };
 
+let preview = {
+    display: "none"
+}
+
+//GET ACTION TO GET TOPIC FROM COURSE EDITOR ON CLICK
 const widgetReducer = (state = widgets, action) => {
     switch (action.type) {
         case 'CREATE_WIDGET':

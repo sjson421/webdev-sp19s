@@ -5,16 +5,25 @@ const buttonMargin = {
     margin: "0.2em"
 }
 const LinkWidget = ({widget, updateWidget}) =>
-    <div className = "container">
+    <div className="container">
         <h3>Link Widget</h3>
         <hr/>
         <div className="float-right margin-bottom">
             <div className="margin-bottom">
                 <a className="btn btn-success margin-right" style={buttonMargin}> Save </a>
-                Preview
-                <a type="checkbox" className="btn btn-light" style={buttonMargin}>
-                    <i className="fa fa-toggle-off"></i>
-                </a>
+                <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
+                <i className="fa fa-toggle-off"
+                   onClick={event => {
+                       if (event.target.className == "fa fa-toggle-off") {
+                           event.target.className = "fa fa-toggle-on"
+                           widget.preview = {}
+                           updateWidget(widget)
+                       } else {
+                           event.target.className = "fa fa-toggle-off"
+                           widget.preview = {display: 'none'}
+                           updateWidget(widget)
+                       }
+                   }}></i>
                 <br/>
             </div>
 
@@ -25,12 +34,17 @@ const LinkWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style={buttonMargin} defaultValue = "Link">
-                <option>Heading</option>
-                <option>Paragraph</option>
-                <option>List</option>
-                <option>Image</option>
-                <option>Link</option>
+            <select style={buttonMargin}
+                    defaultValue="LINK"
+                    onChange={event => {
+                        widget.type = event.target.value
+                        updateWidget(widget)
+                    }}>
+                <option value="HEADING">Heading</option>
+                <option value="PARAGRAPH">Paragraph</option>
+                <option value="LIST">List</option>
+                <option value="IMAGE">Image</option>
+                <option value="LINK">Link</option>
             </select>
             <a className="btn btn-danger" style={buttonMargin}>
                 <i className="fa fa-times"></i>
@@ -69,10 +83,13 @@ const LinkWidget = ({widget, updateWidget}) =>
                 className="form-control"/>
             <br/>
         </form>
-        <h4>Preview</h4>
-        {
-            <a href={widget.href}>{widget.title}</a>
-        }
+
+        <div style={widget.preview}>
+            <h4>Preview</h4>
+            {
+                <a href={widget.href}>{widget.title}</a>
+            }
+        </div>
     </div>
 
 export default LinkWidget

@@ -6,30 +6,38 @@ const buttonMargin = {
 
 const getNewlineItems = ({widget}) => {
     let valueItems = "";
-    const myItems = widget.items.split(',');
-    for (let i = 0; i < myItems.length; i++) {
-        if (i === myItems.length - 1)
-            valueItems = valueItems + myItems[i]
-        else
-            valueItems = valueItems + myItems[i] + "\n";
+    if (widget.items) {
+        const myItems = widget.items.split(',');
+        for (let i = 0; i < myItems.length; i++) {
+            if (i === myItems.length - 1)
+                valueItems = valueItems + myItems[i]
+            else
+                valueItems = valueItems + myItems[i] + "\n";
+        }
     }
     return valueItems;
 }
 
 const getCommaItems = (widget) => {
     let valueItems = "";
-    let myItems = widget.split('\n');
-    for (let i = 0; i < myItems.length; i++) {
-        if (i === myItems.length - 1)
-            valueItems = valueItems + myItems[i]
-        else
-            valueItems = valueItems + myItems[i] + ",";
+
+    if (widget) {
+        let myItems = widget.split('\n');
+        for (let i = 0; i < myItems.length; i++) {
+            if (i === myItems.length - 1)
+                valueItems = valueItems + myItems[i]
+            else
+                valueItems = valueItems + myItems[i] + ",";
+        }
     }
     return valueItems;
 }
 
 const getArrayItems = ({widget}) => {
-    return widget.items.split(',');
+    if (widget.items)
+        return widget.items.split(',');
+    else
+        return "";
 }
 
 const ListWidget = ({widget, updateWidget}) =>
@@ -39,10 +47,19 @@ const ListWidget = ({widget, updateWidget}) =>
         <div className="float-right">
             <div>
                 <a className="btn btn-success" style={buttonMargin}> Save </a>
-                Preview
-                <a type="checkbox" className="btn btn-light">
-                    <i className="fa fa-toggle-off"></i>
-                </a>
+                <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
+                <i className="fa fa-toggle-off"
+                   onClick={event => {
+                       if (event.target.className == "fa fa-toggle-off") {
+                           event.target.className = "fa fa-toggle-on"
+                           widget.preview = {}
+                           updateWidget(widget)
+                       } else {
+                           event.target.className = "fa fa-toggle-off"
+                           widget.preview = {display: 'none'}
+                           updateWidget(widget)
+                       }
+                   }}></i>
                 <br/>
             </div>
 
@@ -53,12 +70,17 @@ const ListWidget = ({widget, updateWidget}) =>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
-            <select style={buttonMargin} value = "List">
-                <option>Heading</option>
-                <option>Paragraph</option>
-                <option>List</option>
-                <option>Image</option>
-                <option>Link</option>
+            <select style={buttonMargin}
+                    defaultValue="LIST"
+                    onChange={event => {
+                        widget.type = event.target.value
+                        updateWidget(widget)
+                    }}>
+                <option value="HEADING">Heading</option>
+                <option value="PARAGRAPH">Paragraph</option>
+                <option value="LIST">List</option>
+                <option value="IMAGE">Image</option>
+                <option value="LINK">Link</option>
             </select>
             <a className="btn btn-danger" style={buttonMargin}>
                 <i className="fa fa-times"></i>
@@ -74,7 +96,7 @@ const ListWidget = ({widget, updateWidget}) =>
                       }}/>
             <br/>
             <select className="form-control"
-                    defaultValue = "Unordered list"
+                    defaultValue="Unordered list"
                     onChange={event => {
                         widget.listType = event.target.value;
                         updateWidget(widget);
@@ -85,7 +107,7 @@ const ListWidget = ({widget, updateWidget}) =>
             <br/>
             <label htmlFor="listWidgetName">Enter the name for the widget</label>
             <input
-                id = "listWidgetName"
+                id="listWidgetName"
                 value={widget.name}
                 onChange={event => {
                     widget.name = event.target.value;
@@ -95,19 +117,22 @@ const ListWidget = ({widget, updateWidget}) =>
                 placeholder="Widget Name"/>
             <br/>
         </form>
-        <h4>Preview</h4>
-        {
-            widget.listType === 'UNORDERED' &&
-            <ul>
-                {getArrayItems({widget}).map((item) =>
-                    <li>{item}</li>)}
-            </ul> ||
-            widget.listType === 'ORDERED' &&
-            <ol>
-                {getArrayItems({widget}).map((item) =>
-                    <li>{item}</li>)}
-            </ol>
-        }
+
+        <div style={widget.preview}>
+            <h4>Preview</h4>
+            {
+                widget.listType === 'UNORDERED' &&
+                <ul>
+                    {getArrayItems({widget}).map((item) =>
+                        <li>{item}</li>)}
+                </ul> ||
+                widget.listType === 'ORDERED' &&
+                <ol>
+                    {getArrayItems({widget}).map((item) =>
+                        <li>{item}</li>)}
+                </ol>
+            }
+        </div>
     </div>
 
 export default ListWidget
