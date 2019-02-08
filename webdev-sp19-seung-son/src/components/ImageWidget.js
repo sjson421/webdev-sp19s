@@ -4,7 +4,7 @@ const buttonMargin = {
     margin: "0.2em"
 }
 
-const ImageWidget = ({widget, updateWidget}) =>
+const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
     <div className="container">
         <h3>Image Widget</h3>
         <hr/>
@@ -27,10 +27,30 @@ const ImageWidget = ({widget, updateWidget}) =>
                 <br/>
             </div>
 
-            <a className="btn btn-warning" style={buttonMargin}>
+            <a className="btn btn-warning"
+               style={buttonMargin}
+               onClick={event => {
+                   const i = widgets.indexOf(widget);
+                   if (i != 0) {
+                       const temp = widgets[i - 1];
+                       widgets[i - 1] = widget;
+                       widgets[i] = temp;
+                       updateWidgets(widgets);
+                   }
+               }}>
                 <i className="fa fa-arrow-up"></i>
             </a>
-            <a className="btn btn-warning" style={buttonMargin}>
+            <a className="btn btn-warning"
+               style={buttonMargin}
+               onClick={event => {
+                   const i = widgets.indexOf(widget);
+                   if (i != widgets.length - 1) {
+                       const temp = widgets[i + 1];
+                       widgets[i + 1] = widget;
+                       widgets[i] = temp;
+                       updateWidgets(widgets);
+                   }
+               }}>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
@@ -46,7 +66,9 @@ const ImageWidget = ({widget, updateWidget}) =>
                 <option value="IMAGE">Image</option>
                 <option value="LINK">Link</option>
             </select>
-            <a className="btn btn-danger" style={buttonMargin}>
+            <a className="btn btn-danger"
+               style={buttonMargin}
+               onClick={() => deleteWidget(widget)}>
                 <i className="fa fa-times"></i>
             </a>
         </div>

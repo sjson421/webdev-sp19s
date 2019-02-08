@@ -22,7 +22,8 @@ class CourseEditor extends React.Component {
             lesson: '',
             topic: '',
             lessonTitle: '',
-            topicTitle: ''
+            topicTitle: '',
+            widgets: []
         }
         this.store = createStore(widgetReducer);
     }
@@ -154,6 +155,10 @@ class CourseEditor extends React.Component {
         this.setState({
             topic: topic
         })
+        this.store.dispatch({
+            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+            topic: topic
+        });
     }
     highlightTopic = (event) => {
         const topicsList = event.target.parentElement.parentElement.getElementsByTagName("li")
@@ -256,7 +261,7 @@ class CourseEditor extends React.Component {
                 <Link to="/"><h6 style={{marginBottom: "2em"}}>Return home</h6></Link>
                 <hr/>
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-lg-4 col-md-12 col-sm-12" style={{marginBottom: "2em"}}>
                         <ModuleList
                             modules={this.state.course.modules}
                             highlightModule={this.highlightModule}

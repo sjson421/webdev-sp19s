@@ -2,15 +2,11 @@ import CourseService from '../services/CourseService'
 
 const service = new CourseService();
 const widgets = {
-    widgets: service.findAllWidgets()
+    widgets: []
 };
 
-let preview = {
-    display: "none"
-}
-
-//GET ACTION TO GET TOPIC FROM COURSE EDITOR ON CLICK
 const widgetReducer = (state = widgets, action) => {
+
     switch (action.type) {
         case 'CREATE_WIDGET':
             return {
@@ -19,7 +15,8 @@ const widgetReducer = (state = widgets, action) => {
                     {
                         type: 'HEADING',
                         text: 'New Widget',
-                        size: 1
+                        size: 1,
+                        preview: {"display": "none"}
                     }
                 ]
             }
@@ -29,11 +26,14 @@ const widgetReducer = (state = widgets, action) => {
             }
 
         case 'UPDATE_WIDGET':
-            // replace the old widget with the new widget
             return {
                 widgets: state.widgets.map(widget =>
                     widget.id === action.widget.id ? action.widget : widget
                 )
+            }
+        case 'UPDATE_WIDGETS':
+            return {
+                widgets: [...action.widgets]
             }
         case 'FIND_WIDGET':
             return widgets.find(widget =>

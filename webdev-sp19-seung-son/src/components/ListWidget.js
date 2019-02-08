@@ -33,15 +33,22 @@ const getCommaItems = (widget) => {
     return valueItems;
 }
 
-const getArrayItems = ({widget}) => {
-    if (widget.items)
-        return widget.items.split(',');
-    else
-        return "";
+const arrayMap = ({widget}) => {
+    return widget.items.split(',');
 }
-
-const ListWidget = ({widget, updateWidget}) =>
+const check = ({widget}) => {
+    if (!widget.items) {
+        widget.items = "";
+    }
+    if (!widget.listType) {
+        widget.listType = "UNORDERED"
+    }
+}
+const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
     <div className="container">
+        {check({widget})}
+        {() => updateWidget({widget})}
+
         <h3>List Widget</h3>
         <hr/>
         <div className="float-right">
@@ -63,10 +70,30 @@ const ListWidget = ({widget, updateWidget}) =>
                 <br/>
             </div>
 
-            <a className="btn btn-warning" style={buttonMargin}>
+            <a className="btn btn-warning"
+               style={buttonMargin}
+               onClick={event => {
+                   const i = widgets.indexOf(widget);
+                   if (i != 0) {
+                       const temp = widgets[i - 1];
+                       widgets[i - 1] = widget;
+                       widgets[i] = temp;
+                       updateWidgets(widgets);
+                   }
+               }}>
                 <i className="fa fa-arrow-up"></i>
             </a>
-            <a className="btn btn-warning" style={buttonMargin}>
+            <a className="btn btn-warning"
+               style={buttonMargin}
+               onClick={event => {
+                   const i = widgets.indexOf(widget);
+                   if (i != widgets.length - 1) {
+                       const temp = widgets[i + 1];
+                       widgets[i + 1] = widget;
+                       widgets[i] = temp;
+                       updateWidgets(widgets);
+                   }
+               }}>
                 <i className="fa fa-arrow-down"></i>
             </a>
 
@@ -82,7 +109,9 @@ const ListWidget = ({widget, updateWidget}) =>
                 <option value="IMAGE">Image</option>
                 <option value="LINK">Link</option>
             </select>
-            <a className="btn btn-danger" style={buttonMargin}>
+            <a className="btn btn-danger"
+               style={buttonMargin}
+               onClick={() => deleteWidget(widget)}>
                 <i className="fa fa-times"></i>
             </a>
         </div>
@@ -123,13 +152,15 @@ const ListWidget = ({widget, updateWidget}) =>
             {
                 widget.listType === 'UNORDERED' &&
                 <ul>
-                    {getArrayItems({widget}).map((item) =>
-                        <li>{item}</li>)}
+                    {arrayMap({widget}).map(item =>
+                        <li> {item}</li>
+                    )}
                 </ul> ||
                 widget.listType === 'ORDERED' &&
                 <ol>
-                    {getArrayItems({widget}).map((item) =>
-                        <li>{item}</li>)}
+                    {arrayMap({widget}).map(item =>
+                        <li> {item}</li>
+                    )}
                 </ol>
             }
         </div>

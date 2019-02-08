@@ -3,12 +3,8 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-const HeadingWidget = ({widget, updateWidget}) =>
+const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
     <div>
-        <a className="btn btn-light">
-            <i className="fa fa-plus"></i> Add Widget
-        </a>
-
         <div className="container">
             <h3> Heading Widget </h3>
             <hr/>
@@ -28,10 +24,30 @@ const HeadingWidget = ({widget, updateWidget}) =>
                        }
                    }}></i>
                 <br/>
-                <a className="btn btn-warning" style={buttonMargin}>
+                <a className="btn btn-warning"
+                   style={buttonMargin}
+                   onClick={event => {
+                       const i = widgets.indexOf(widget);
+                       if (i != 0) {
+                           const temp = widgets[i - 1];
+                           widgets[i - 1] = widget;
+                           widgets[i] = temp;
+                           updateWidgets(widgets);
+                       }
+                   }}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning" style={buttonMargin}>
+                <a className="btn btn-warning"
+                   style={buttonMargin}
+                   onClick={event => {
+                       const i = widgets.indexOf(widget);
+                       if (i != widgets.length - 1) {
+                           const temp = widgets[i + 1];
+                           widgets[i + 1] = widget;
+                           widgets[i] = temp;
+                           updateWidgets(widgets);
+                       }
+                   }}>
                     <i className="fa fa-arrow-down"></i>
                 </a>
 
@@ -47,7 +63,9 @@ const HeadingWidget = ({widget, updateWidget}) =>
                     <option value="IMAGE">Image</option>
                     <option value="LINK">Link</option>
                 </select>
-                <a className="btn btn-danger" style={buttonMargin}>
+                <a className="btn btn-danger"
+                   style={buttonMargin}
+                   onClick={() => deleteWidget(widget)}>
                     <i className="fa fa-times"></i>
                 </a>
             </div>

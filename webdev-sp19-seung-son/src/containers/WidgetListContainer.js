@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import WidgetList from '../components/WidgetList'
+import CourseEditor from '../components/CourseEditor'
 
 const stateToPropertyMapper = state => ({
     widgets: state.widgets
 })
 
-const dispatchToPropertyMapper = dispatch => ({
+const dispatchToPropertyMapper = (dispatch, widgets) => ({
     createWidget: () =>
         dispatch({
             type: 'CREATE_WIDGET'
@@ -35,6 +36,11 @@ const dispatchToPropertyMapper = dispatch => ({
     findAllWidgets: () =>
         dispatch({
             type: 'FIND_ALL_WIDGETS'
+        }),
+    updateWidgets: widgets =>
+        dispatch({
+            type: 'UPDATE_WIDGETS',
+            widgets: widgets
         })
 })
 

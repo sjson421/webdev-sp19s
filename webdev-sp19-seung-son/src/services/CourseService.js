@@ -43,8 +43,6 @@ class CourseService {
                                     } else {
                                         widgets = [widget];
                                     }
-                                    //REMOVE IF NOT NEEDED
-                                    this.courses[i].modules[j].lessons[k].topics[l].widgets = widgets;
                                 }
                         }
                 }
@@ -53,7 +51,7 @@ class CourseService {
 
 
     findWidgets = topicId => {
-        for (let i = 0; i < this.courses.length; i++) {
+        for (let i = 0; i < courses.length; i++) {
             const modules = this.courses[i].modules;
             if (modules != null)
                 for (let j = 0; j < modules.length; j++) {
@@ -119,8 +117,6 @@ class CourseService {
                                                     ...widget
                                                 }
                                             }
-                                            //REMOVE IF NOT NEEDED
-                                            this.courses[i].modules[j].lessons[k].topics[l].widgets[m] = curWidget;
                                         }
                                     }
                                 }
@@ -147,38 +143,11 @@ class CourseService {
                                                 widget => widget.id !== widgetId
                                             )
                                         }
-                                        //REMOVE IF NOT NEEDED
-                                        this.courses[i].modules[j].lessons[k].topics[l].widgets = widgets;
                                     }
                                 }
                         }
                 }
         }
-    }
-    findAllWidgets = () => {
-        let allWidgets = [];
-        for (let i = 0; i < this.courses.length; i++) {
-            const modules = this.courses[i].modules;
-            if (modules != null)
-                for (let j = 0; j < modules.length; j++) {
-                    const lessons = modules[j].lessons;
-                    if (lessons != null)
-                        for (let k = 0; k < lessons.length; k++) {
-                            const topics = lessons[k].topics;
-                            if (topics != null)
-                                for (let l = 0; l < topics.length; l++) {
-                                    let widgets = topics[l].widgets;
-                                    if (widgets != null) {
-                                        for (let m = 0; m < widgets.length; m++) {
-                                            const curWidget = widgets[m];
-                                            allWidgets.push(curWidget);
-                                        }
-                                    }
-                                }
-                        }
-                }
-        }
-        return allWidgets;
     }
 
 }
