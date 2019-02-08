@@ -4,7 +4,7 @@ const LessonTabs = ({lessons = [], createLesson, deleteLesson, editLesson, highl
     <ul className="nav nav-tabs">
         {
             lessons.map(lesson =>
-                <li key={lesson.id} className="nav-group-item" style={{padding: "1em"}}>
+                <li key={lesson.id} className="nav-group-item" style={{padding: "1em", marginBottom:"1em"}}>
                     <span onClick={(event) => {
                         highlightLesson(event);
                         selectLesson(lesson);

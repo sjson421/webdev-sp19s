@@ -79,14 +79,15 @@ const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
                     widget.title = event.target.value;
                     updateWidget(widget);
                 }}
-                className="form-control"/>
+                className="form-control"
+                placeholder = "Link text"/>
             <br/>
             <label htmlFor="linkUrl">Enter the link URL</label>
             <input
                 id="linkUrl"
                 type="text"
                 className="form-control"
-                placeholder="Enter image URL"
+                placeholder="Link URL"
                 value={widget.href}
                 onChange={event => {
                     widget.href = event.target.value;
@@ -102,7 +103,8 @@ const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
                     widget.name = event.target.value;
                     updateWidget(widget);
                 }}
-                className="form-control"/>
+                className="form-control"
+                placeholder = "Widget name"/>
             <br/>
         </form>
 

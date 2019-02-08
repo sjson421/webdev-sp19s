@@ -90,7 +90,8 @@ const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, wid
                     widget.name = event.target.value;
                     updateWidget(widget);
                 }}
-                className="form-control"/>
+                className="form-control"
+                placeholder="Widget name"/>
             <br/>
         </form>
         <div style={widget.preview}>

@@ -4,7 +4,7 @@ const TopicPills = ({topics = [], highlightTopic, selectTopic, deleteTopic, edit
     <ul className="nav nav-pills">
         {
             topics.map(topic =>
-                <li key={topic.id} className="nav-item" style={{padding: "1em"}}>
+                <li key={topic.id} className="nav-item" style={{padding: "1em", marginBottom:"1em"}}>
                     <span onClick={(event) => {
                         highlightTopic(event);
                         selectTopic(topic);

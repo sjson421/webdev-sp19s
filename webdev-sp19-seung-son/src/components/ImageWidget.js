@@ -75,7 +75,7 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
         <form className="form-group">
             <input type="text"
                    className="form-control"
-                   placeholder="Enter image URL"
+                   placeholder="Image URL"
                    value={widget.src}
                    onChange={event => {
                        widget.src = event.target.value;
