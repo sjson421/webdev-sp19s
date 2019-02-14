@@ -1,14 +1,16 @@
 package models;
 
+import java.util.List;
+
 public class Lesson {
 	private Integer id;
-	private Module module;
 	private String title;
+	private List<Topic> topics;
 	
-	public Lesson(Integer id, Module module, String title) {
+	public Lesson(Integer id, String title, List<Topic> topics) {
 		this.id = id;
-		this.module = module;
 		this.title = title;
+		this.topics = topics;
 	}
 
 	public Integer getId() {
@@ -18,20 +20,19 @@ public class Lesson {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Module getModule() {
-		return module;
-	}
-
-	public void setModule(Module module) {
-		this.module = module;
-	}
-
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public List<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
 }

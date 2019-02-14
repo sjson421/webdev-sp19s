@@ -2,10 +2,9 @@ package models;
 
 public class Widget {
 	private Integer id;
-	private Topic topic;
 	private String title;
 	private String type;
-	private String size;
+	private Integer size;
 	private String text;
 	private String listType;
 	private String items;
@@ -13,10 +12,9 @@ public class Widget {
 	private String href;
 	private String preview;
 
-	public Widget(Integer id, Topic topic, String title, String type, String size, String text, 
+	public Widget(Integer id, String title, String type, Integer size, String text, 
 			String listType, String items, String src, String href) {
 		this.id = id;
-		this.topic = topic;
 		this.title = title;
 		this.type = type;
 		this.size = size;
@@ -36,14 +34,6 @@ public class Widget {
 		this.id = id;
 	}
 
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -60,11 +50,11 @@ public class Widget {
 		this.type = type;
 	}
 
-	public String getSize() {
+	public Integer getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
 

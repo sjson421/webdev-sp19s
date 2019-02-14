@@ -1,16 +1,19 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 public class Course {
 	private Integer id;
 	private String title;
 	private Date lastModified;
+	private List<Module> modules;
 	
-	public Course(Integer id, String title, String owner, Date lastModified) {
+	public Course(Integer id, String title, String owner, Date lastModified, List<Module> modules) {
 		this.id = id;
 		this.title = title;
 		this.lastModified = lastModified;
+		this.modules = modules;
 	}
 	public Integer getId() {
 		return id;
@@ -29,5 +32,11 @@ public class Course {
 	}
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
+	}
+	public List<Module> getModules() {
+		return modules;
+	}
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
 	}
 }
