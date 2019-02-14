@@ -1,4 +1,4 @@
-package services;
+package edu.northeastern.cs5610.services;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,11 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.*;
 
-import models.Faculty;
-import models.Person;
-import models.Student;
+import edu.northeastern.cs5610.models.Faculty;
+import edu.northeastern.cs5610.models.Person;
+import edu.northeastern.cs5610.models.Student;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserService {
 	Faculty alice = new Faculty(123, "Alice", "Jondice", "alice", "alice", new Date(1990, 1, 3), "English");
 	Student bob = new Student(234, "Bob", "Fallon", "bob", "bob", new Date(1995, 2, 16), "Physics");

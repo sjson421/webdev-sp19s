@@ -1,6 +1,6 @@
 import React from 'react'
 import CourseCard from './CourseCard'
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 
 const navStyle = {
     marginBottom: '2%'
@@ -23,6 +23,12 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
                    onClick={() => addCourse(document.getElementById('courseTitle').value)}>
                     <i className="fa fa-plus-circle"></i></a>
             </form>
+            <Link to="/profile"><h6 className="nav-link input-group my-2 my-lg-0"
+                                    style={{marginBottom: "2em", color: "#86e557"}}>Profile</h6></Link>
+            <Link to="/login"><h6 className="nav-link input-group my-2 my-lg-0"
+                                  style={{marginBottom: "0.2em", color: "#86e557"}}>Login</h6></Link>
+            <Link to="/register"><h6 className="nav-link input-group my-2 my-lg-0"
+                                     style={{marginBottom: "0.2em", color: "#86e557"}}>Register</h6></Link>
         </nav>
         <div className="table-responsive">
             <table className="table">

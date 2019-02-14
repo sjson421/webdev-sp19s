@@ -4,7 +4,9 @@ import CourseGrid from './CourseGrid'
 import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
 import CourseEditor from "./CourseEditor";
-import WidgetList from "./WidgetList";
+import Login from './Login'
+import Profile from './Profile'
+import Register from './Register'
 
 class WhiteBoard extends Component {
     deleteCourse = course =>
@@ -21,16 +23,22 @@ class WhiteBoard extends Component {
                 title: courseTitle
             }
         this.setState({
-            courses: this.courseService.addCourse(course)
+            courses: this.courseService.createCourse(course)
         })
     }
 
     constructor() {
         super();
-        this.courseService = new CourseService()
+        this.courseService = new CourseService();
         this.state = {
-            courses: this.courseService.findAllCourses()
+            courses: []
         }
+    }
+
+    componentDidMount() {
+        this.courseService.findAllCourses()
+            .then(courses =>
+                this.setState({courses: courses}));
     }
 
     render() {
@@ -41,18 +49,27 @@ class WhiteBoard extends Component {
                         <Route path='/' exact
                                render={() =>
                                    <CourseGrid
-                                       addCourse = {this.addCourse}
+                                       addCourse={this.addCourse}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
                         <Route path='/table'
                                render={() =>
                                    <CourseTable
-                                       addCourse = {this.addCourse}
+                                       addCourse={this.addCourse}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
                         <Route path="/course/:id"
                                exact
                                component={CourseEditor}/>
+                        <Route path="/login"
+                               render={() =>
+                                   <Login/>}/>
+                        <Route path="/register"
+                               render={() =>
+                                   <Register/>}/>
+                        <Route path="/profile"
+                               exact
+                               component={Profile}/>
                     </div>
                 </Router>
             </div>

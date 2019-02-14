@@ -1,6 +1,6 @@
 import React from 'react'
 import CourseRow from './CourseRow'
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 
 const navStyle = {
     marginBottom: '2%'
@@ -13,7 +13,6 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
                 <a className="btn btn-primary" href="#"><i className="fa fa-bars"></i></a><a
                 className="navbar-brand" href="#">Course Manager</a>
             </form>
-
             <form className="input-group my-2 my-lg-0">
                 <input id="courseTitle" className="form-control mr-sm-2" type="text"
                        placeholder="New Course Title"/>
@@ -21,6 +20,12 @@ const CourseTable = ({courses, deleteCourse, addCourse}) =>
                    onClick={() => addCourse(document.getElementById('courseTitle').value)}>
                     <i className="fa fa-plus-circle"></i></a>
             </form>
+            <Link to="/profile"><h6 className="nav-link input-group my-2 my-lg-0"
+                                    style={{marginBottom: "2em", color: "#86e557"}}>Profile</h6></Link>
+            <Link to="/login"><h6 className="nav-link input-group my-2 my-lg-0"
+                                  style={{marginBottom: "0.2em", color: "#86e557"}}>Login</h6></Link>
+            <Link to="/register"><h6 className="nav-link input-group my-2 my-lg-0"
+                                     style={{marginBottom: "0.2em", color: "#86e557"}}>Register</h6></Link>
 
         </nav>
         <div className="table-responsive">

@@ -1,5 +1,7 @@
 import React from "react";
-
+const margin = {
+    margin: "0.2em"
+};
 class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -23,8 +25,8 @@ class Login extends React.Component {
                                    placeholder="!@#$QWERzxc" id="password"/>
                         </div>
                     </div>
-                    <button type="button" className="btn btn-primary">Sign in</button>
-                    <a className="btn btn-danger" href="/index.html">Cancel</a>
+                    <a className="btn btn-primary" href="/profile" style ={margin}>Sign in</a>
+                    <a className="btn btn-danger" href="/" style ={margin}>Cancel</a>
                     <p align="right">
                         <a href="../register/register.template.client.html">Sign up</a>
                     </p>

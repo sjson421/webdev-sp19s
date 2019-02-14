@@ -1,4 +1,4 @@
-package services;
+package edu.northeastern.cs5610.services;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import models.*;
+import edu.northeastern.cs5610.models.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CourseService {
 	/* Data initialization */
 	static Widget headingWidget = new Widget(123, "Heading", "HEADING", 1, "I am here", null, null, null, null);

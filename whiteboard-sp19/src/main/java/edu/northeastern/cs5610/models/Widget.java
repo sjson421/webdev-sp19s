@@ -1,4 +1,4 @@
-package models;
+package edu.northeastern.cs5610.models;
 
 public class Widget {
 	private Integer id;

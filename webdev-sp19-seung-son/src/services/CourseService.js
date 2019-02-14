@@ -1,30 +1,36 @@
 import courses from './courses.json'
 
+const COURSES_URL = "http://localhost:8080/api/courses";
+
 class CourseService {
     constructor() {
         this.courses = courses;
     }
-
-    addCourse = course => {
+    createCourse = course => {
         if (course === null) {
             course = {
                 id: (new Date()).getTime(),
                 title: 'New Course'
             }
         }
-        this.courses.push(course)
-        return this.courses
+        fetch(COURSES_URL, course)
+            .then(response =>
+                response.json());
     }
     findCourseById = courseId =>
-        this.courses = this.courses.find(
-            course => course.id === courseId
-        )
+        fetch(COURSES_URL + "/" + courseId)
+            .then(response =>
+                response.json());
     findAllCourses = () =>
-        this.courses;
+        fetch(COURSES_URL)
+            .then(response =>
+                response.json());
+
+
     deleteCourse = deleteCourse =>
-        this.courses = this.courses.filter(
-            course => course.id !== deleteCourse.id
-        )
+        fetch(COURSES_URL + "/" + deleteCourse.id)
+            .then(response =>
+                response.json());
 
     createWidget = (topicId, widget) => {
         for (let i = 0; i < this.courses.length; i++) {
