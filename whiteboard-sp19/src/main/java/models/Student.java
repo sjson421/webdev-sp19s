@@ -6,7 +6,7 @@ public class Student extends Person{
 	private String major;
 	
 	public Student(Integer id, String firstName, String lastName, String username, String password, Date dob, String major) {
-		super(id, firstName, lastName, username, password, dob);
+		super(id, "STUDENT", firstName, lastName, username, password, dob);
 		this.major = major;
 	}
 
