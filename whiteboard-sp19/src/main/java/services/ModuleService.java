@@ -12,7 +12,7 @@ public class ModuleService {
 	List<Course> courses = CourseService.courses;
 
 	@PostMapping("/api/courses/{cid}/modules")
-	public Module createCourse(@PathVariable("cid") Integer id, @RequestBody Module module) {
+	public Module createModule(@PathVariable("cid") Integer id, @RequestBody Module module) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			if (course.getId().equals(id)) {
@@ -65,14 +65,14 @@ public class ModuleService {
 	}
 
 	@DeleteMapping("/api/modules/{mid}")
-	public void deleteCourse(@PathVariable("mid") Integer id) {
+	public void deleteModule(@PathVariable("mid") Integer id) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
 			for (int j = 0; j < modules.size(); j++) {
 				Module module = modules.get(j);
 				if (module.getId().equals(id)) {
-					modules.remove(module);
+					modules.remove(j);
 				}
 			}
 		}
