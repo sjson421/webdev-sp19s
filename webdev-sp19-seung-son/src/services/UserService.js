@@ -1,4 +1,4 @@
-const SOURCE = "https://assignment5-sp19s1-seung-son.herokuapp.com";
+const SOURCE = "http://localhost:8080";
 
 function isJson(str) {
     try {
