@@ -24,7 +24,7 @@ public class ModuleService {
 		return null;
 	}
 
-	@GetMapping("/api/course/{cid}/modules")
+	@GetMapping("/api/courses/{cid}/modules")
 	public List<Module> findAllModules(@PathVariable("cid") Integer id) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);

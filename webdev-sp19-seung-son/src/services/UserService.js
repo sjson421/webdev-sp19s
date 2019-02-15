@@ -15,6 +15,7 @@ class UserService {
         fetch(SOURCE + "/api/register", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
             body: JSON.stringify(user)
         }).then(response => {
             return response.text().then(function (text) {
@@ -22,7 +23,9 @@ class UserService {
             })
         });
     profile = () =>
-        fetch("/api/profile")
+        fetch(SOURCE + "/api/profile", {
+            credentials: 'include'
+        })
             .then(response => {
                 return response.text().then(function (text) {
                     return isJson(text) ? JSON.parse(text) : null
@@ -32,6 +35,7 @@ class UserService {
         fetch(SOURCE + '/api/login', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
             body: JSON.stringify(user)
         }).then(response => {
             return response.text().then(function (text) {
@@ -40,7 +44,8 @@ class UserService {
         })
     logout = () =>
         fetch(SOURCE + '/api/logout', {
-            method: "POST"
+            method: "POST",
+            credentials: 'include'
         });
     findCourseById = courseId =>
         fetch(SOURCE + "/api/users/" + courseId)
@@ -50,6 +55,14 @@ class UserService {
         fetch(SOURCE + "/api/users")
             .then(response =>
                 response.json());
+    updateUser = user => {
+        return fetch(SOURCE + '/api/profile', {
+            method: "PUT",
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify(user)
+        }).then(response => response)
+    }
 }
 
 export default UserService;

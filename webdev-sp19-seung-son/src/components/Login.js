@@ -20,13 +20,8 @@ class Login extends React.Component {
 
     login = () => {
         const user = {
-            id: "",
-            type: "",
-            firstName: "",
-            lastName: "",
             username: this.state.username,
-            password: this.state.password,
-            dob: ""
+            password: this.state.password
         }
         this.service.login(user)
             .then((response) => {

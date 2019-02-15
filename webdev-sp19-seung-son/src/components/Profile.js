@@ -24,14 +24,30 @@ class Profile extends React.Component {
             phone: '',
             email: '',
             type: '',
-            dob: ''
+            dob: '',
+            visible: {display: 'none'}
         }
     }
 
-    usernameChanged = event =>
-        this.setState({
-            username: event.target.value
-        })
+    componentDidMount() {
+        this.service.profile()
+            .then(response => {
+                if (response != null) {
+                    this.selected = response.type;
+                    this.setState({
+                        currentUser: response,
+                        username: response.username,
+                        firstName: response.firstName,
+                        lastName: response.lastName,
+                        phone: response.phone,
+                        email: response.email,
+                        type: response.type,
+                        dob: response.dob
+                    })
+                }
+            });
+    }
+
     firstNameChanged = event =>
         this.setState({
             firstName: event.target.value
@@ -48,51 +64,78 @@ class Profile extends React.Component {
         this.setState({
             email: event.target.value
         })
-    typeChanged = event =>
-        this.setState({
+    typeChanged = event => {
+        this.selected = event.target.value;
+        return this.setState({
             type: event.target.value
         })
-    dobChanged = event =>
-        this.setState({
+    }
+    dobChanged = event => {
+        return this.setState({
             dob: event.target.value
-        })
+        })}
+    updateUser = () => {
+        const s = this.state;
+        const c = this.state.currentUser;
+
+        const user = {
+            id: c.id,
+            type: s.type,
+            firstName: s.firstName,
+            lastName: s.lastName,
+            username: c.username,
+            password: c.password,
+            dob: s.dob,
+            phone: s.phone,
+            email: s.email
+        }
+        this.service.updateUser(user)
+            .then(response => {
+                if (response) {
+                    this.setState({
+                        visible: {}
+                    });
+                } else {
+                    alert("User update has failed!")
+                }
+            });
+    }
+    logout = () =>
+        this.service.logout();
 
     render() {
-        this.service.profile()
-            .then(response => {
-                this.setState({
-                    currentUser: response
-                })
-            });
+        if (!this.state.currentUser) {
+            this.state.currentUser = '';
+        }
         return (
             <div>
                 <div id="profile">
                     <h1 style={title}>Profile</h1>
-                    <div className="alert alert-success" role="alert">
+                    <div className="alert alert-success" role="alert" style = {this.state.visible}>
                         Profile successfully saved!
                     </div>
                     <p>Username:</p>
                     <input className="form-control" id="usernameFld"
                            style={bottom}
-                           onChange={this.usernameChanged}  defaultValue = {this.state.currentUser.username} readonly/>
+                           defaultValue={this.state.currentUser.username} readOnly/>
                     <p>First Name:</p>
                     <input className="form-control"
                            style={bottom}
-                           onChange={this.firstNameChanged} defaultValue = {this.state.currentUser.firstName}/>
+                           onChange={this.firstNameChanged} defaultValue={this.state.currentUser.firstName}/>
                     <p>Last Name:</p>
                     <input className="form-control"
                            style={bottom}
-                           onChange={this.lastNameChanged} defaultValue = {this.state.currentUser.lastName}/>
+                           onChange={this.lastNameChanged} defaultValue={this.state.currentUser.lastName}/>
                     <p>Phone:</p>
                     <input className="form-control" id="phoneFld" placeholder="(555)123-4324"
                            style={bottom}
-                           onChange={this.phoneChanged} defaultValue = {this.state.currentUser.phone}/>
+                           onChange={this.phoneChanged} defaultValue={this.state.currentUser.phone}/>
                     <p>Email:</p>
                     <input className="form-control" id="emailFld" placeholder="alice@wonderland.com" style={bottom}
-                           onChange={this.emailChanged} defaultValue = {this.state.currentUser.email}/>
+                           onChange={this.emailChanged} defaultValue={this.state.currentUser.email}/>
                     <p>Role:</p>
                     <select className="form-control" id="roleFld" style={bottom}
-                            defaultValue={this.state.currentUser.type}
+                            value={this.selected}
                             onChange={this.typeChanged}>
                         <option value="FACULTY">Faculty</option>
                         <option value="STUDENT">Student</option>
@@ -100,6 +143,7 @@ class Profile extends React.Component {
                         <option value="ADMIN">Admin</option>
                     </select>
                     <p>Date of Birth:</p>
+                    {console.log(this.state.currentUser.dob)}
                     <input className="form-control" id="dobFld"
                            placeholder="mm/dd/yyyy" type="date" style={bottom}
                            defaultValue={this.state.currentUser.dob}
@@ -108,9 +152,11 @@ class Profile extends React.Component {
                 <button
                     id="updateBtn"
                     className="btn btn-success"
-                    style={margin}> Update
+                    style={margin}
+                    onClick={this.updateUser}> Update
                 </button>
-                <a className="btn btn-danger" href="/" style={margin}>Logout</a>
+                <a className="btn btn-danger" style={margin} href="/"
+                   onClick={this.logout}>Logout</a>
                 <Link to="/"><h6 className="float-right" style={{marginTop: "2em"}}>Return home</h6></Link>
             </div>
 

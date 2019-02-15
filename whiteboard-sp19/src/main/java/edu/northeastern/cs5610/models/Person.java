@@ -9,12 +9,12 @@ public class Person {
 	private String lastName;
 	private String username;
 	private String password;
-	private Date dob;
+	private String dob;
 	private String phone;
 	private String email;
 
 	public Person(Integer id, String type, String firstName, String lastName, String username, 
-			String password, Date dob, String phone, String email) {
+			String password, String dob, String phone, String email) {
 		this.setId(id);
 		this.type = type;
 		this.firstName = firstName;
@@ -67,11 +67,11 @@ public class Person {
 		this.id = id;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 

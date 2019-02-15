@@ -2,7 +2,7 @@ import CourseService from '../services/CourseService'
 
 const service = new CourseService();
 const widgets = {
-    widgets: []
+    widgets: service.findAllWidgets()
 };
 
 const widgetReducer = (state = widgets, action) => {

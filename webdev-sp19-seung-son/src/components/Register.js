@@ -41,13 +41,8 @@ class Register extends React.Component {
             alert("Your passwords do not match!")
         } else {
             const user = {
-                id: "",
-                type: "",
-                firstName: "",
-                lastName: "",
                 username: this.state.username,
-                password: this.state.password,
-                dob: ""
+                password: this.state.password
             }
             this.service.register(user)
                 .then(response => {

@@ -156,7 +156,26 @@ class CourseService {
                 }
         }
     }
-
+    findAllWidgets = () => {
+        let widgets = [];
+        for (let i = 0; i < courses.length; i++) {
+            const modules = this.courses[i].modules;
+            if (modules != null)
+                for (let j = 0; j < modules.length; j++) {
+                    const lessons = modules[j].lessons;
+                    if (lessons != null)
+                        for (let k = 0; k < lessons.length; k++) {
+                            const topics = lessons[k].topics;
+                            if (topics != null)
+                                for (let l = 0; l < topics.length; l++) {
+                                    const curTopic = topics[l];
+                                        widgets.push(...curTopic.widgets);
+                                }
+                        }
+                }
+        }
+        return widgets;
+    }
 }
 
 export default CourseService

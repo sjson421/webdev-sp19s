@@ -77,7 +77,7 @@ public class TopicService {
 	}
 
 	@PutMapping("/api/topic/{tid}")
-	public Topic updateTopic(@PathVariable("tid") Integer id, @RequestBody Lesson newLesson) {
+	public Topic updateTopic(@PathVariable("tid") Integer id, @RequestBody Topic newTopic) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
@@ -90,7 +90,7 @@ public class TopicService {
 					for (int l = 0; l < topics.size(); l++) {
 						Topic topic = topics.get(l);
 						if (topic.getId().equals(id)) {
-							topics.set(l, topic);
+							topics.set(l, newTopic);
 							return topic;
 						}
 					}
