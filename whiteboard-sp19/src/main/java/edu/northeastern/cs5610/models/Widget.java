@@ -25,6 +25,7 @@ public class Widget {
 		this.href = href;
 		preview = "{\"display\" : \"none\"}";
 	}
+	public Widget() {}
 
 	public Integer getId() {
 		return id;

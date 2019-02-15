@@ -6,16 +6,21 @@ class CourseService {
     constructor() {
         this.courses = courses;
     }
+
     createCourse = course => {
         if (course === null) {
-            course = {
-                id: (new Date()).getTime(),
-                title: 'New Course'
-            }
+            course.title = "New Course"
         }
-        fetch(COURSES_URL, course)
-            .then(response =>
-                response.json());
+        course.id = "0";
+        course.modules = [];
+
+        fetch(COURSES_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(course)
+        }).then(response => {
+            console.log(response.json());
+        });
     }
     findCourseById = courseId =>
         fetch(COURSES_URL + "/" + courseId)
@@ -23,14 +28,17 @@ class CourseService {
                 response.json());
     findAllCourses = () =>
         fetch(COURSES_URL)
-            .then(response =>
-                response.json());
+            .then(response => {
+                return response.json()
+            });
 
 
     deleteCourse = deleteCourse =>
-        fetch(COURSES_URL + "/" + deleteCourse.id)
-            .then(response =>
-                response.json());
+        fetch(COURSES_URL + "/" + deleteCourse.id, {
+            method: 'DELETE'
+        }).then(response => {
+            return response.json();
+        });
 
     createWidget = (topicId, widget) => {
         for (let i = 0; i < this.courses.length; i++) {

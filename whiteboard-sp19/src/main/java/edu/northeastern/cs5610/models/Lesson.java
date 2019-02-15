@@ -12,6 +12,7 @@ public class Lesson {
 		this.title = title;
 		this.topics = topics;
 	}
+	public Lesson() {}
 
 	public Integer getId() {
 		return id;

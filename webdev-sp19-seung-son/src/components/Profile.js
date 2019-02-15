@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const title = {
     marginBottom: "2em"
@@ -19,7 +20,7 @@ class Profile extends React.Component {
         return (
             <div>
                 <div id="profile">
-                    <h1 className="title">Profile</h1>
+                    <h1 style = {title}>Profile</h1>
                     <div className="alert alert-success" role="alert">
                         Profile successfully saved!
                     </div>
@@ -48,6 +49,7 @@ class Profile extends React.Component {
                     style={margin}> Update
                 </button>
                 <a className="btn btn-danger" href="/" style={margin}>Logout</a>
+                <Link to="/"><h6 className = "float-right" style={{marginTop: "2em"}}>Return home</h6></Link>
             </div>
 
         )

@@ -20,6 +20,7 @@ public class Person {
 		this.password = password;
 		this.dob = dob;
 	}
+	public Person() {}
 
 	public String getFirstName() {
 		return firstName;

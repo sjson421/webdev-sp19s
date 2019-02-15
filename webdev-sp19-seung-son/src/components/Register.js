@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const title = {
     marginBottom: "2em"
@@ -33,6 +34,7 @@ class Register extends React.Component {
                 <a id="registerBtn" className="btn btn-success"
                    href="../profile/profile.template.client.html" style={margin}>Register</a>
                 <a className="btn btn-danger" href="/" style={margin}>Cancel</a>
+                <Link to="/"><h6 className = "float-right" style={{marginTop: "2em"}}>Return home</h6></Link>
             </div>
         )
     }

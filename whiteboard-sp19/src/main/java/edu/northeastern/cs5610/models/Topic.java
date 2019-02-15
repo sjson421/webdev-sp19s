@@ -12,7 +12,7 @@ public class Topic {
 		this.title = title;
 		this.widgets = widgets;
 	}
-
+	public Topic() {}
 	public Integer getId() {
 		return id;
 	}

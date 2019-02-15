@@ -12,6 +12,7 @@ public class Module {
 		this.title = title;
 		this.lessons = lessons;
 	}
+	public Module() {}
 	public Integer getId() {
 		return id;
 	}

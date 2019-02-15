@@ -1,7 +1,6 @@
 package edu.northeastern.cs5610.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +52,9 @@ public class CourseService {
 	}
 
 	static List<Module> placeholderModules = new ArrayList<Module>();
-	static Course cs5610 = new Course(123, "CS5610", "me", new Date(), modules);
-	static Course cs5400 = new Course(234, "CS5400", "me", new Date(), placeholderModules);
-	static Course cs5700 = new Course(345, "C5700", "me", new Date(), placeholderModules);
+	static Course cs5610 = new Course(123, "CS5610", modules);
+	static Course cs5400 = new Course(234, "CS5400", placeholderModules);
+	static Course cs5700 = new Course(345, "C5700", placeholderModules);
 	static List<Course> courses = new ArrayList<Course>();
 	{
 		courses.add(cs5610);
@@ -65,9 +64,10 @@ public class CourseService {
 	/* Data initialization ends */
 
 	@PostMapping("/api/courses")
-	public Course createCourse(@RequestBody Course course) {
+	public List<Course> createCourse(@RequestBody Course course) {
+		course.setId((int)(Math.random() * 10000));
 		courses.add(course);
-		return course;
+		return courses;
 	}
 
 	@GetMapping("/api/courses")
@@ -99,12 +99,13 @@ public class CourseService {
 	}
 
 	@DeleteMapping("/api/courses/{cid}")
-	public void deleteCourse(@PathVariable("cid") Integer id) {
+	public List<Course> deleteCourse(@PathVariable("cid") Integer id) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			if (course.getId().equals(id)) {
 				courses.remove(course);
 			}
 		}
+		return courses;
 	}
 }

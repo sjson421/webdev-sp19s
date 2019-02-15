@@ -14,7 +14,7 @@ public class LessonService {
 	List<Course> courses = CourseService.courses;
 
 	@PostMapping("/api/module/{mid}/lesson")
-	public Lesson createLesson(@PathVariable("mid") Integer id, @RequestBody Lesson lesson) {
+	public List<Lesson> createLesson(@PathVariable("mid") Integer id, @RequestBody Lesson lesson) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
@@ -22,7 +22,7 @@ public class LessonService {
 				Module module = modules.get(j);
 				if (module.getId().equals(id)) {
 					module.getLessons().add(lesson);
-					return lesson;
+					return module.getLessons();
 				}
 			}
 		}
@@ -84,7 +84,7 @@ public class LessonService {
 	}
 
 	@DeleteMapping("/api/lesson/{lid}")
-	public void deleteLesson(@PathVariable("lid") Integer id) {
+	public List<Lesson> deleteLesson(@PathVariable("lid") Integer id) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
@@ -95,9 +95,11 @@ public class LessonService {
 					Lesson lesson = lessons.get(k);
 					if (lesson.getId().equals(id)) {
 						lessons.remove(k);
+						return lessons;
 					}
 				}
 			}
 		}
+		return null;
 	}
 }

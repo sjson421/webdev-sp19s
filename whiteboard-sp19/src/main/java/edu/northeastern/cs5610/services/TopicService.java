@@ -15,7 +15,7 @@ public class TopicService {
 	List<Course> courses = CourseService.courses;
 
 	@PostMapping("/api/lesson/{lid}/topic")
-	public Topic createTopic(@PathVariable("lid") Integer id, @RequestBody Topic topic) {
+	public List<Topic> createTopic(@PathVariable("lid") Integer id, @RequestBody Topic topic) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
@@ -26,7 +26,7 @@ public class TopicService {
 					Lesson lesson = lessons.get(k);
 					if (lesson.getId().equals(id)) {
 						lesson.getTopics().add(topic);
-						return topic;
+						return lesson.getTopics();
 					}
 				}
 			}
@@ -101,7 +101,7 @@ public class TopicService {
 	}
 
 	@DeleteMapping("/api/topic/{tid}")
-	public void deleteTopic(@PathVariable("tid") Integer id) {
+	public List<Topic> deleteTopic(@PathVariable("tid") Integer id) {
 		for (int i = 0; i < courses.size(); i++) {
 			Course course = courses.get(i);
 			List<Module> modules = course.getModules();
@@ -115,10 +115,12 @@ public class TopicService {
 						Topic topic = topics.get(l);
 						if (topic.getId().equals(id)) {
 							topics.remove(l);
+							return topics;
 						}
 					}
 				}
 			}
 		}
+		return null;
 	}
 }

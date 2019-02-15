@@ -24,11 +24,11 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
                     <i className="fa fa-plus-circle"></i></a>
             </form>
             <Link to="/profile"><h6 className="nav-link input-group my-2 my-lg-0"
-                                    style={{marginBottom: "2em", color: "#86e557"}}>Profile</h6></Link>
+                                    style={{marginBottom: "2em", color: "WHITE"}}>Profile</h6></Link>
             <Link to="/login"><h6 className="nav-link input-group my-2 my-lg-0"
-                                  style={{marginBottom: "0.2em", color: "#86e557"}}>Login</h6></Link>
+                                  style={{marginBottom: "0.2em", color: "WHITE"}}>Login</h6></Link>
             <Link to="/register"><h6 className="nav-link input-group my-2 my-lg-0"
-                                     style={{marginBottom: "0.2em", color: "#86e557"}}>Register</h6></Link>
+                                     style={{marginBottom: "0.2em", color: "WHITE"}}>Register</h6></Link>
         </nav>
         <div className="table-responsive">
             <table className="table">
@@ -44,6 +44,7 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
             </table>
         </div>
         <div className="card-deck row">
+            {console.log(courses)}
             {
                 courses.map(course =>
                     <CourseCard
