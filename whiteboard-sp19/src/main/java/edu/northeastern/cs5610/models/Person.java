@@ -10,8 +10,11 @@ public class Person {
 	private String username;
 	private String password;
 	private Date dob;
+	private String phone;
+	private String email;
 
-	public Person(Integer id, String type, String firstName, String lastName, String username, String password, Date dob) {
+	public Person(Integer id, String type, String firstName, String lastName, String username, 
+			String password, Date dob, String phone, String email) {
 		this.setId(id);
 		this.type = type;
 		this.firstName = firstName;
@@ -19,6 +22,8 @@ public class Person {
 		this.username = username;
 		this.password = password;
 		this.dob = dob;
+		this.phone = phone;
+		this.email = email;
 	}
 	public Person() {}
 
@@ -76,5 +81,17 @@ public class Person {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -1,30 +1,53 @@
+const SOURCE = "http://localhost:8080";
+
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 class UserService {
+
     register = (user) =>
-        fetch("/api/register", {
+        fetch(SOURCE + "/api/register", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
-        }).then(response =>
-            response.json());
+        }).then(response => {
+            return response.text().then(function (text) {
+                return isJson(text) ? JSON.parse(text) : null
+            })
+        });
     profile = () =>
         fetch("/api/profile")
-            .then(response => response);
+            .then(response => {
+                return response.text().then(function (text) {
+                    return isJson(text) ? JSON.parse(text) : null
+                })
+            });
     login = user =>
-        fetch('/api/login', {
+        fetch(SOURCE + '/api/login', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
-        }).then(response => response);
+        }).then(response => {
+            return response.text().then(function (text) {
+                return isJson(text) ? JSON.parse(text) : null
+            })
+        })
     logout = () =>
-        fetch('/api/logout', {
+        fetch(SOURCE + '/api/logout', {
             method: "POST"
         });
     findCourseById = courseId =>
-        fetch("/api/users/" + courseId)
+        fetch(SOURCE + "/api/users/" + courseId)
             .then(response =>
                 response.json());
     findAllUsers = () =>
-        fetch("/api/users")
+        fetch(SOURCE + "/api/users")
             .then(response =>
                 response.json());
 }

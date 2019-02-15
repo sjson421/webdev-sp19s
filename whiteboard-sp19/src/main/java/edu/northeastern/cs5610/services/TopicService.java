@@ -10,7 +10,7 @@ import edu.northeastern.cs5610.models.Module;
 import edu.northeastern.cs5610.models.Topic;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class TopicService {
 	List<Course> courses = CourseService.courses;
 

@@ -5,10 +5,12 @@ import java.util.Date;
 public class Faculty extends Person{
 	private String department;
 	
-	public Faculty(Integer id, String firstName, String lastName, String username, String password, Date dob, String department) {
-		super(id, "FACULTY", firstName, lastName, username, password, dob);
+	public Faculty(Integer id, String firstName, String lastName, String username, 
+			String password, Date dob, String phone, String email, String department) {
+		super(id, "FACULTY", firstName, lastName, username, password, dob, phone, email);
 		this.department = department;
 	}
+	public Faculty() {}
 
 	public String getDepartment() {
 		return department;

@@ -8,7 +8,7 @@ import edu.northeastern.cs5610.models.Course;
 import edu.northeastern.cs5610.models.Module;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class ModuleService {
 	List<Course> courses = CourseService.courses;
 

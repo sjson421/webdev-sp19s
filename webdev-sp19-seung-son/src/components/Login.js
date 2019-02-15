@@ -2,6 +2,7 @@ import React from "react";
 import {Link, Route} from "react-router-dom";
 import UserService from "../services/UserService";
 import Profile from "./Profile";
+import {withRouter} from 'react-router-dom';
 
 const margin = {
     margin: "0.2em"
@@ -13,8 +14,7 @@ class Login extends React.Component {
         this.service = new UserService();
         this.state = {
             username: '',
-            password: '',
-            currentUser: ''
+            password: ''
         }
     }
 
@@ -28,7 +28,14 @@ class Login extends React.Component {
             password: this.state.password,
             dob: ""
         }
-        this.service.login(user);
+        this.service.login(user)
+            .then((response) => {
+                if (!response) {
+                    alert("Your login credentials are incorrect.")
+                } else {
+                    this.props.history.push('/profile')
+                }
+            })
     }
 
     usernameChanged = event =>
@@ -60,11 +67,11 @@ class Login extends React.Component {
                                    onChange={this.passwordChanged}/>
                         </div>
                     </div>
-                    <a className="btn btn-primary" style={margin} href = "/profile"
-                       onClick= {this.login}>Sign in</a>
+                    <a className="btn btn-primary" style={margin}
+                       onClick={this.login}>Sign in</a>
                     <a className="btn btn-danger" href="/" style={margin}>Cancel</a>
                     <p align="right">
-                        <a href="../register/register.template.client.html">Sign up</a>
+                        <a href="/register">Sign up</a>
                     </p>
                 </form>
                 <Link to="/"><h6 className="float-right" style={{marginTop: "2em"}}>Return home</h6></Link>
@@ -73,5 +80,5 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
 
