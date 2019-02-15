@@ -9,7 +9,7 @@ import edu.northeastern.cs5610.models.Lesson;
 import edu.northeastern.cs5610.models.Module;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class LessonService {
 	List<Course> courses = CourseService.courses;
 

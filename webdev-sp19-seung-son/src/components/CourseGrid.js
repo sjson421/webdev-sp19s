@@ -44,7 +44,6 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
             </table>
         </div>
         <div className="card-deck row">
-            {console.log(courses)}
             {
                 courses.map(course =>
                     <CourseCard

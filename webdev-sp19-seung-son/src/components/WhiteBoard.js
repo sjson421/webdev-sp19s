@@ -9,23 +9,6 @@ import Profile from './Profile'
 import Register from './Register'
 
 class WhiteBoard extends Component {
-    deleteCourse = course =>
-        this.setState({
-            courses: this.courseService.deleteCourse(course)
-        })
-    addCourse = (courseTitle) => {
-        if (courseTitle === '') {
-            courseTitle = "New Course"
-        }
-        const course =
-            {
-                id: (new Date()).getTime(),
-                title: courseTitle
-            }
-        this.setState({
-            courses: this.courseService.createCourse(course)
-        })
-    }
 
     constructor() {
         super();
@@ -39,6 +22,28 @@ class WhiteBoard extends Component {
         this.courseService.findAllCourses()
             .then(courses =>
                 this.setState({courses: courses}));
+    }
+
+    deleteCourse = course =>
+        this.courseService.deleteCourse(course)
+            .then(response =>
+                this.setState({courses: response})
+            )
+
+    addCourse = (courseTitle) => {
+        if (courseTitle === '') {
+            courseTitle = "New Course"
+        }
+        const course =
+            {
+                id: "0",
+                title: courseTitle,
+                modules: []
+            }
+        return this.courseService.createCourse(course)
+            .then(response =>
+                this.setState({courses: response})
+            )
     }
 
     render() {

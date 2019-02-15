@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import edu.northeastern.cs5610.models.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class CourseService {
 	/* Data initialization */
 	static Widget headingWidget = new Widget(123, "Heading", "HEADING", 1, "I am here", null, null, null, null);
@@ -52,9 +52,9 @@ public class CourseService {
 	}
 
 	static List<Module> placeholderModules = new ArrayList<Module>();
-	static Course cs5610 = new Course(123, "CS5610", modules);
-	static Course cs5400 = new Course(234, "CS5400", placeholderModules);
-	static Course cs5700 = new Course(345, "C5700", placeholderModules);
+	static Course cs5610 = new Course(0, "CS5610", modules);
+	static Course cs5400 = new Course(1, "CS5400", placeholderModules);
+	static Course cs5700 = new Course(2, "C5700", placeholderModules);
 	static List<Course> courses = new ArrayList<Course>();
 	{
 		courses.add(cs5610);
@@ -63,9 +63,12 @@ public class CourseService {
 	}
 	/* Data initialization ends */
 
+	int courseId = 3;
+	
 	@PostMapping("/api/courses")
 	public List<Course> createCourse(@RequestBody Course course) {
-		course.setId((int)(Math.random() * 10000));
+		course.setId(courseId);
+		courseId++;
 		courses.add(course);
 		return courses;
 	}

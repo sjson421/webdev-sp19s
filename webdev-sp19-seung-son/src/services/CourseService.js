@@ -7,21 +7,14 @@ class CourseService {
         this.courses = courses;
     }
 
-    createCourse = course => {
-        if (course === null) {
-            course.title = "New Course"
-        }
-        course.id = "0";
-        course.modules = [];
-
+    createCourse = course =>
         fetch(COURSES_URL, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(course)
         }).then(response => {
-            console.log(response.json());
+            return response.json()
         });
-    }
     findCourseById = courseId =>
         fetch(COURSES_URL + "/" + courseId)
             .then(response =>

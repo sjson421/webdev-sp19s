@@ -199,6 +199,7 @@ class CourseEditor extends React.Component {
         });
     }
     deleteTopic = (dTopic) => {
+
         const newTopics = this.state.lesson.topics.filter(
             topic => topic.id !== dTopic.id
         )
@@ -220,7 +221,6 @@ class CourseEditor extends React.Component {
                 break;
             }
         }
-        console.log(topics)
         this.setState(
             {
                 lesson: {
