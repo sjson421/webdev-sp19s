@@ -86,6 +86,7 @@ class ModuleList extends React.Component {
     }
 
     render() {
+        this.state.modules = this.props.modules;
         if (!this.state.modules)
             this.state.modules = [];
         return (

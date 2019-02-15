@@ -14,9 +14,12 @@ class CourseEditor extends React.Component {
         super(props)
         this.courseService = new CourseService()
         const courseId = parseInt(props.match.params.id)
-        const course = this.courseService.findCourseById(courseId)
+        this.courseService.findCourseById(courseId)
+            .then(response => this.setState({
+                course: response
+            }))
         this.state = {
-            course: course,
+            course:'',
             module: '',
             title: '',
             lesson: '',
