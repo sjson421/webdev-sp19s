@@ -1,6 +1,6 @@
 import courses from './courses.json'
 
-const COURSES_URL = "http://localhost:8080/api/courses";
+const COURSES_URL = "https://assignment5-sp19s1-seung-son.herokuapp.com/api/courses";
 
 class CourseService {
     constructor() {
