@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import UserService from '../services/UserService'
 
 const title = {
     marginBottom: "2em"
@@ -13,10 +14,13 @@ const margin = {
 
 class Profile extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.service = new UserService();
+        this.state.currentUser = undefined;
     }
 
     render() {
+        this.state.currentUser = this.service.profile().then(response => response);
         return (
             <div>
                 <div id="profile">
@@ -26,7 +30,7 @@ class Profile extends React.Component {
                     </div>
                     <p>Username:</p>
                     <input className="form-control" id="usernameFld"
-                           placeholder="Alice" style = {bottom} readOnly/>
+                           style = {bottom} readOnly>{this.state.currentUser.username}</input>
                     <p>Phone:</p>
                     <input className="form-control" id="phoneFld"
                            placeholder="(555)123-4324" style = {bottom} />
