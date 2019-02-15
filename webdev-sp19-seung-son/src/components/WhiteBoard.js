@@ -73,8 +73,8 @@ class WhiteBoard extends Component {
                                render={() =>
                                    <Register/>}/>
                         <Route path="/profile"
-                               exact
-                               component={Profile}/>
+                               render={() =>
+                                   <Profile/>}/>
                     </div>
                 </Router>
             </div>

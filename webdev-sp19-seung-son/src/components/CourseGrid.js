@@ -23,8 +23,6 @@ const CourseGrid = ({courses, deleteCourse, addCourse}) =>
                    onClick={() => addCourse(document.getElementById('courseTitle').value)}>
                     <i className="fa fa-plus-circle"></i></a>
             </form>
-            <Link to="/profile"><h6 className="nav-link input-group my-2 my-lg-0"
-                                    style={{marginBottom: "2em", color: "WHITE"}}>Profile</h6></Link>
             <Link to="/login"><h6 className="nav-link input-group my-2 my-lg-0"
                                   style={{marginBottom: "0.2em", color: "WHITE"}}>Login</h6></Link>
             <Link to="/register"><h6 className="nav-link input-group my-2 my-lg-0"

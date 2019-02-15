@@ -16,11 +16,14 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.service = new UserService();
-        this.state.currentUser = undefined;
+        this.state = {
+            currentUser: ''
+        }
     }
 
     render() {
-        this.state.currentUser = this.service.profile().then(response => response);
+        this.state.currentUser = this.service.profile().then(response => response.json());
+        console.log(this.state.currentUser)
         return (
             <div>
                 <div id="profile">
@@ -38,13 +41,13 @@ class Profile extends React.Component {
                     <input className="form-control" id="emailFld"
                            placeholder="alice@wonderland.com" style = {bottom} />
                     <p>Role:</p>
-                    <select className="selectpicker" id="roleFld" style = {bottom} >
+                    <select className="form-control" id="roleFld" style = {bottom} >
                         <option>Faculty</option>
                         <option>Student</option>
                         <option>Admin</option>
                     </select>
                     <p>Date of Birth:</p>
-                    <input className="form-control myinput" id="dobFld"
+                    <input className="form-control" id="dobFld"
                            placeholder="mm/dd/yyyy" type="date" style = {bottom} />
                 </div>
                 <button
