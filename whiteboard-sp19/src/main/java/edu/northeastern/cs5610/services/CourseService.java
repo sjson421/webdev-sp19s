@@ -11,10 +11,9 @@ import edu.northeastern.cs5610.models.*;
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class CourseService {
 	/* Data initialization */
-	static Widget headingWidget = new Widget(123, "Heading", "HEADING", 1, "I am here", null, null, null, null);
-	static Widget imageWidget = new Widget(234, "Image", "IMAGE", null, null, null, null, "https://picsum.photos/200", null);
-	static Widget linkWidget = new Widget(345, "The DOM", "LINK", null, null, null, null, null,
-			"https://en.wikipedia.org/wiki/Document_Object_Model");
+	static Widget headingWidget = new Widget(123,"HEADING", "I am here");
+	static Widget imageWidget = new Widget(234, "IMAGE", "Image");
+	static Widget linkWidget = new Widget(345, "LINK", "DOM");
 	static List<Widget> widgets = new ArrayList<Widget>();
 	{
 		widgets.add(headingWidget);

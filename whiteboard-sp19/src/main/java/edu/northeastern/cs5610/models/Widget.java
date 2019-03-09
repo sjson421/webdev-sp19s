@@ -1,31 +1,25 @@
 package edu.northeastern.cs5610.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Widget {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String title;
 	private String type;
-	private Integer size;
-	private String text;
-	private String listType;
-	private String items;
-	private String src;
-	private String href;
+	private String name;
 	private String preview;
 
-	public Widget(Integer id, String title, String type, Integer size, String text, 
-			String listType, String items, String src, String href) {
+	public Widget(Integer id, String type, String name) {
 		this.id = id;
-		this.title = title;
 		this.type = type;
-		this.size = size;
-		this.text = text;
-		this.listType = listType;
-		this.items = items;
-		this.src = src;
-		this.href = href;
-		preview = "{\"display\" : \"none\"}";
+		this.name = name;
+		this.preview = "{\"display\" : \"none\"}";
 	}
-	public Widget() {}
+
+	public Widget() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -33,14 +27,6 @@ public class Widget {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getType() {
@@ -51,52 +37,12 @@ public class Widget {
 		this.type = type;
 	}
 
-	public Integer getSize() {
-		return size;
+	public String getName() {
+		return name;
 	}
 
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getListType() {
-		return listType;
-	}
-
-	public void setListType(String listType) {
-		this.listType = listType;
-	}
-
-	public String getItems() {
-		return items;
-	}
-
-	public void setItems(String items) {
-		this.items = items;
-	}
-
-	public String getSrc() {
-		return src;
-	}
-
-	public void setSrc(String src) {
-		this.src = src;
-	}
-
-	public String getHref() {
-		return href;
-	}
-
-	public void setHref(String href) {
-		this.href = href;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPreview() {
