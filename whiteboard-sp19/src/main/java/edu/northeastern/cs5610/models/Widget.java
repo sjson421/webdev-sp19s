@@ -1,6 +1,7 @@
 package edu.northeastern.cs5610.models;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Widget {
@@ -10,12 +11,16 @@ public class Widget {
 	private String type;
 	private String name;
 	private String preview;
+	@ManyToOne()
+	@JsonIgnore
+	private Topic topic;
 
-	public Widget(Integer id, String type, String name) {
+	public Widget(Integer id, String type, String name, Topic topic) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
 		this.preview = "{\"display\" : \"none\"}";
+		this.topic = topic;
 	}
 
 	public Widget() {
@@ -51,5 +56,16 @@ public class Widget {
 
 	public void setPreview(String preview) {
 		this.preview = preview;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+		if (!topic.getWidgets().contains(this)) {
+			topic.getWidgets().add(this);
+		}
 	}
 }

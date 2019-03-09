@@ -8,6 +8,7 @@ import edu.northeastern.cs5610.models.Course;
 import edu.northeastern.cs5610.models.Lesson;
 import edu.northeastern.cs5610.models.Module;
 import edu.northeastern.cs5610.models.Topic;
+import edu.northeastern.cs5610.models.Widget;
 
 @RestController
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -122,5 +123,17 @@ public class TopicService {
 			}
 		}
 		return null;
+	}
+
+	@PostMapping("/api/topic/{tid}/widget")
+	public Widget createWidget(@PathVariable("tid") Integer id, @RequestBody Widget widget) {
+		Topic topic = findTopicById(id);
+		return topic.createWidgetOnTopic(widget);
+	}
+
+	@GetMapping("/api/topic/{tid}/widget")
+	public List<Widget> findAllWidgets(@PathVariable("tid") Integer id) {
+		Topic topic = findTopicById(id);
+		return topic.getWidgets();
 	}
 }
