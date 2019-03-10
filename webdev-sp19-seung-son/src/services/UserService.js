@@ -1,4 +1,6 @@
-const SOURCE = "http://localhost:8080";
+import url from "./Source";
+
+const SOURCE = url;
 
 function isJson(str) {
     try {
@@ -47,8 +49,8 @@ class UserService {
             method: "POST",
             credentials: 'include'
         });
-    findCourseById = courseId =>
-        fetch(SOURCE + "/api/users/" + courseId)
+    findUserById = userId =>
+        fetch(SOURCE + "/api/users/" + userId)
             .then(response =>
                 response.json());
     findAllUsers = () =>

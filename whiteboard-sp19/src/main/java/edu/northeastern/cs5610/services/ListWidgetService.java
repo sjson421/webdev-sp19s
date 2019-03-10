@@ -1,5 +1,7 @@
 package edu.northeastern.cs5610.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +26,10 @@ public class ListWidgetService {
 	public ListWidget findWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
 	}
-
+	@GetMapping("/api/list/widget")
+	public List<ListWidget> findAllWidgets() {
+		return (List<ListWidget>) widgetRep.findAll();
+	}
 	@PutMapping("/api/list/widget/{wid}")
 	public ListWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ListWidget widget) {
 		ListWidget w = widgetRep.findById(id).get();

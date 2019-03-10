@@ -1,14 +1,13 @@
-import courses from './courses.json'
+import url from "./Source";
 
-const COURSES_URL = "http://localhost:8080/api/courses";
+const SOURCE = url + "/api/courses";
 
 class CourseService {
     constructor() {
-        this.courses = courses;
     }
 
     createCourse = course =>
-        fetch(COURSES_URL, {
+        fetch(SOURCE, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(course)
@@ -16,22 +15,30 @@ class CourseService {
             return response.json()
         });
     findCourseById = courseId =>
-        fetch(COURSES_URL + "/" + courseId)
+        fetch(SOURCE + "/" + courseId)
             .then(response =>
                 response.json());
     findAllCourses = () =>
-        fetch(COURSES_URL)
+        fetch(SOURCE)
             .then(response => {
                 return response.json()
             });
 
 
     deleteCourse = deleteCourse =>
-        fetch(COURSES_URL + "/" + deleteCourse.id, {
+        fetch(SOURCE + "/" + deleteCourse.id, {
             method: 'DELETE'
         }).then(response => {
             return response.json();
         });
+    updateCourse = course => {
+        return fetch(SOURCE + '/' + course.id, {
+            method: "PUT",
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify(course)
+        }).then(response => response)
+    }
 
     createWidget = (topicId, widget) => {
         for (let i = 0; i < this.courses.length; i++) {
@@ -58,6 +65,7 @@ class CourseService {
 
 
     findWidgets = topicId => {
+        const courses = this.findAllCourses();
         for (let i = 0; i < courses.length; i++) {
             const modules = this.courses[i].modules;
             if (modules != null)
@@ -158,6 +166,7 @@ class CourseService {
     }
     findAllWidgets = () => {
         let widgets = [];
+        const courses = this.findAllCourses();
         for (let i = 0; i < courses.length; i++) {
             const modules = this.courses[i].modules;
             if (modules != null)
@@ -169,7 +178,7 @@ class CourseService {
                             if (topics != null)
                                 for (let l = 0; l < topics.length; l++) {
                                     const curTopic = topics[l];
-                                        widgets.push(...curTopic.widgets);
+                                    widgets.push(...curTopic.widgets);
                                 }
                         }
                 }

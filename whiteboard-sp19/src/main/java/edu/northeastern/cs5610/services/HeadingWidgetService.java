@@ -1,5 +1,7 @@
 package edu.northeastern.cs5610.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5610.models.HeadingWidget;
+import edu.northeastern.cs5610.models.LinkWidget;
 import edu.northeastern.cs5610.models.ParagraphWidget;
 import edu.northeastern.cs5610.repositories.HeadingWidgetRepository;
 
@@ -23,7 +26,10 @@ public class HeadingWidgetService {
 	public HeadingWidget findHeadingWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
 	}
-
+	@GetMapping("/api/heading/widget")
+	public List<HeadingWidget> findAllWidgets() {
+		return (List<HeadingWidget>) widgetRep.findAll();
+	}
 	@PutMapping("/api/heading/widget/{wid}")
 	public HeadingWidget updateHeadingWidget(@PathVariable("wid") Integer id, @RequestBody HeadingWidget widget) {
 		HeadingWidget w = widgetRep.findById(id).get();

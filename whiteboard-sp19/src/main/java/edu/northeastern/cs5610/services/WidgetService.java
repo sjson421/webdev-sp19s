@@ -1,5 +1,7 @@
 package edu.northeastern.cs5610.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,10 +19,15 @@ import edu.northeastern.cs5610.repositories.WidgetRepository;
 public class WidgetService {
 	@Autowired
 	WidgetRepository widgetRep;
-	
+
 	@GetMapping("/api/widget/{wid}")
 	public Widget findWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
+	}
+
+	@GetMapping("/api/widget")
+	public List<Widget> findAllWidgets() {
+		return (List<Widget>) widgetRep.findAll();
 	}
 
 	@PutMapping("/api/widget/{wid}")
@@ -29,6 +36,7 @@ public class WidgetService {
 		w = widget;
 		return widgetRep.save(w);
 	}
+
 	@DeleteMapping("/api/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {
 		widgetRep.deleteById(id);
