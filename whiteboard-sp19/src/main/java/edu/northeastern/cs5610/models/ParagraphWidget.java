@@ -1,13 +1,17 @@
 package edu.northeastern.cs5610.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ParagraphWidget extends Widget {
 	private String text;
 
-	public ParagraphWidget(Integer id, String type, String name, String preview, String text) {
-		super(id, type, name);
+	public ParagraphWidget(String name, Topic topic, String text) {
+		super("PARAGRAPH", name, topic);
 		this.text = text;
 	}
-
+	public ParagraphWidget() {
+	}
 	public String getText() {
 		return text;
 	}

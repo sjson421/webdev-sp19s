@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5610.models.HeadingWidget;
+import edu.northeastern.cs5610.models.ParagraphWidget;
 import edu.northeastern.cs5610.repositories.HeadingWidgetRepository;
 
 @RestController
@@ -25,7 +26,9 @@ public class HeadingWidgetService {
 
 	@PutMapping("/api/heading/widget/{wid}")
 	public HeadingWidget updateHeadingWidget(@PathVariable("wid") Integer id, @RequestBody HeadingWidget widget) {
-		return widgetRep.save(widget);
+		HeadingWidget w = widgetRep.findById(id).get();
+		w = widget;
+		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/heading/widget/{wid}")
 	public void deleteHeadingWidget(@PathVariable("wid") Integer id) {

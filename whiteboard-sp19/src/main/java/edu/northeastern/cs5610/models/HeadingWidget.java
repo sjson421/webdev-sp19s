@@ -1,16 +1,20 @@
 package edu.northeastern.cs5610.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class HeadingWidget extends Widget {
 	private Integer size;
 	private String text;
 
-	public HeadingWidget(Integer id, String type, String name, String preview, Integer size,
+	public HeadingWidget(String name, Topic topic, Integer size,
 			String text) {
-		super(id, type, name);
+		super("HEADING", name, topic);
 		this.size = size;
 		this.text = text;
 	}
-
+	public HeadingWidget() {
+	}
 	public Integer getSize() {
 		return size;
 	}

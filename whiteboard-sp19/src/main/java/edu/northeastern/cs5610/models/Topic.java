@@ -2,18 +2,31 @@ package edu.northeastern.cs5610.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Topic {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String title;
 	@OneToMany(mappedBy = "topic")
 	private List<Widget> widgets;
+	@ManyToOne()
+	@JsonIgnore
+	private Lesson lesson;
 
-	public Topic(Integer id, String title, List<Widget> widgets) {
-		this.id = id;
+	public Topic(String title, List<Widget> widgets, Lesson lesson) {
 		this.title = title;
 		this.widgets = widgets;
+		this.lesson = lesson;
 	}
 
 	public Topic() {
@@ -49,5 +62,13 @@ public class Topic {
 			widget.setTopic(this);
 		}
 		return widget;
+	}
+
+	public Lesson getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
 	}
 }

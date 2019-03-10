@@ -1,8 +1,14 @@
 package edu.northeastern.cs5610.models;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Person {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String type;
 	private String firstName;
@@ -13,9 +19,8 @@ public class Person {
 	private String phone;
 	private String email;
 
-	public Person(Integer id, String type, String firstName, String lastName, String username, 
-			String password, String dob, String phone, String email) {
-		this.setId(id);
+	public Person(String type, String firstName, String lastName, String username, String password,
+			String dob, String phone, String email) {
 		this.type = type;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -25,7 +30,9 @@ public class Person {
 		this.phone = phone;
 		this.email = email;
 	}
-	public Person() {}
+
+	public Person() {
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -82,15 +89,19 @@ public class Person {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}

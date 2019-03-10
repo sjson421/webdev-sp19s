@@ -6,41 +6,34 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import edu.northeastern.cs5610.models.Faculty;
 import edu.northeastern.cs5610.models.Person;
 import edu.northeastern.cs5610.models.Student;
+import edu.northeastern.cs5610.models.Widget;
+import edu.northeastern.cs5610.repositories.PersonRepository;
 
 @RestController
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class UserService {
-	static Faculty alice = new Faculty(0, "Alice", "Jondice", "alice", "alice", "1970-02-22", "123-123-1234",
-			"alice@alice.com", "English");
-	static Student bob = new Student(1, "Bob", "Fallon", "bob", "bob", "1994-12-12", "234-124-5321",
-			"bob@bob.com", "Physics");
-	static Student charlie = new Student(2, "Charlie", "Hood", "charlie", "charlie", "1990-05-10",
-			"345-123-5321", "charlie@charlie.com", "Chemistry");
-
-	List<Person> users = new ArrayList<Person>();
-	{
-		users.add(alice);
-		users.add(bob);
-		users.add(charlie);
-	}
-	int uid = 3;
-
+	@Autowired
+	PersonRepository rep;
+	
 	@PostMapping("/api/register")
 	public Person register(@RequestBody Person user, HttpSession session) {
-		for (int i = 0; i < users.size(); i++) {
-			Person iUser = users.get(i);
-			if (user.getUsername().equals(iUser.getUsername()))
+		List<Person> registered = (List<Person>) rep.findAll();
+		for (int i = 0; i < registered.size(); i++) {
+			Person p = registered.get(i);
+			if (p.getUsername().equals(user.getUsername())) {
 				return null;
+			}
 		}
-		Faculty newUser = new Faculty(uid, null, null, user.getUsername(), user.getPassword(), null, null, null, null);
-		uid++;
+		
+		Faculty newUser = new Faculty(null, null, user.getUsername(), user.getPassword(), null, null, null, null);
 		session.setAttribute("currentUser", newUser);
-		users.add(newUser);
+		rep.save(newUser);
 		return newUser;
 	}
 
@@ -52,6 +45,7 @@ public class UserService {
 
 	@PostMapping("/api/login")
 	public Person login(@RequestBody Person credentials, HttpSession session) {
+		List<Person> users = (List<Person>) rep.findAll();
 		for (int i = 0; i < users.size(); i++) {
 			Person user = users.get(i);
 			if (user.getUsername().equals(credentials.getUsername())
@@ -70,31 +64,16 @@ public class UserService {
 
 	@GetMapping("/api/users")
 	public List<Person> findAllUsers() {
-		return users;
+		return (List<Person>) rep.findAll();
 	}
 
 	@GetMapping("/api/users/{id}")
 	public Person findUserById(@PathVariable("id") Integer id) {
-		for (int i = 0; i < users.size(); i++) {
-			Person user = users.get(i);
-			if (user.getId().equals(id)) {
-				return user;
-			}
-		}
-		return null;
+		return rep.findById(id).get();
 	}
 
 	@PutMapping("/api/profile")
-	public Boolean updateUser(@RequestBody Person updater, HttpSession session) {
-		Person currentUser = (Person) session.getAttribute("currentUser");
-
-		for (int i = 0; i < users.size(); i++) {
-			Person user = users.get(i);
-			if (user.getId().equals(currentUser.getId())) {
-				users.set(i, updater);
-				return true;
-			}
-		}
-		return false;
+	public Person updateUser(@RequestBody Person updater, HttpSession session) {
+		return rep.save(updater);
 	}
 }

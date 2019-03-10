@@ -10,13 +10,12 @@ public class Widget {
 	private Integer id;
 	private String type;
 	private String name;
-	private String preview;
+	private String preview = "{\"display\" : \"none\"}";
 	@ManyToOne()
 	@JsonIgnore
 	private Topic topic;
 
-	public Widget(Integer id, String type, String name, Topic topic) {
-		this.id = id;
+	public Widget(String type, String name, Topic topic) {
 		this.type = type;
 		this.name = name;
 		this.preview = "{\"display\" : \"none\"}";

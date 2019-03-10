@@ -25,7 +25,9 @@ public class WidgetService {
 
 	@PutMapping("/api/widget/{wid}")
 	public Widget updateWidget(@PathVariable("wid") Integer id, @RequestBody Widget widget) {
-		return widgetRep.save(widget);
+		Widget w = widgetRep.findById(id).get();
+		w = widget;
+		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {

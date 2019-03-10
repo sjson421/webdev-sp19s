@@ -17,7 +17,7 @@ import edu.northeastern.cs5610.repositories.ParagraphWidgetRepository;
 public class ParagraphWidgetService {
 	@Autowired
 	ParagraphWidgetRepository widgetRep;
-	
+
 	@GetMapping("/api/paragraph/widget/{wid}")
 	public ParagraphWidget findWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
@@ -25,8 +25,11 @@ public class ParagraphWidgetService {
 
 	@PutMapping("/api/paragraph/widget/{wid}")
 	public ParagraphWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ParagraphWidget widget) {
-		return widgetRep.save(widget);
+		ParagraphWidget w = widgetRep.findById(id).get();
+		w = widget;
+		return widgetRep.save(w);
 	}
+
 	@DeleteMapping("/api/paragraph/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {
 		widgetRep.deleteById(id);

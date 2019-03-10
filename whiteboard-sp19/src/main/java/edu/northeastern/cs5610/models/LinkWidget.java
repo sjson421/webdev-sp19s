@@ -1,15 +1,19 @@
 package edu.northeastern.cs5610.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class LinkWidget extends Widget {
 	private String title;
 	private String href;
 
-	public LinkWidget(Integer id, String type, String name, String preview, String title, String href) {
-		super(id, type, name);
+	public LinkWidget(String name, Topic topic, String title, String href) {
+		super("LINK", name, topic);
 		this.title = title;
 		this.href = href;
 	}
-
+	public LinkWidget() {
+	}
 	public String getTitle() {
 		return title;
 	}

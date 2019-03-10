@@ -1,13 +1,14 @@
 package edu.northeastern.cs5610.models;
 
-import java.util.Date;
+import javax.persistence.Entity;
 
+@Entity
 public class Student extends Person{
 	private String major;
 	
-	public Student(Integer id, String firstName, String lastName, String username, 
+	public Student(String firstName, String lastName, String username, 
 			String password, String dob, String phone, String email, String major) {
-		super(id, "STUDENT", firstName, lastName, username, password, dob, phone, email);
+		super("STUDENT", firstName, lastName, username, password, dob, phone, email);
 		this.major = major;
 	}
 

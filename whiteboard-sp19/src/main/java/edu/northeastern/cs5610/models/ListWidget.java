@@ -1,16 +1,19 @@
 package edu.northeastern.cs5610.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ListWidget extends Widget {
 	private String listType;
 	private String items;
 
-	public ListWidget(Integer id, String type, String name, String preview, String listType,
-			String items) {
-		super(id, type, name);
+	public ListWidget(String name, Topic topic, String listType, String items) {
+		super("LIST", name, topic);
 		this.listType = listType;
 		this.items = items;
 	}
-
+	public ListWidget() {
+	}
 	public String getListType() {
 		return listType;
 	}

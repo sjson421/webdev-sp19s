@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5610.models.ImageWidget;
+import edu.northeastern.cs5610.models.ParagraphWidget;
 import edu.northeastern.cs5610.repositories.ImageWidgetRepository;
 
 @RestController
@@ -25,7 +26,9 @@ public class ImageWidgetService {
 
 	@PutMapping("/api/image/widget/{wid}")
 	public ImageWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ImageWidget widget) {
-		return widgetRep.save(widget);
+		ImageWidget w = widgetRep.findById(id).get();
+		w = widget;
+		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/image/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {

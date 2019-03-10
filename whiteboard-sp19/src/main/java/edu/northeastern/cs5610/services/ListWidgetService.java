@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5610.models.ListWidget;
+import edu.northeastern.cs5610.models.ParagraphWidget;
 import edu.northeastern.cs5610.repositories.ListWidgetRepository;
 
 
@@ -26,7 +27,9 @@ public class ListWidgetService {
 
 	@PutMapping("/api/list/widget/{wid}")
 	public ListWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ListWidget widget) {
-		return widgetRep.save(widget);
+		ListWidget w = widgetRep.findById(id).get();
+		w = widget;
+		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/list/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {
