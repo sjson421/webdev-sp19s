@@ -74,6 +74,15 @@ public class UserService {
 
 	@PutMapping("/api/profile")
 	public Person updateUser(@RequestBody Person updater, HttpSession session) {
-		return rep.save(updater);
+		Person currentUser = (Person) session.getAttribute("currentUser");
+		currentUser.setType(updater.getType());
+		currentUser.setFirstName(updater.getFirstName());
+		currentUser.setLastName(updater.getLastName());
+		currentUser.setUsername(updater.getUsername());
+		currentUser.setPassword(updater.getPassword());
+		currentUser.setDob(updater.getDob());
+		currentUser.setPhone(updater.getPhone());
+		currentUser.setEmail(updater.getEmail());
+		return rep.save(currentUser);
 	}
 }
