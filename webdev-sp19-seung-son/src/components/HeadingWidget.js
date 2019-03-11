@@ -15,11 +15,11 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = {}
+                           widget.preview = '{}'
                            updateWidget(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = {display: 'none'}
+                           widget.preview = '{"display": "none"}'
                            updateWidget(widget)
                        }
                    }}></i>
@@ -106,7 +106,7 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                     placeholder="Widget Name"/>
                 <br/>
             </form>
-            <div style={widget.preview}>
+            <div style={JSON.parse(widget.preview)}>
                 <h3>Preview</h3>
                 {
                     widget.size === 1 && <h1>{widget.text}</h1> ||

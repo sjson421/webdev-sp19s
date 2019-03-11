@@ -40,6 +40,7 @@ public class HeadingWidgetService {
 				break;
 			}
 		}
+		widget.setType("HEADING");
 		widgetRep.save(widget);
 		return widget;
 	}

@@ -1,17 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import WidgetList from '../components/WidgetList'
-import CourseEditor from '../components/CourseEditor'
+import TopicService from '../services/TopicService'
 
-const stateToPropertyMapper = state => ({
-    widgets: state.widgets
-})
+const service = new TopicService();
 
+const stateToPropertyMapper = state => {
+    return {
+        widgets: state.widgets
+    }
+}
 const dispatchToPropertyMapper = (dispatch, widgets) => ({
-    createWidget: () =>
+    createWidget: () => {
+        const widget = {
+            name: 'New Widget',
+            text: 'New Widget',
+            size: 1
+        }
         dispatch({
             type: 'CREATE_WIDGET'
-        }),
+        })
+    },
     deleteWidget: widget =>
         dispatch({
             type: 'DELETE_WIDGET',
@@ -28,11 +37,12 @@ const dispatchToPropertyMapper = (dispatch, widgets) => ({
             type: 'FIND_WIDGET',
             widget: widget
         }),
-    findAllWidgetsForTopic: topic =>
+    findAllWidgetsForTopic: topic => {
         dispatch({
             type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
             topic: topic
-        }),
+        });
+    },
     findAllWidgets: () =>
         dispatch({
             type: 'FIND_ALL_WIDGETS'
@@ -40,11 +50,6 @@ const dispatchToPropertyMapper = (dispatch, widgets) => ({
     updateWidgets: widgets =>
         dispatch({
             type: 'UPDATE_WIDGETS',
-            widgets: widgets
-        }),
-    setWidgets: widgets =>
-        dispatch({
-            type: 'SET',
             widgets: widgets
         })
 })

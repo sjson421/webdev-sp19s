@@ -5,9 +5,6 @@ import ParagraphWidget from './ParagraphWidget'
 import ListWidget from './ListWidget'
 import LinkWidget from './LinkWidget'
 
-const buttonMargin = {
-    margin: "0.2em"
-}
 const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, widgets}) =>
     <div style = {{marginBottom: "2em"}}>
         {

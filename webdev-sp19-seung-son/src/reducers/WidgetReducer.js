@@ -8,7 +8,11 @@ const tService = new TopicService();
 
 let topicId = -1;
 
-const widgetReducer = (state = [], action) => {
+const widgets = {
+    widgets: []
+};
+
+const widgetReducer = (state = widgets, action) => {
     switch (action.type) {
         case 'CREATE_WIDGET':
             if (topicId == -1) {
@@ -16,19 +20,14 @@ const widgetReducer = (state = [], action) => {
             }
             const widget = {
                 name: 'New Widget',
+                type: 'HEADING',
                 text: 'New Widget',
                 size: 1
             }
-            return hService.createWidget(topicId, widget)
-                .then(() =>
-                    tService.findAllWidgets(topicId)
-                        .then(response => {
-                                return {
-                                    widgets: response
-                                }
-                            }
-                        )
-                )
+            hService.createWidget(topicId, widget);
+            return {
+                widgets: state.widgets, widget
+            }
         case 'DELETE_WIDGET':
             service.deleteWidget(action.widget);
             return {
@@ -51,16 +50,12 @@ const widgetReducer = (state = [], action) => {
             )
 
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
-            topicId = action.topic.id;
-            return tService.findAllWidgets(action.topic.id)
-                .then(response => {
-                        return {
-                            widgets: response
-                        }
-                    }
-                )
+            topicId = action.id;
+            return {
+                widgets: action.response
+            }
         case 'FIND_ALL_WIDGETS':
-            return state.widgets;
+            return state;
         default:
             return state;
     }

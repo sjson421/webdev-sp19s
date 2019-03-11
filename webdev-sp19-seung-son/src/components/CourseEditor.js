@@ -31,8 +31,7 @@ class CourseEditor extends React.Component {
             topic: '',
             moduleTitle: '',
             lessonTitle: '',
-            topicTitle: '',
-            widgets: []
+            topicTitle: ''
         }
         this.courseService.findCourseById(courseId)
             .then(response => this.setState({
@@ -148,14 +147,14 @@ class CourseEditor extends React.Component {
         this.setState({
             topic: topic
         })
-        this.store.dispatch({
-            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
-            topic: topic
-        });
         this.topicService.findAllWidgets(topic.id)
-            .then(response => this.setState({
-                widgets: response
-            }))
+            .then((response) => {
+                this.store.dispatch({
+                    type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                    response: response,
+                    id: topic.id
+                })
+            })
     }
     highlightTopic = (event) => {
         const topicsList = event.target.parentElement.parentElement.getElementsByTagName("li")
