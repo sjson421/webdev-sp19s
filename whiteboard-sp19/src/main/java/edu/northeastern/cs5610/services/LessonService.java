@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import edu.northeastern.cs5610.models.Course;
 import edu.northeastern.cs5610.models.Lesson;
 import edu.northeastern.cs5610.models.Module;
+import edu.northeastern.cs5610.models.Topic;
 import edu.northeastern.cs5610.repositories.LessonRepository;
+import edu.northeastern.cs5610.repositories.ModuleRepository;
 import edu.northeastern.cs5610.repositories.WidgetRepository;
 
 @RestController
@@ -17,16 +19,35 @@ import edu.northeastern.cs5610.repositories.WidgetRepository;
 public class LessonService {
 	@Autowired
 	LessonRepository rep;
+	@Autowired
+	ModuleRepository cRep;
 	
 	@PostMapping("/api/module/{mid}/lesson")
 	public List<Lesson> createLesson(@PathVariable("mid") Integer id, @RequestBody Lesson lesson) {
+		List<Module> modules = (List<Module>) cRep.findAll();
+		for (int i = 0; i < modules.size(); i++) {
+			Module w = modules.get(i);
+			if (w.getId().equals(id)) {
+				lesson.setModule(w);
+				break;
+			}
+		}
 		rep.save(lesson);
 		return (List<Lesson>) rep.findAll();
 	}
 
 	@GetMapping("/api/module/{mid}/lesson")
 	public List<Lesson> findAllLessons(@PathVariable("mid") Integer id) {
-		return (List<Lesson>) rep.findAll();
+		List<Lesson> returned = new ArrayList<Lesson>();
+		List<Lesson> lessons = (List<Lesson>) rep.findAll();
+		
+		for (int i = 0; i < lessons.size(); i++) {
+			Lesson w = lessons.get(i);
+			if (w.getModule().getId().equals(id)) {
+				returned.add(w);
+			}
+		}
+		return returned;
 	}
 
 	@GetMapping("/api/lesson/{lid}")
@@ -37,7 +58,7 @@ public class LessonService {
 	@PutMapping("/api/lesson/{lid}")
 	public Lesson updateLesson(@PathVariable("lid") Integer id, @RequestBody Lesson newLesson) {
 		Lesson c = rep.findById(id).get();
-		c = newLesson;
+		c.setTitle(newLesson.getTitle());
 		return rep.save(c);
 	}
 

@@ -1,26 +1,36 @@
-import CourseService from '../services/CourseService'
+import WidgetService from '../services/WidgetService'
+import TopicService from '../services/TopicService'
+import HeadingWidgetService from "../services/HeadingWidgetService";
 
-const service = new CourseService();
-const widgets = {
-    widgets: service.findAllWidgets()
-};
+const service = new WidgetService();
+const hService = new HeadingWidgetService();
+const tService = new TopicService();
 
-const widgetReducer = (state = widgets, action) => {
+let topicId = -1;
 
+const widgetReducer = (state = [], action) => {
     switch (action.type) {
         case 'CREATE_WIDGET':
-            return {
-                widgets: [
-                    ...state.widgets,
-                    {
-                        type: 'HEADING',
-                        text: 'New Widget',
-                        size: 1,
-                        preview: {"display": "none"}
-                    }
-                ]
+            if (topicId == -1) {
+                return;
             }
+            const widget = {
+                name: 'New Widget',
+                text: 'New Widget',
+                size: 1
+            }
+            return hService.createWidget(topicId, widget)
+                .then(() =>
+                    tService.findAllWidgets(topicId)
+                        .then(response => {
+                                return {
+                                    widgets: response
+                                }
+                            }
+                        )
+                )
         case 'DELETE_WIDGET':
+            service.deleteWidget(action.widget);
             return {
                 widgets: state.widgets.filter(widget => widget.id !== action.widget.id)
             }
@@ -36,14 +46,19 @@ const widgetReducer = (state = widgets, action) => {
                 widgets: [...action.widgets]
             }
         case 'FIND_WIDGET':
-            return widgets.find(widget =>
+            return state.widgets.find(widget =>
                 widget.id === action.widget.id
             )
 
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
-            return {
-                widgets: service.findWidgets(action.topic.id)
-            };
+            topicId = action.topic.id;
+            return tService.findAllWidgets(action.topic.id)
+                .then(response => {
+                        return {
+                            widgets: response
+                        }
+                    }
+                )
         case 'FIND_ALL_WIDGETS':
             return state.widgets;
         default:

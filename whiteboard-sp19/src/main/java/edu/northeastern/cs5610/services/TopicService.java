@@ -1,5 +1,6 @@
 package edu.northeastern.cs5610.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,35 @@ import edu.northeastern.cs5610.repositories.TopicRepository;
 public class TopicService {
 	@Autowired
 	TopicRepository rep;
+	@Autowired
+	LessonRepository cRep;
 
 	@PostMapping("/api/lesson/{lid}/topic")
 	public List<Topic> createTopic(@PathVariable("lid") Integer id, @RequestBody Topic topic) {
+		List<Lesson> courses = (List<Lesson>) cRep.findAll();
+		for (int i = 0; i < courses.size(); i++) {
+			Lesson w = courses.get(i);
+			if (w.getId().equals(id)) {
+				topic.setLesson(w);
+				break;
+			}
+		}
 		rep.save(topic);
 		return (List<Topic>) rep.findAll();
 	}
 
 	@GetMapping("/api/lesson/{lid}/topic")
 	public List<Topic> findAllTopics(@PathVariable("lid") Integer id) {
-		return (List<Topic>) rep.findAll();
+		List<Topic> returned = new ArrayList<Topic>();
+		List<Topic> topics = (List<Topic>) rep.findAll();
+		
+		for (int i = 0; i < topics.size(); i++) {
+			Topic w = topics.get(i);
+			if (w.getLesson().getId().equals(id)) {
+				returned.add(w);
+			}
+		}
+		return returned;
 	}
 
 	@GetMapping("/api/topic/{tid}")
@@ -38,7 +58,7 @@ public class TopicService {
 	@PutMapping("/api/topic/{tid}")
 	public Topic updateTopic(@PathVariable("tid") Integer id, @RequestBody Topic newTopic) {
 		Topic c = rep.findById(id).get();
-		c = newTopic;
+		c.setTitle(newTopic.getTitle());
 		return rep.save(c);
 	}
 

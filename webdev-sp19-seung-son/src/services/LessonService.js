@@ -4,16 +4,20 @@ const SOURCE = url;
 let mid;
 
 class LessonService {
-    constructor(mid) {
-        this.mid = mid;
-    }
-
+    createLesson = (mid, lesson) =>
+        fetch(SOURCE + "/api/module/" + mid + "/lesson", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(lesson)
+        }).then(response => {
+            return response.json()
+        });
     findLessonById = courseId =>
         fetch(SOURCE + "/api/lesson/" + courseId)
             .then(response =>
                 response.json());
-    findAllLessons = () =>
-        fetch(SOURCE + "/api/module/" + this.mid + "/lesson")
+    findAllLessons = mid =>
+        fetch(SOURCE + "/api/module/" + mid + "/lesson")
             .then(response => {
                 return response.json()
             });

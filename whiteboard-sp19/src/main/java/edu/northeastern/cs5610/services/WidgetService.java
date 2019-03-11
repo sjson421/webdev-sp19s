@@ -1,5 +1,6 @@
 package edu.northeastern.cs5610.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class WidgetService {
 	public Widget findWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
 	}
-
+	
 	@GetMapping("/api/widget")
 	public List<Widget> findAllWidgets() {
 		return (List<Widget>) widgetRep.findAll();

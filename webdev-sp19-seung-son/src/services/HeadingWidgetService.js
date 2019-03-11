@@ -1,8 +1,16 @@
-import Source from "/src/services";
+import url from "./Source";
 
-const SOURCE = Source.url;
+const SOURCE = url;
 
 class HeadingWidgetService {
+    createWidget = (tid, widget) =>
+        fetch(SOURCE + "/api/topic/" + tid + "/heading/widget", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(widget)
+        }).then(response => {
+            return response.json()
+        });
     findHeadingWidgetById = courseId =>
         fetch(SOURCE + "/api/heading/widget/" + courseId)
             .then(response =>
@@ -20,7 +28,6 @@ class HeadingWidgetService {
             body: JSON.stringify(course)
         }).then(response => response.json())
     }
-
     deleteHeadingWidget = deleteCourse =>
         fetch(SOURCE + "/api/heading/widget/" + deleteCourse.id, {
             method: 'DELETE'

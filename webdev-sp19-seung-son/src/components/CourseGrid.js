@@ -7,7 +7,6 @@ const navStyle = {
 };
 
 const CourseGrid = ({courses, deleteCourse, addCourse}) =>
-
     <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-primary"
              style={navStyle}>

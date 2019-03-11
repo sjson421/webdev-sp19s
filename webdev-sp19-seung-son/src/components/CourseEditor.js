@@ -3,6 +3,10 @@ import ModuleList from "./ModuleList";
 import LessonTabs from "./LessonTabs";
 import TopicPills from "./TopicPills";
 import CourseService from "../services/CourseService";
+import ModuleService from "../services/ModuleService";
+import LessonService from "../services/LessonService";
+import TopicService from "../services/TopicService";
+import WidgetService from "../services/WidgetService";
 import {Link} from "react-router-dom";
 import WidgetListContainer from "../containers/WidgetListContainer";
 import widgetReducer from '../reducers/WidgetReducer'
@@ -12,24 +16,55 @@ import {Provider} from 'react-redux'
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props)
-        this.courseService = new CourseService()
-        const courseId = parseInt(props.match.params.id)
-        this.courseService.findCourseById(courseId)
-            .then(response => this.setState({
-                course: response
-            }))
+        this.courseService = new CourseService();
+        this.moduleService = new ModuleService();
+        this.lessonService = new LessonService();
+        this.topicService = new TopicService();
+        this.widgetService = new WidgetService();
+        const courseId = parseInt(props.match.params.id);
+
         this.state = {
-            course:'',
+            course: '',
             module: '',
             title: '',
             lesson: '',
             topic: '',
+            moduleTitle: '',
             lessonTitle: '',
             topicTitle: '',
             widgets: []
         }
+        this.courseService.findCourseById(courseId)
+            .then(response => this.setState({
+                course: response
+            }))
+        this.moduleService.findAllModules(courseId)
+            .then(response => this.setState({
+                modules: response
+            }))
         this.store = createStore(widgetReducer);
     }
+
+    moduleRefresh = (id) =>
+        this.moduleService.findAllModules(id)
+            .then(response => this.setState({
+                modules: response
+            }))
+    lessonRefresh = (id) =>
+        this.lessonService.findAllLessons(id)
+            .then(response => this.setState({
+                lessons: response
+            }))
+    topicRefresh = (id) =>
+        this.topicService.findAllTopics(id)
+            .then(response => this.setState({
+                topics: response
+            }))
+    widgetRefresh = (id) =>
+        this.widgetService.findAllWidgetsForTopic(id)
+            .then(response => this.setState({
+                topics: response
+            }))
 
     lessonTitleChanged = (event) => {
         const newTitle = event.target.value;
@@ -59,16 +94,7 @@ class CourseEditor extends React.Component {
             module: module,
             lesson: ''
         })
-    }
-    deleteModuleCascade = (deleteModule) => {
-        if (this.state.module === deleteModule) {
-            this.state.lesson = '';
-            this.state.module = ''
-        }
-        this.setState({
-            module: this.state.module,
-            lesson: this.state.lesson
-        })
+        this.lessonRefresh(module.id)
     }
     highlightLesson = (event) => {
         const lessonsList = event.target.parentElement.parentElement.getElementsByTagName("li")
@@ -83,6 +109,7 @@ class CourseEditor extends React.Component {
         this.setState({
             lesson: lesson
         })
+        this.topicRefresh(lesson.id)
     }
     createLesson = () => {
         let title = this.state.lessonTitle;
@@ -92,67 +119,30 @@ class CourseEditor extends React.Component {
         }
 
         const newLesson = {
-            id: (new Date()).getTime(),
             title: title
         }
-
 
         if (!this.state.module) {
             alert("You cannot create a lesson without a selected module!");
             return;
         }
-        if (!this.state.module.lessons) {
-            this.state.module.lessons = [newLesson]
-        } else {
-            this.state.module.lessons.push(newLesson);
-        }
-        this.setState({
-            lessons: {
-                ...this.state.module.lessons
-            }
-        });
+        this.lessonService.createLesson(this.state.module.id, newLesson)
+            .then(() =>
+                this.lessonRefresh(this.state.module.id)
+            )
     }
     deleteLesson = (dLesson) => {
-        const myLessons = this.state.module.lessons;
-        let index = 0;
-
-        for (var i = 0; i < myLessons.length; i++) {
-            if (myLessons[i].id == dLesson.id) {
-                index = i;
-                break;
-            }
-        }
-        if (this.state.lesson === myLessons[i]) {
-            this.state.lesson = '';
-        }
-        const newLessons = this.state.module.lessons.filter(
-            lesson => lesson.id !== dLesson.id
-        )
-        this.state.module.lessons = newLessons;
-        this.setState({
-            lesson: this.state.lesson
-        })
+        this.lessonService.deleteLesson(dLesson)
+            .then(() =>
+                this.lessonRefresh(this.state.module.id)
+            )
     }
     editLesson = (lesson) => {
-        const lessons = this.state.module.lessons;
-
-        let title = this.state.lessonTitle;
-        if (title === '') {
-            title = "No Title"
-        }
-        for (let i = 0; i < lessons.length; i++) {
-            if (lessons[i].id === lesson.id) {
-                lessons[i].title = title;
-                break;
-            }
-        }
-        this.setState(
-            {
-                module: {
-                    lessons: [...lessons]
-                }
-            }
-        )
+        lesson.title = this.state.lessonTitle;
+        this.lessonService.updateLesson(lesson)
+            .then(() =>
+                this.lessonRefresh(this.state.module.id)
+            )
     }
     selectTopic = topic => {
         this.setState({
@@ -162,6 +152,10 @@ class CourseEditor extends React.Component {
             type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
             topic: topic
         });
+        this.topicService.findAllWidgets(topic.id)
+            .then(response => this.setState({
+                widgets: response
+            }))
     }
     highlightTopic = (event) => {
         const topicsList = event.target.parentElement.parentElement.getElementsByTagName("li")
@@ -181,69 +175,31 @@ class CourseEditor extends React.Component {
         }
 
         const newTopic = {
-            id: (new Date()).getTime(),
             title: title
         }
 
         if (!this.state.lesson) {
             alert("You cannot create a topic without a selected lesson!");
             return;
-        } else {
-            if (!this.state.lesson.topics) {
-                this.state.lesson.topics = [newTopic]
-            } else {
-                this.state.lesson.topics.push(newTopic);
-            }
         }
-        this.setState({
-            topics: {
-                ...this.state.lesson.topics
-            }
-        });
+        this.topicService.createTopic(this.state.lesson.id, newTopic)
+            .then(() =>
+                this.topicRefresh(this.state.lesson.id)
+            )
+
     }
     deleteTopic = (dTopic) => {
-
-        const newTopics = this.state.lesson.topics.filter(
-            topic => topic.id !== dTopic.id
-        )
-        this.state.lesson.topics = newTopics;
-        this.setState({
-            lesson: this.state.lesson
-        })
+        this.topicService.deleteTopic(dTopic)
+            .then(() =>
+                this.topicRefresh(this.state.lesson.id)
+            )
     }
     editTopic = (topic) => {
-        const topics = this.state.lesson.topics;
-
-        let title = this.state.topicTitle;
-        if (title === '') {
-            title = "No Title"
-        }
-        for (let i = 0; i < topics.length; i++) {
-            if (topics[i].id === topic.id) {
-                topics[i].title = title;
-                break;
-            }
-        }
-        this.setState(
-            {
-                lesson: {
-                    topics: [...topics]
-                }
-            }
-        )
-    }
-
-    editCourse = () => {
-        const title = this.state.title;
-        const id = parseInt(this.props.match.params.id);
-        const course = this.state.course;
-        course.title = title;
-        this.courseService.updateCourse(id, course);
-        this.setState({
-            course: {
-                title: title
-            }
-        })
+        topic.title = this.state.topicTitle;
+        this.topicService.updateTopic(topic)
+            .then(() =>
+                this.topicRefresh(this.state.lesson.id)
+            )
     }
 
     setTitle = (title) => {
@@ -252,29 +208,64 @@ class CourseEditor extends React.Component {
         })
     }
 
+    createModule = () => {
+        let title = this.state.moduleTitle;
+
+        if (title === '') {
+            title = "New Module";
+        }
+
+        const newModule = {
+            title: title
+        }
+
+        this.moduleService.createModule(this.state.course.id, newModule)
+            .then(() =>
+                this.moduleRefresh(this.state.course.id)
+            )
+    }
+    moduleTitleChanged = (event) => {
+        const newTitle = event.target.value;
+        this.setState(
+            {
+                moduleTitle: newTitle
+            });
+    }
+    deleteModule = (dModule) => {
+        this.moduleService.deleteModule(dModule)
+            .then(() =>
+                this.moduleRefresh(this.state.course.id)
+            )
+    }
+    editModule = (module) => {
+        module.title = this.state.moduleTitle;
+        this.moduleService.updateModule(module)
+            .then(() =>
+                this.moduleRefresh(this.state.course.id)
+            )
+    }
+
     render() {
         return (
             <div>
-                <h2>Course Editor: {this.state.course.title}
-                    <i className="fa fa-pencil"
-                       style={{margin: "0 1%", cursor: "pointer"}}
-                       onClick={() => {
-                           this.editCourse(module)
-                       }}></i></h2>
+                <h2>Course Editor: {this.state.course.title}</h2>
                 <Link to="/"><h6 style={{marginBottom: "2em"}}>Return home</h6></Link>
                 <hr/>
                 <div className="row">
                     <div className="col-lg-4 col-md-12 col-sm-12" style={{marginBottom: "2em"}}>
                         <ModuleList
-                            modules={this.state.course.modules}
+                            modules={this.state.modules}
+                            createModule={this.createModule}
+                            deleteModule={this.deleteModule}
+                            editModule={this.editModule}
                             highlightModule={this.highlightModule}
                             selectModule={this.selectModule}
                             setTitle={this.setTitle}
-                            deleteModuleCascade={this.deleteModuleCascade}/>
+                            moduleTitleChanged={this.moduleTitleChanged}/>
                     </div>
                     <div className="col-8">
                         <LessonTabs
-                            lessons={this.state.module.lessons}
+                            lessons={this.state.lessons}
                             createLesson={this.createLesson}
                             deleteLesson={this.deleteLesson}
                             editLesson={this.editLesson}
@@ -283,7 +274,7 @@ class CourseEditor extends React.Component {
                             lessonTitleChanged={this.lessonTitleChanged}/>
                         <hr/>
                         <TopicPills
-                            topics={this.state.lesson.topics}
+                            topics={this.state.topics}
                             createTopic={this.createTopic}
                             deleteTopic={this.deleteTopic}
                             editTopic={this.editTopic}

@@ -4,16 +4,20 @@ const SOURCE = url;
 let cid;
 
 class ModuleService {
-    constructor(cid) {
-        this.cid = cid;
-    }
-
+    createModule = (cid, module) =>
+        fetch(SOURCE + "/api/courses/" + cid + "/modules", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(module)
+        }).then(response => {
+            return response.json()
+        });
     findModuleById = courseId =>
         fetch(SOURCE + "/api/modules/" + courseId)
             .then(response =>
                 response.json());
-    findAllModules = () =>
-        fetch(SOURCE + "/api/courses/" + this.cid + "/modules")
+    findAllModules = cid =>
+        fetch(SOURCE + "/api/courses/" + cid + "/modules")
             .then(response => {
                 return response.json()
             });

@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetComponent from './WidgetComponent'
 import ParagraphWidget from "./ParagraphWidget";
 
-const WidgetList = ({widgets, createWidget, deleteWidget, updateWidget, updateWidgets}) =>
+const WidgetList = ({widgets = [], createWidget, deleteWidget, updateWidget, updateWidgets}) =>
     <div>
         <h1 style = {{marginBottom: "2em"}}>Widget List</h1>
         <div className="list-group">

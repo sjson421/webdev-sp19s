@@ -7,6 +7,11 @@ class WidgetService {
         fetch(SOURCE + "/api/widget/" + courseId)
             .then(response =>
                 response.json());
+    findAllWidgetsForTopic = tid =>
+        fetch(SOURCE + "/api/topic/" + tid + "/widget")
+            .then(response => {
+                return response.json()
+            });
     findAllWidgets = () =>
         fetch(SOURCE + "/api/widget")
             .then(response => {
