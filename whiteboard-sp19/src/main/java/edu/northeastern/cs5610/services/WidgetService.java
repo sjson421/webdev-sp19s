@@ -1,6 +1,5 @@
 package edu.northeastern.cs5610.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.northeastern.cs5610.models.Widget;
+import edu.northeastern.cs5610.models.*;
 import edu.northeastern.cs5610.repositories.WidgetRepository;
 
 @RestController
@@ -41,5 +40,10 @@ public class WidgetService {
 	@DeleteMapping("/api/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {
 		widgetRep.deleteById(id);
+	}
+	
+	@PutMapping("/api/widget")
+	public void updateWidgets(@RequestBody List<Widget> widgets) {
+		widgetRep.saveAll(widgets);
 	}
 }

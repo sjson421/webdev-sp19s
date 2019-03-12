@@ -22,6 +22,8 @@ public class TopicService {
 	@Autowired
 	LessonRepository cRep;
 
+	public static int topicId;
+
 	@PostMapping("/api/lesson/{lid}/topic")
 	public List<Topic> createTopic(@PathVariable("lid") Integer id, @RequestBody Topic topic) {
 		List<Lesson> courses = (List<Lesson>) cRep.findAll();
@@ -77,6 +79,7 @@ public class TopicService {
 	@GetMapping("/api/topic/{tid}/widget")
 	public List<Widget> findAllWidgets(@PathVariable("tid") Integer id) {
 		Topic topic = findTopicById(id);
+		TopicService.topicId = id;
 		return topic.getWidgets();
 	}
 }

@@ -151,8 +151,7 @@ class CourseEditor extends React.Component {
             .then((response) => {
                 this.store.dispatch({
                     type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
-                    response: response,
-                    id: topic.id
+                    response: response
                 })
             })
     }

@@ -33,7 +33,10 @@ public class LinkWidgetService {
 	@PutMapping("/api/link/widget/{wid}")
 	public LinkWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody LinkWidget widget) {
 		LinkWidget w = widgetRep.findById(id).get();
-		w = widget;
+		w.setName(widget.getName());
+		w.setType(widget.getType());
+		w.setTitle(widget.getTitle());
+		w.setHref(widget.getHref());
 		return widgetRep.save(w);
 	}
 

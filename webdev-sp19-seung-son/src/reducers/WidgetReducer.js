@@ -1,9 +1,17 @@
 import WidgetService from '../services/WidgetService'
 import TopicService from '../services/TopicService'
 import HeadingWidgetService from "../services/HeadingWidgetService";
+import ParagraphWidgetService from "../services/ParagraphWidgetService";
+import ImageWidgetService from "../services/ImageWidgetService";
+import ListWidgetService from "../services/ListWidgetService";
+import LinkWidgetService from "../services/LinkWidgetService";
 
 const service = new WidgetService();
-const hService = new HeadingWidgetService();
+const headingService = new HeadingWidgetService();
+const paragraphService = new ParagraphWidgetService();
+const imageService = new ImageWidgetService();
+const listService = new ListWidgetService();
+const linkService = new LinkWidgetService();
 const tService = new TopicService();
 
 let topicId = -1;
@@ -24,7 +32,7 @@ const widgetReducer = (state = widgets, action) => {
                 text: 'New Widget',
                 size: 1
             }
-            hService.createWidget(topicId, widget);
+            headingService.createWidget(topicId, widget);
             return {
                 widgets: state.widgets, widget
             }
@@ -35,6 +43,7 @@ const widgetReducer = (state = widgets, action) => {
             }
 
         case 'UPDATE_WIDGET':
+            service.updateWidget(action.widget);
             return {
                 widgets: state.widgets.map(widget =>
                     widget.id === action.widget.id ? action.widget : widget
@@ -50,12 +59,46 @@ const widgetReducer = (state = widgets, action) => {
             )
 
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
-            topicId = action.id;
             return {
                 widgets: action.response
             }
         case 'FIND_ALL_WIDGETS':
             return state;
+        case 'UPDATE_HEADING_WIDGET':
+            headingService.updateHeadingWidget(action.widget);
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
+        case 'UPDATE_PARAGRAPH_WIDGET':
+            paragraphService.updateParagraphWidget(action.widget);
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
+        case 'UPDATE_IMAGE_WIDGET':
+            imageService.updateImageWidget(action.widget);
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
+        case 'UPDATE_LIST_WIDGET':
+            listService.updateListWidget(action.widget);
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
+        case 'UPDATE_LINK_WIDGET':
+            linkService.updateLinkWidget(action.widget);
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
         default:
             return state;
     }

@@ -30,7 +30,8 @@ public class HeadingWidgetService {
 	TopicRepository topicRep;
 	
 	@PostMapping("/api/topic/{tid}/heading/widget")
-	public HeadingWidget createWidget(@PathVariable("tid") Integer id, @RequestBody HeadingWidget widget) {
+	public int createWidget(@PathVariable("tid") Integer tid, @RequestBody HeadingWidget widget) {
+		int id = TopicService.topicId;
 		List<Topic> topics =(List<Topic>) topicRep.findAll();
 		
 		for (int i = 0; i < topics.size(); i++) {
@@ -42,7 +43,7 @@ public class HeadingWidgetService {
 		}
 		widget.setType("HEADING");
 		widgetRep.save(widget);
-		return widget;
+		return id;
 	}
 	@GetMapping("/api/heading/widget/{wid}")
 	public HeadingWidget findHeadingWidgetById(@PathVariable("wid") Integer id) {
@@ -55,7 +56,10 @@ public class HeadingWidgetService {
 	@PutMapping("/api/heading/widget/{wid}")
 	public HeadingWidget updateHeadingWidget(@PathVariable("wid") Integer id, @RequestBody HeadingWidget widget) {
 		HeadingWidget w = widgetRep.findById(id).get();
-		w = widget;
+		w.setName(widget.getName());
+		w.setType(widget.getType());
+		w.setSize(widget.getSize());
+		w.setText(widget.getText());
 		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/heading/widget/{wid}")

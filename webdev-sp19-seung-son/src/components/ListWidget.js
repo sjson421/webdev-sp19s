@@ -44,7 +44,7 @@ const check = ({widget}) => {
         widget.listType = "UNORDERED"
     }
 }
-const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
+const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
     <div className="container">
         {check({widget})}
         {() => updateWidget({widget})}
@@ -53,24 +53,27 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
         <hr/>
         <div className="float-right">
             <div>
-                <a className="btn btn-success" style={buttonMargin}> Save </a>
+                <a className="btn btn-success"
+                   style={buttonMargin}
+                   onClick={event =>
+                       updateWidget(widget)}> Save </a>
                 <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
                 <i className="fa fa-toggle-off"
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = {}
+                           widget.preview = '{}'
                            updateWidget(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = {display: 'none'}
+                           widget.preview = '{"display": "none"}'
                            updateWidget(widget)
                        }
                    }}></i>
                 <br/>
             </div>
 
-            <a className="btn btn-warning"
+            <a className={top}
                style={buttonMargin}
                onClick={event => {
                    const i = widgets.indexOf(widget);
@@ -83,7 +86,7 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
                }}>
                 <i className="fa fa-arrow-up"></i>
             </a>
-            <a className="btn btn-warning"
+            <a className={bottom}
                style={buttonMargin}
                onClick={event => {
                    const i = widgets.indexOf(widget);
@@ -118,17 +121,17 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
         <form className="form-group">
             <textarea className="form-control" rows="5"
                       placeholder="Enter one list item per line"
-                      value={getNewlineItems({widget})}
+                      defaultValue={getNewlineItems({widget})}
                       onChange={event => {
                           widget.items = getCommaItems(event.target.value);
-                          updateWidget(widget);
+                          updateWidget(widget)
                       }}/>
             <br/>
             <select className="form-control"
                     defaultValue="Unordered list"
                     onChange={event => {
                         widget.listType = event.target.value;
-                        updateWidget(widget);
+                        updateWidget(widget)
                     }}>
                 <option value="UNORDERED">Unordered list</option>
                 <option value="ORDERED">Ordered list</option>
@@ -137,17 +140,17 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}
             <label htmlFor="listWidgetName">Enter the name for the widget</label>
             <input
                 id="listWidgetName"
-                value={widget.name}
+                defaultValue={widget.name}
                 onChange={event => {
                     widget.name = event.target.value;
-                    updateWidget(widget);
+                    updateWidget(widget)
                 }}
                 className="form-control"
                 placeholder="Widget Name"/>
             <br/>
         </form>
 
-        <div style={widget.preview}>
+        <div style={JSON.parse(widget.preview)}>
             <h4>Preview</h4>
             {
                 widget.listType === 'UNORDERED' &&

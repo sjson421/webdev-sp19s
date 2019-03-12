@@ -33,7 +33,9 @@ public class ImageWidgetService {
 	@PutMapping("/api/image/widget/{wid}")
 	public ImageWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ImageWidget widget) {
 		ImageWidget w = widgetRep.findById(id).get();
-		w = widget;
+		w.setName(widget.getName());
+		w.setType(widget.getType());
+		w.setSrc(widget.getSrc());
 		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/image/widget/{wid}")

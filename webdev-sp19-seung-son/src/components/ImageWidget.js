@@ -4,30 +4,33 @@ const buttonMargin = {
     margin: "0.2em"
 }
 
-const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
+const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
     <div className="container">
         <h3>Image Widget</h3>
         <hr/>
         <div className="float-right">
             <div>
-                <a className="btn btn-success" style={buttonMargin}> Save </a>
+                <a className="btn btn-success"
+                   style={buttonMargin}
+                   onClick={event =>
+                       updateWidget(widget)}> Save </a>
                 <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
                 <i className="fa fa-toggle-off"
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = {}
+                           widget.preview = '{}'
                            updateWidget(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = {display: 'none'}
+                           widget.preview = '{"display": "none"}'
                            updateWidget(widget)
                        }
                    }}></i>
                 <br/>
             </div>
 
-            <a className="btn btn-warning"
+            <a className={top}
                style={buttonMargin}
                onClick={event => {
                    const i = widgets.indexOf(widget);
@@ -40,7 +43,7 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
                }}>
                 <i className="fa fa-arrow-up"></i>
             </a>
-            <a className="btn btn-warning"
+            <a className={bottom}
                style={buttonMargin}
                onClick={event => {
                    const i = widgets.indexOf(widget);
@@ -76,26 +79,26 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
             <input type="text"
                    className="form-control"
                    placeholder="Image URL"
-                   value={widget.src}
+                   defaultValue={widget.src}
                    onChange={event => {
                        widget.src = event.target.value;
-                       updateWidget(widget);
+                       updateWidget(widget)
                    }}/>
             <br/>
             <label htmlFor="imageWidgetName">Enter the name for the widget</label>
             <input
                 id="imageWidgetName"
-                value={widget.name}
+                defaultValue={widget.name}
                 onChange={event => {
                     widget.name = event.target.value;
-                    updateWidget(widget);
+                    updateWidget(widget)
                 }}
                 className="form-control"
                 placeholder="Widget Name"/>
             <br/>
         </form>
 
-        <div style={widget.preview}>
+        <div style={JSON.parse(widget.preview)}>
             <h4>Preview</h4>
             {
                 <img src={widget.src}

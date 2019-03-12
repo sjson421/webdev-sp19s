@@ -33,7 +33,10 @@ public class ListWidgetService {
 	@PutMapping("/api/list/widget/{wid}")
 	public ListWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ListWidget widget) {
 		ListWidget w = widgetRep.findById(id).get();
-		w = widget;
+		w.setName(widget.getName());
+		w.setType(widget.getType());
+		w.setListType(widget.getListType());
+		w.setItems(widget.getItems());
 		return widgetRep.save(w);
 	}
 	@DeleteMapping("/api/list/widget/{wid}")

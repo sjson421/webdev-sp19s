@@ -3,13 +3,19 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets}) =>
+
+//TODO: find out how to change value
+
+const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
     <div>
         <div className="container">
             <h3> Heading Widget </h3>
             <hr/>
             <div className="float-right">
-                <a className="btn btn-success" style={buttonMargin}> Save </a>
+                <a className="btn btn-success"
+                   style={buttonMargin}
+                   onClick={() =>
+                       updateWidget(widget)}> Save </a>
                 <span style={{margin: "0 0.5em 0 1em"}}>Preview</span>
                 <i className="fa fa-toggle-off"
                    onClick={event => {
@@ -24,7 +30,7 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                        }
                    }}></i>
                 <br/>
-                <a className="btn btn-warning"
+                <a className={top}
                    style={buttonMargin}
                    onClick={event => {
                        const i = widgets.indexOf(widget);
@@ -37,7 +43,7 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                    }}>
                     <i className="fa fa-arrow-up"></i>
                 </a>
-                <a className="btn btn-warning"
+                <a className={bottom}
                    style={buttonMargin}
                    onClick={event => {
                        const i = widgets.indexOf(widget);
@@ -71,10 +77,10 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
             </div>
             <form className="form-group">
                 <input
-                    value={widget.text}
+                    defaultValue={widget.text}
                     onChange={event => {
                         widget.text = event.target.value;
-                        updateWidget(widget);
+                        updateWidget(widget)
                     }}
                     className="form-control"
                     placeholder="Heading text"/>
@@ -97,10 +103,10 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                 <label htmlFor="headingWidgetName">Enter the name for the widget</label>
                 <input
                     id="headingWidgetName"
-                    value={widget.name}
+                    defaultValue={widget.name}
                     onChange={event => {
                         widget.name = event.target.value;
-                        updateWidget(widget);
+                        updateWidget(widget)
                     }}
                     className="form-control"
                     placeholder="Widget Name"/>

@@ -32,6 +32,14 @@ class WidgetService {
         }).then(response => {
             return response.json();
         });
+    updateWidgets = w => {
+        return fetch(SOURCE + '/api/widget/', {
+            method: "PUT",
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify(w)
+        })
+    }
 }
 
 export default WidgetService
