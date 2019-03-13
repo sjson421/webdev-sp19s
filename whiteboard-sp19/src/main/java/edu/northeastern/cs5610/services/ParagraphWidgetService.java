@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5610.models.ParagraphWidget;
+import edu.northeastern.cs5610.models.Topic;
 import edu.northeastern.cs5610.models.Widget;
 import edu.northeastern.cs5610.repositories.ParagraphWidgetRepository;
 import edu.northeastern.cs5610.repositories.WidgetRepository;
@@ -33,12 +34,13 @@ public class ParagraphWidgetService {
 		return (List<ParagraphWidget>) widgetRep.findAll();
 	}
 	@PutMapping("/api/paragraph/widget/{wid}")
-	public ParagraphWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ParagraphWidget widget) {
-		ParagraphWidget w = (ParagraphWidget) rep.findById(id).get();
-		w.setName(widget.getName());
-		w.setType(widget.getType());
-		w.setText(widget.getText());
-		return widgetRep.save(w);
+	public int updateWidget(@PathVariable("wid") Integer id, @RequestBody ParagraphWidget widget) {
+		Widget w = rep.findById(id).get();
+		Topic topic = w.getTopic();
+		ParagraphWidget newWidget = new ParagraphWidget(widget.getName(), topic, widget.getText());
+		rep.deleteById(id);
+		widgetRep.save(newWidget);
+		return topic.getId();
 	}
 
 	@DeleteMapping("/api/paragraph/widget/{wid}")

@@ -4,9 +4,17 @@ import WidgetList from '../components/WidgetList'
 import TopicService from '../services/TopicService'
 import HeadingWidgetService from '../services/HeadingWidgetService'
 import CourseEditor from '../components/CourseEditor'
+import ImageWidgetService from "../services/ImageWidgetService";
+import LinkWidgetService from "../services/LinkWidgetService";
+import ListWidgetService from "../services/ListWidgetService";
+import ParagraphWidgetService from "../services/ParagraphWidgetService";
 
 const topicService = new TopicService();
 const headingService = new HeadingWidgetService();
+const imageService = new ImageWidgetService();
+const linkService = new LinkWidgetService();
+const listService = new ListWidgetService();
+const paragraphService = new ParagraphWidgetService();
 
 const stateToPropertyMapper = state => {
     return {
@@ -58,36 +66,71 @@ const dispatchToPropertyMapper = (dispatch, widgets) => ({
         dispatch({
             type: 'FIND_ALL_WIDGETS'
         }),
+    changeWidgetType: widget =>
+        dispatch({
+            type: 'CHANGE_WIDGET_TYPE',
+            widget:widget
+        }),
     updateWidgets: widgets =>
         dispatch({
             type: 'UPDATE_WIDGETS',
             widgets: widgets
         }),
     updateHeadingWidget: widget =>
-        dispatch({
-            type: 'UPDATE_HEADING_WIDGET',
-            widget: widget
-        }),
+        headingService.updateHeadingWidget(widget)
+            .then(tid => {
+                topicService.findAllWidgets(tid)
+                    .then((response) => {
+                        dispatch({
+                            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                            response: response
+                        })
+                    })
+            }),
     updateParagraphWidget: widget =>
-        dispatch({
-            type: 'UPDATE_PARAGRAPH_WIDGET',
-            widget: widget
-        }),
+        paragraphService.updateParagraphWidget(widget)
+            .then(tid => {
+                topicService.findAllWidgets(tid)
+                    .then((response) => {
+                        dispatch({
+                            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                            response: response
+                        })
+                    })
+            }),
     updateListWidget: widget =>
-        dispatch({
-            type: 'UPDATE_LIST_WIDGET',
-            widget: widget
-        }),
+        listService.updateListWidget(widget)
+            .then(tid => {
+                topicService.findAllWidgets(tid)
+                    .then((response) => {
+                        dispatch({
+                            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                            response: response
+                        })
+                    })
+            }),
     updateImageWidget: widget =>
-        dispatch({
-            type: 'UPDATE_IMAGE_WIDGET',
-            widget: widget
-        }),
+        imageService.updateImageWidget(widget)
+            .then(tid => {
+                topicService.findAllWidgets(tid)
+                    .then((response) => {
+                        dispatch({
+                            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                            response: response
+                        })
+                    })
+            }),
     updateLinkWidget: widget =>
-        dispatch({
-            type: 'UPDATE_LINK_WIDGET',
-            widget: widget
-        }),
+        linkService.updateLinkWidget(widget)
+            .then(tid => {
+                topicService.findAllWidgets(tid)
+                    .then((response) => {
+                        dispatch({
+                            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
+                            response: response
+                        })
+                    })
+            })
 })
 
 const WidgetListContainer = connect(

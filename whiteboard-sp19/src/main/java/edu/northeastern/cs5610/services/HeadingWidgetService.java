@@ -1,6 +1,7 @@
 package edu.northeastern.cs5610.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,8 +19,10 @@ import edu.northeastern.cs5610.models.LinkWidget;
 import edu.northeastern.cs5610.models.Module;
 import edu.northeastern.cs5610.models.ParagraphWidget;
 import edu.northeastern.cs5610.models.Topic;
+import edu.northeastern.cs5610.models.Widget;
 import edu.northeastern.cs5610.repositories.HeadingWidgetRepository;
 import edu.northeastern.cs5610.repositories.TopicRepository;
+import edu.northeastern.cs5610.repositories.WidgetRepository;
 
 @RestController
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -28,12 +31,14 @@ public class HeadingWidgetService {
 	HeadingWidgetRepository widgetRep;
 	@Autowired
 	TopicRepository topicRep;
-	
+	@Autowired
+	WidgetRepository rep;
+
 	@PostMapping("/api/topic/{tid}/heading/widget")
 	public int createWidget(@PathVariable("tid") Integer tid, @RequestBody HeadingWidget widget) {
 		int id = TopicService.topicId;
-		List<Topic> topics =(List<Topic>) topicRep.findAll();
-		
+		List<Topic> topics = (List<Topic>) topicRep.findAll();
+
 		for (int i = 0; i < topics.size(); i++) {
 			Topic topic = topics.get(i);
 			if (topic.getId().equals(id)) {
@@ -45,23 +50,27 @@ public class HeadingWidgetService {
 		widgetRep.save(widget);
 		return id;
 	}
+
 	@GetMapping("/api/heading/widget/{wid}")
 	public HeadingWidget findHeadingWidgetById(@PathVariable("wid") Integer id) {
 		return widgetRep.findById(id).get();
 	}
+
 	@GetMapping("/api/heading/widget")
 	public List<HeadingWidget> findAllWidgets() {
 		return (List<HeadingWidget>) widgetRep.findAll();
 	}
+
 	@PutMapping("/api/heading/widget/{wid}")
-	public HeadingWidget updateHeadingWidget(@PathVariable("wid") Integer id, @RequestBody HeadingWidget widget) {
-		HeadingWidget w = widgetRep.findById(id).get();
-		w.setName(widget.getName());
-		w.setType(widget.getType());
-		w.setSize(widget.getSize());
-		w.setText(widget.getText());
-		return widgetRep.save(w);
+	public int updateHeadingWidget(@PathVariable("wid") Integer id, @RequestBody HeadingWidget widget) {
+		Widget w = rep.findById(id).get();
+		Topic topic = w.getTopic();
+		HeadingWidget newWidget = new HeadingWidget(widget.getName(), topic, widget.getSize(), widget.getText());
+		rep.deleteById(id);
+		widgetRep.save(newWidget);
+		return topic.getId();
 	}
+
 	@DeleteMapping("/api/heading/widget/{wid}")
 	public void deleteHeadingWidget(@PathVariable("wid") Integer id) {
 		widgetRep.deleteById(id);

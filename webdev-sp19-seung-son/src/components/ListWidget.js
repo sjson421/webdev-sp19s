@@ -4,6 +4,7 @@ const buttonMargin = {
     margin: "0.2em"
 }
 
+let preview = false;
 const getNewlineItems = ({widget}) => {
     let valueItems = "";
     if (widget.items) {
@@ -44,7 +45,7 @@ const check = ({widget}) => {
         widget.listType = "UNORDERED"
     }
 }
-const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
+const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom, changeWidgetType}) =>
     <div className="container">
         {check({widget})}
         {() => updateWidget({widget})}
@@ -62,12 +63,12 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = '{}'
-                           updateWidget(widget)
+                           preview = true;
+                           changeWidgetType(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = '{"display": "none"}'
-                           updateWidget(widget)
+                           preview = false;
+                           changeWidgetType(widget)
                        }
                    }}></i>
                 <br/>
@@ -104,7 +105,7 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                     defaultValue="LIST"
                     onChange={event => {
                         widget.type = event.target.value
-                        updateWidget(widget)
+                        changeWidgetType(widget)
                     }}>
                 <option value="HEADING">Heading</option>
                 <option value="PARAGRAPH">Paragraph</option>
@@ -118,55 +119,57 @@ const ListWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                 <i className="fa fa-times"></i>
             </a>
         </div>
-        <form className="form-group">
+        {
+            !preview &&
+            <form className="form-group">
             <textarea className="form-control" rows="5"
                       placeholder="Enter one list item per line"
                       defaultValue={getNewlineItems({widget})}
                       onChange={event => {
                           widget.items = getCommaItems(event.target.value);
-                          updateWidget(widget)
                       }}/>
-            <br/>
-            <select className="form-control"
-                    defaultValue="Unordered list"
+                <br/>
+                <select className="form-control"
+                        defaultValue={widget.listType}
+                        onChange={event => {
+                            widget.listType = event.target.value;
+                            changeWidgetType(widget)
+                        }}>
+                    <option value="UNORDERED">Unordered list</option>
+                    <option value="ORDERED">Ordered list</option>
+                </select>
+                <br/>
+                <label htmlFor="listWidgetName">Enter the name for the widget</label>
+                <input
+                    id="listWidgetName"
+                    defaultValue={widget.name}
                     onChange={event => {
-                        widget.listType = event.target.value;
-                        updateWidget(widget)
-                    }}>
-                <option value="UNORDERED">Unordered list</option>
-                <option value="ORDERED">Ordered list</option>
-            </select>
-            <br/>
-            <label htmlFor="listWidgetName">Enter the name for the widget</label>
-            <input
-                id="listWidgetName"
-                defaultValue={widget.name}
-                onChange={event => {
-                    widget.name = event.target.value;
-                    updateWidget(widget)
-                }}
-                className="form-control"
-                placeholder="Widget Name"/>
-            <br/>
-        </form>
-
-        <div style={JSON.parse(widget.preview)}>
-            <h4>Preview</h4>
-            {
-                widget.listType === 'UNORDERED' &&
-                <ul>
-                    {arrayMap({widget}).map(item =>
-                        <li> {item}</li>
-                    )}
-                </ul> ||
-                widget.listType === 'ORDERED' &&
-                <ol>
-                    {arrayMap({widget}).map(item =>
-                        <li> {item}</li>
-                    )}
-                </ol>
-            }
-        </div>
+                        widget.name = event.target.value;
+                    }}
+                    className="form-control"
+                    placeholder="Widget Name"/>
+                <br/>
+            </form>
+            ||
+            preview &&
+            <div>
+                <h4>Preview</h4>
+                {
+                    widget.listType === 'UNORDERED' &&
+                    <ul>
+                        {arrayMap({widget}).map(item =>
+                            <li> {item}</li>
+                        )}
+                    </ul> ||
+                    widget.listType === 'ORDERED' &&
+                    <ol>
+                        {arrayMap({widget}).map(item =>
+                            <li> {item}</li>
+                        )}
+                    </ol>
+                }
+            </div>
+        }
     </div>
 
 export default ListWidget

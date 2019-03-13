@@ -7,10 +7,14 @@ let bottom = "btn btn-warning"
 
 const WidgetList = ({
                         widgets, createWidget, deleteWidget, updateWidget, updateWidgets, updateHeadingWidget,
-                        updateParagraphWidget, updateListWidget, updateImageWidget, updateLinkWidget
+                        updateParagraphWidget, updateListWidget, updateImageWidget, updateLinkWidget, changeWidgetType
                     }) =>
     <div>
-        <h1 style={{marginBottom: "2em"}}>Widget List</h1>
+        <h1>Widget List</h1>
+        <span
+            title="Upon update, the updated widget will appear at the bottom of the list!">
+            <p style={{marginBottom: "2em", color: "blue"}}>Hover for Help!</p>
+        </span>
         <div className="list-group">
             {
                 widgets.map((widget, index) => {
@@ -37,7 +41,8 @@ const WidgetList = ({
                             updateParagraphWidget={updateParagraphWidget}
                             updateListWidget={updateListWidget}
                             updateImageWidget={updateImageWidget}
-                            updateLinkWidget={updateLinkWidget}/>
+                            updateLinkWidget={updateLinkWidget}
+                            changeWidgetType={changeWidgetType}/>
                     }
                 )
             }

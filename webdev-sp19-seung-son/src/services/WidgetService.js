@@ -29,8 +29,6 @@ class WidgetService {
     deleteWidget = deleteCourse =>
         fetch(SOURCE + "/api/widget/" + deleteCourse.id, {
             method: 'DELETE'
-        }).then(response => {
-            return response.json();
         });
     updateWidgets = w => {
         return fetch(SOURCE + '/api/widget/', {

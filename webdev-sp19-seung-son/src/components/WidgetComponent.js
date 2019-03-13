@@ -5,9 +5,13 @@ import ParagraphWidget from './ParagraphWidget'
 import ListWidget from './ListWidget'
 import LinkWidget from './LinkWidget'
 
-const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, widgets, top, bottom, updateHeadingWidget,
-                         updateParagraphWidget, updateListWidget, updateImageWidget, updateLinkWidget}) =>
-    <div style = {{marginBottom: "2em"}}>
+let preview = false;
+
+const WidgetComponent = ({
+                             widget, deleteWidget, updateWidget, updateWidgets, widgets, top, bottom, updateHeadingWidget,
+                             updateParagraphWidget, updateListWidget, updateImageWidget, updateLinkWidget, changeWidgetType
+                         }) =>
+    <div style={{marginBottom: "2em"}}>
         {
             widget.type == 'HEADING' &&
             <HeadingWidget
@@ -17,7 +21,8 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, wid
                 widget={widget}
                 widgets={widgets}
                 top={top}
-                bottom={bottom}/> ||
+                bottom={bottom}
+                changeWidgetType={changeWidgetType}/> ||
             widget.type == 'PARAGRAPH' &&
             <ParagraphWidget
                 updateWidget={updateParagraphWidget}
@@ -26,7 +31,8 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, wid
                 widget={widget}
                 widgets={widgets}
                 top={top}
-                bottom={bottom}/> ||
+                bottom={bottom}
+                changeWidgetType={changeWidgetType}/> ||
             widget.type == 'LIST' &&
             <ListWidget
                 updateWidget={updateListWidget}
@@ -35,7 +41,8 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, wid
                 widget={widget}
                 widgets={widgets}
                 top={top}
-                bottom={bottom}/> ||
+                bottom={bottom}
+                changeWidgetType={changeWidgetType}/> ||
             widget.type == 'IMAGE' &&
             <ImageWidget
                 widget={widget}
@@ -44,7 +51,8 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, wid
                 updateWidgets={updateWidgets}
                 widgets={widgets}
                 top={top}
-                bottom={bottom}/> ||
+                bottom={bottom}
+                changeWidgetType={changeWidgetType}/> ||
             widget.type == 'LINK' &&
             <LinkWidget
                 updateWidget={updateLinkWidget}
@@ -53,7 +61,8 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget, updateWidgets, wid
                 widget={widget}
                 widgets={widgets}
                 top={top}
-                bottom={bottom}/>
+                bottom={bottom}
+                changeWidgetType={changeWidgetType}/>
 
         }
         <hr/>

@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.northeastern.cs5610.models.HeadingWidget;
 import edu.northeastern.cs5610.models.ImageWidget;
 import edu.northeastern.cs5610.models.ParagraphWidget;
+import edu.northeastern.cs5610.models.Topic;
+import edu.northeastern.cs5610.models.Widget;
 import edu.northeastern.cs5610.repositories.ImageWidgetRepository;
+import edu.northeastern.cs5610.repositories.WidgetRepository;
 
 @RestController
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class ImageWidgetService {
 	@Autowired
 	ImageWidgetRepository widgetRep;
+	@Autowired
+	WidgetRepository rep;
 	
 	@GetMapping("/api/image/widget/{wid}")
 	public ImageWidget findWidgetById(@PathVariable("wid") Integer id) {
@@ -31,12 +36,13 @@ public class ImageWidgetService {
 		return (List<ImageWidget>) widgetRep.findAll();
 	}
 	@PutMapping("/api/image/widget/{wid}")
-	public ImageWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody ImageWidget widget) {
-		ImageWidget w = widgetRep.findById(id).get();
-		w.setName(widget.getName());
-		w.setType(widget.getType());
-		w.setSrc(widget.getSrc());
-		return widgetRep.save(w);
+	public int updateWidget(@PathVariable("wid") Integer id, @RequestBody ImageWidget widget) {
+		Widget w = rep.findById(id).get();
+		Topic topic = w.getTopic();
+		ImageWidget newWidget = new ImageWidget(widget.getName(), topic, widget.getSrc());
+		rep.deleteById(id);
+		widgetRep.save(newWidget);
+		return topic.getId();
 	}
 	@DeleteMapping("/api/image/widget/{wid}")
 	public void deleteWidget(@PathVariable("wid") Integer id) {

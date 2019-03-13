@@ -4,7 +4,8 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
+let preview = false;
+const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom, changeWidgetType}) =>
     <div className="container">
         <h3>Link Widget</h3>
         <hr/>
@@ -19,12 +20,13 @@ const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = '{}'
-                           updateWidget(widget)
+                           changeWidgetType(widget)
+                           preview = true;
                        } else {
                            event.target.className = "fa fa-toggle-off"
                            widget.preview = '{"display": "none"}'
-                           updateWidget(widget)
+                           changeWidgetType(widget)
+                           preview = false;
                        }
                    }}></i>
                 <br/>
@@ -61,7 +63,7 @@ const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                     defaultValue="LINK"
                     onChange={event => {
                         widget.type = event.target.value
-                        updateWidget(widget)
+                        changeWidgetType(widget)
                     }}>
                 <option value="HEADING">Heading</option>
                 <option value="PARAGRAPH">Paragraph</option>
@@ -75,48 +77,51 @@ const LinkWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets,
                 <i className="fa fa-times"></i>
             </a>
         </div>
-        <form className="form-group">
-            <input
-                defaultValue={widget.title}
-                onChange={event => {
-                    widget.title = event.target.value;
-                    updateWidget(widget)
-                }}
-                className="form-control"
-                placeholder = "Link text"/>
-            <br/>
-            <label htmlFor="linkUrl">Enter the link URL</label>
-            <input
-                id="linkUrl"
-                type="text"
-                className="form-control"
-                placeholder="Link URL"
-                defaultValue={widget.href}
-                onChange={event => {
-                    widget.href = event.target.value;
-                    updateWidget(widget)
-                }}/>
-            <br/>
-            <label htmlFor="listWidgetName">Enter the name for the
-                widget</label>
-            <input
-                id="listWidgetName"
-                defaultValue={widget.name}
-                onChange={event => {
-                    widget.name = event.target.value;
-                    updateWidget(widget)
-                }}
-                className="form-control"
-                placeholder = "Widget name"/>
-            <br/>
-        </form>
+        {
+            !preview &&
+            <form className="form-group">
+                <input
+                    defaultValue={widget.title}
+                    onChange={event => {
+                        widget.title = event.target.value;
+                        changeWidgetType(widget)
+                    }}
+                    className="form-control"
+                    placeholder="Link text"/>
+                <br/>
+                <label htmlFor="linkUrl">Enter the link URL</label>
+                <input
+                    id="linkUrl"
+                    type="text"
+                    className="form-control"
+                    placeholder="Link URL"
+                    defaultValue={widget.href}
+                    onChange={event => {
+                        widget.href = event.target.value;
+                    }}/>
+                <br/>
+                <label htmlFor="listWidgetName">Enter the name for the
+                    widget</label>
+                <input
+                    id="listWidgetName"
+                    defaultValue={widget.name}
+                    onChange={event => {
+                        widget.name = event.target.value;
+                    }}
+                    className="form-control"
+                    placeholder="Widget name"/>
+                <br/>
+            </form>
+            ||
+            preview &&
 
-        <div style={JSON.parse(widget.preview)}>
-            <h4>Preview</h4>
-            {
-                <a href={widget.href}>{widget.title}</a>
-            }
-        </div>
+            <div>
+                <h4>Preview</h4>
+                {
+                    <a href={"http://" + widget.href}>{widget.title}</a>
+                }
+            </div>
+        }
     </div>
 
 export default LinkWidget

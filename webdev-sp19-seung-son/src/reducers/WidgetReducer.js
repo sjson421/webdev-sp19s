@@ -64,6 +64,12 @@ const widgetReducer = (state = widgets, action) => {
             }
         case 'FIND_ALL_WIDGETS':
             return state;
+        case 'CHANGE_WIDGET_TYPE':
+            return {
+                widgets: state.widgets.map(widget =>
+                    widget.id === action.widget.id ? action.widget : widget
+                )
+            }
         case 'UPDATE_HEADING_WIDGET':
             headingService.updateHeadingWidget(action.widget);
             return {

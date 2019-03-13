@@ -42,7 +42,7 @@ public class WidgetService {
 		widgetRep.deleteById(id);
 	}
 	
-	@PutMapping("/api/widget")
+	@PutMapping("/api/topic/{tid}/widget")
 	public void updateWidgets(@RequestBody List<Widget> widgets) {
 		widgetRep.saveAll(widgets);
 	}

@@ -11,16 +11,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.northeastern.cs5610.models.HeadingWidget;
 import edu.northeastern.cs5610.models.LinkWidget;
 import edu.northeastern.cs5610.models.ListWidget;
 import edu.northeastern.cs5610.models.ParagraphWidget;
+import edu.northeastern.cs5610.models.Topic;
+import edu.northeastern.cs5610.models.Widget;
 import edu.northeastern.cs5610.repositories.LinkWidgetRepository;
+import edu.northeastern.cs5610.repositories.WidgetRepository;
 
 @RestController
 @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*")
 public class LinkWidgetService {
 	@Autowired
 	LinkWidgetRepository widgetRep;
+	@Autowired
+	WidgetRepository rep;
 
 	@GetMapping("/api/link/widget/{wid}")
 	public LinkWidget findWidgetById(@PathVariable("wid") Integer id) {
@@ -31,13 +37,13 @@ public class LinkWidgetService {
 		return (List<LinkWidget>) widgetRep.findAll();
 	}
 	@PutMapping("/api/link/widget/{wid}")
-	public LinkWidget updateWidget(@PathVariable("wid") Integer id, @RequestBody LinkWidget widget) {
-		LinkWidget w = widgetRep.findById(id).get();
-		w.setName(widget.getName());
-		w.setType(widget.getType());
-		w.setTitle(widget.getTitle());
-		w.setHref(widget.getHref());
-		return widgetRep.save(w);
+	public int updateWidget(@PathVariable("wid") Integer id, @RequestBody LinkWidget widget) {
+		Widget w = rep.findById(id).get();
+		Topic topic = w.getTopic();
+		LinkWidget newWidget = new LinkWidget(widget.getName(), topic, widget.getTitle(), widget.getHref());
+		rep.deleteById(id);
+		widgetRep.save(newWidget);
+		return topic.getId();
 	}
 
 	@DeleteMapping("/api/link/widget/{wid}")

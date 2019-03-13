@@ -4,7 +4,9 @@ const buttonMargin = {
     margin: "0.2em"
 }
 
-const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
+let preview = false;
+
+const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom, changeWidgetType}) =>
     <div className="container">
         <h3>Image Widget</h3>
         <hr/>
@@ -19,12 +21,12 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = '{}'
-                           updateWidget(widget)
+                           preview = true;
+                           changeWidgetType(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = '{"display": "none"}'
-                           updateWidget(widget)
+                           preview = false;
+                           changeWidgetType(widget)
                        }
                    }}></i>
                 <br/>
@@ -61,7 +63,7 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
                     defaultValue="IMAGE"
                     onChange={event => {
                         widget.type = event.target.value
-                        updateWidget(widget)
+                        changeWidgetType(widget)
                     }}>
                 <option value="HEADING">Heading</option>
                 <option value="PARAGRAPH">Paragraph</option>
@@ -75,35 +77,38 @@ const ImageWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets
                 <i className="fa fa-times"></i>
             </a>
         </div>
-        <form className="form-group">
-            <input type="text"
-                   className="form-control"
-                   placeholder="Image URL"
-                   defaultValue={widget.src}
-                   onChange={event => {
-                       widget.src = event.target.value;
-                       updateWidget(widget)
-                   }}/>
-            <br/>
-            <label htmlFor="imageWidgetName">Enter the name for the widget</label>
-            <input
-                id="imageWidgetName"
-                defaultValue={widget.name}
-                onChange={event => {
-                    widget.name = event.target.value;
-                    updateWidget(widget)
-                }}
-                className="form-control"
-                placeholder="Widget Name"/>
-            <br/>
-        </form>
 
-        <div style={JSON.parse(widget.preview)}>
-            <h4>Preview</h4>
-            {
-                <img src={widget.src}
-                     alt={widget.src}></img>
-            }
-        </div>
+        {
+            !preview &&
+            <form className="form-group">
+                <input type="text"
+                       className="form-control"
+                       placeholder="Image URL"
+                       defaultValue={widget.src}
+                       onChange={event => {
+                           widget.src = event.target.value;
+                       }}/>
+                <br/>
+                <label htmlFor="imageWidgetName">Enter the name for the widget</label>
+                <input
+                    id="imageWidgetName"
+                    defaultValue={widget.name}
+                    onChange={event => {
+                        widget.name = event.target.value;
+                    }}
+                    className="form-control"
+                    placeholder="Widget Name"/>
+                <br/>
+            </form>
+            ||
+            preview &&
+            <div>
+                <h4>Preview</h4>
+                {
+                    <img src={widget.src}
+                         alt={widget.src}></img>
+                }
+            </div>
+        }
     </div>
 export default ImageWidget

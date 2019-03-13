@@ -3,10 +3,8 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-
-//TODO: find out how to change value
-
-const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
+let preview = false;
+const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom, changeWidgetType}) =>
     <div>
         <div className="container">
             <h3> Heading Widget </h3>
@@ -21,12 +19,13 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = '{}'
-                           updateWidget(widget)
+                           changeWidgetType(widget)
+                           preview = true
                        } else {
                            event.target.className = "fa fa-toggle-off"
                            widget.preview = '{"display": "none"}'
-                           updateWidget(widget)
+                           changeWidgetType(widget)
+                           preview = false
                        }
                    }}></i>
                 <br/>
@@ -61,7 +60,7 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                         defaultValue="Heading"
                         onChange={event => {
                             widget.type = event.target.value
-                            updateWidget(widget)
+                            changeWidgetType(widget)
                         }}>
                     <option value="HEADING">Heading</option>
                     <option value="PARAGRAPH">Paragraph</option>
@@ -75,53 +74,57 @@ const HeadingWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widge
                     <i className="fa fa-times"></i>
                 </a>
             </div>
-            <form className="form-group">
-                <input
-                    defaultValue={widget.text}
-                    onChange={event => {
-                        widget.text = event.target.value;
-                        updateWidget(widget)
-                    }}
-                    className="form-control"
-                    placeholder="Heading text"/>
-                <br/>
-                <label htmlFor="size">Size</label>
-                <select className="form-control"
-                        id="size"
-                        defaultValue="Heading 1"
+
+            {
+                !preview &&
+                <form className="form-group">
+                    <input
+                        defaultValue={widget.text}
                         onChange={event => {
-                            widget.size = parseInt(event.target.value)
-                            updateWidget(widget)
-                        }}>
-                    <option value="1">Heading 1</option>
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
-                    <option value="4">Heading 4</option>
-                    <option value="5">Heading 5</option>
-                </select>
-                <br/>
-                <label htmlFor="headingWidgetName">Enter the name for the widget</label>
-                <input
-                    id="headingWidgetName"
-                    defaultValue={widget.name}
-                    onChange={event => {
-                        widget.name = event.target.value;
-                        updateWidget(widget)
-                    }}
-                    className="form-control"
-                    placeholder="Widget Name"/>
-                <br/>
-            </form>
-            <div style={JSON.parse(widget.preview)}>
-                <h3>Preview</h3>
-                {
-                    widget.size === 1 && <h1>{widget.text}</h1> ||
-                    widget.size === 2 && <h2>{widget.text}</h2> ||
-                    widget.size === 3 && <h3>{widget.text}</h3> ||
-                    widget.size === 4 && <h4>{widget.text}</h4> ||
-                    widget.size === 5 && <h5>{widget.text}</h5>
-                }
-            </div>
+                            widget.text = event.target.value;
+                        }}
+                        className="form-control"
+                        placeholder="Heading text"/>
+                    <br/>
+                    <label htmlFor="size">Size</label>
+                    <select className="form-control"
+                            id="size"
+                            defaultValue={widget.size}
+                            onChange={event => {
+                                widget.size = parseInt(event.target.value)
+                                changeWidgetType(widget)
+                            }}>
+                        <option value="1">Heading 1</option>
+                        <option value="2">Heading 2</option>
+                        <option value="3">Heading 3</option>
+                        <option value="4">Heading 4</option>
+                        <option value="5">Heading 5</option>
+                    </select>
+                    <br/>
+                    <label htmlFor="headingWidgetName">Enter the name for the widget</label>
+                    <input
+                        id="headingWidgetName"
+                        defaultValue={widget.name}
+                        onChange={event => {
+                            widget.name = event.target.value;
+                        }}
+                        className="form-control"
+                        placeholder="Widget Name"/>
+                    <br/>
+                </form>
+                ||
+                preview &&
+                <div>
+                    <h3>Preview</h3>
+                    {
+                        widget.size === 1 && <h1>{widget.text}</h1> ||
+                        widget.size === 2 && <h2>{widget.text}</h2> ||
+                        widget.size === 3 && <h3>{widget.text}</h3> ||
+                        widget.size === 4 && <h4>{widget.text}</h4> ||
+                        widget.size === 5 && <h5>{widget.text}</h5>
+                    }
+                </div>
+            }
         </div>
     </div>
 

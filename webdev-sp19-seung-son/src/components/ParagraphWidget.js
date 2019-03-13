@@ -3,7 +3,8 @@ import React from 'react'
 const buttonMargin = {
     margin: "0.2em"
 }
-const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom}) =>
+let preview = false;
+const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, widgets, top, bottom, changeWidgetType}) =>
     <div className="container">
         <h3>Paragraph Widget</h3>
         <hr/>
@@ -18,12 +19,12 @@ const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, wid
                    onClick={event => {
                        if (event.target.className == "fa fa-toggle-off") {
                            event.target.className = "fa fa-toggle-on"
-                           widget.preview = '{}'
-                           updateWidget(widget)
+                           preview = true;
+                           changeWidgetType(widget)
                        } else {
                            event.target.className = "fa fa-toggle-off"
-                           widget.preview = '{"display": "none"}'
-                           updateWidget(widget)
+                           preview = false;
+                           changeWidgetType(widget)
                        }
                    }}></i>
                 <br/>
@@ -60,7 +61,7 @@ const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, wid
                     defaultValue="PARAGRAPH"
                     onChange={event => {
                         widget.type = event.target.value
-                        updateWidget(widget)
+                        changeWidgetType(widget)
                     }}>
                 <option value="HEADING">Heading</option>
                 <option value="PARAGRAPH">Paragraph</option>
@@ -74,33 +75,36 @@ const ParagraphWidget = ({widget, updateWidget, deleteWidget, updateWidgets, wid
                 <i className="fa fa-times"></i>
             </a>
         </div>
-        <form className="form-group">
+        {
+            !preview &&
+            <form className="form-group">
             <textarea
                 defaultValue={widget.text}
                 onChange={event => {
                     widget.text = event.target.value;
-                    updateWidget(widget)
                 }}
                 className="form-control"
                 rows="2"
                 placeholder="Paragraph text"/>
-            <br/>
-            <label htmlFor="paragraphWidgetName">Enter the name for the widget</label>
-            <input
-                id="paragraphWidgetName"
-                defaultValue={widget.name}
-                onChange={event => {
-                    widget.name = event.target.value;
-                    updateWidget(widget)
-                }}
-                className="form-control"
-                placeholder="Widget name"/>
-            <br/>
-        </form>
-        <div style={JSON.parse(widget.preview)}>
-            <h4>Preview</h4>
-            <p>{widget.text}</p>
-        </div>
+                <br/>
+                <label htmlFor="paragraphWidgetName">Enter the name for the widget</label>
+                <input
+                    id="paragraphWidgetName"
+                    defaultValue={widget.name}
+                    onChange={event => {
+                        widget.name = event.target.value;
+                    }}
+                    className="form-control"
+                    placeholder="Widget name"/>
+                <br/>
+            </form>
+            ||
+            preview &&
+            <div>
+                <h4>Preview</h4>
+                <p>{widget.text}</p>
+            </div>
+        }
 
     </div>
 
