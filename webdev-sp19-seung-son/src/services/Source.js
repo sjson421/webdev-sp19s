@@ -1,2 +1,2 @@
-const url = "http://localhost:8080";
+const url = "https://assign6-back-sp19s1-seung-son.herokuapp.com";
 export default url;

@@ -3,21 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5f1c2bf8-f89a-443a-bcb7-21c1d54ee2db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HeadingWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeadingWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ImageWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LinkWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LinkWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ListWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ListWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParagraphWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParagraphWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/WidgetComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WidgetComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/WidgetList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/WidgetList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/WidgetListContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/WidgetListContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/WidgetReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/WidgetReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/WidgetService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/WidgetService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/HeadingWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/HeadingWidgetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ImageWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ImageWidgetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/LinkWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/LinkWidgetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ListWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ListWidgetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ParagraphWidgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whiteboard-sp19/src/main/java/edu/northeastern/cs5610/services/ParagraphWidgetService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/Source.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Source.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,7 +18,7 @@
     <session id="-1876929421">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
+          <entry key="project.closed" value="26" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.28" value="2" />
@@ -56,7 +42,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="124" />
-          <entry key="JavaScript" value="46184" />
+          <entry key="JavaScript" value="46188" />
           <entry key="PLAIN_TEXT" value="22" />
           <entry key="TypeScript" value="13" />
         </counts>
@@ -73,7 +59,7 @@
           <entry key="CSS" value="5" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="23" />
-          <entry key="JavaScript" value="509" />
+          <entry key="JavaScript" value="510" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="TypeScript" value="5" />
         </counts>
@@ -83,13 +69,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/reducers/WidgetReducer.js">
+        <entry file="file://$PROJECT_DIR$/src/services/Source.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="51" column="30" lean-forward="true" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="17">
+              <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -163,7 +146,6 @@
         <option value="$PROJECT_DIR$/src/components/Register.js" />
         <option value="$PROJECT_DIR$/src/components/Profile.js" />
         <option value="$PROJECT_DIR$/src/services/SourceUrl.js" />
-        <option value="$PROJECT_DIR$/src/services/Source.js" />
         <option value="$PROJECT_DIR$/src/services/ImageWidgetService.js" />
         <option value="$PROJECT_DIR$/src/services/ListWidgetService.js" />
         <option value="$PROJECT_DIR$/src/services/LinkWidgetService.js" />
@@ -191,6 +173,7 @@
         <option value="$PROJECT_DIR$/src/components/ListWidget.js" />
         <option value="$PROJECT_DIR$/src/components/LinkWidget.js" />
         <option value="$PROJECT_DIR$/src/reducers/WidgetReducer.js" />
+        <option value="$PROJECT_DIR$/src/services/Source.js" />
       </list>
     </option>
   </component>
@@ -250,19 +233,7 @@
               <item name="webdev-sp19-seung-son" type="b2602c69:ProjectViewProjectNode" />
               <item name="webdev-sp19-seung-son" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webdev-sp19-seung-son" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webdev-sp19-seung-son" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webdev-sp19-seung-son" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webdev-sp19-seung-son" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -341,12 +312,12 @@
       <workItem from="1552310230600" duration="12394000" />
       <workItem from="1552323550017" duration="4483000" />
       <workItem from="1552371129643" duration="6944000" />
-      <workItem from="1552495668425" duration="10224000" />
+      <workItem from="1552495668425" duration="10552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173653000" />
+    <option name="totallyTimeSpent" value="173981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1563" height="845" extended-state="6" />
@@ -571,13 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/Source.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TopicId.js" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
@@ -698,11 +662,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/WidgetReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="51" column="30" lean-forward="true" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        <state relative-caret-position="323">
+          <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/Source.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
         </state>
       </provider>
     </entry>
