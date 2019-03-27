@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <h1>{{course.title}}</h1><br/>
+  <div class="row">
+    <div class="col-4">
+      <ul class="list-group">
+        <li class="list-group-item wbdv"
+            [ngClass]="{'active': module.id == moduleId}"
+            *ngFor="let module of modules">
+          <span routerLink='/course/{{courseId}}/module/{{module.id}}/lesson'
+                style="cursor: pointer">{{module.title}}
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-8">
+      <span *ngIf="moduleId">
+        <app-lesson-tabs-component></app-lesson-tabs-component>
+      </span>
+      <span *ngIf="lessonId">
+        <app-topic-pills-component></app-topic-pills-component>
+      </span>
+      <span *ngIf="topicId">
+        <app-widget-list-component></app-widget-list-component>
+      </span>
+    </div>
+  </div>
+  <p class="float-right"
+     style="color:deepskyblue; cursor:pointer"
+     routerLink="/course">Return Home</p>
+</div>

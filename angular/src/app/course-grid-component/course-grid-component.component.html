@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary" style="margin-bottom: 2em;">
+    <form class="input-group my-2 my-lg-0">
+      <a class="btn btn-primary"><i class="fa fa-bars"></i></a><a
+      class="navbar-brand" href="/course">Course Manager</a>
+    </form>
+  </nav>
+  <div class="card-deck row">
+      <span *ngFor="let course of courses"
+            class="card col-sm-12 col-md-4 col-lg-2"
+            style="width:18rem; cursor: pointer"
+            routerLink="/course/{{course.id}}/module">
+          <img class="card-img-top"
+               src="https://picsum.photos/300/200"/>
+          <span class="card-body">
+            <h5 class="card-title">{{course.title}}</h5>
+            <p class="card-text">me</p>
+            <p class="card-text">6:45</p>
+          </span>
+      </span>
+  </div>
+</div>
