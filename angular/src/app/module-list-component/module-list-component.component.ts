@@ -14,7 +14,7 @@ export class ModuleListComponentComponent implements OnInit {
   moduleId = 0;
   lessonId = 0;
   topicId = 0;
-  course = '';
+  course = null;
 
   constructor(private router: Router,
               private moduleService: ModuleServiceClientService,
@@ -22,6 +22,14 @@ export class ModuleListComponentComponent implements OnInit {
               private route: ActivatedRoute) {
     this.route.params.subscribe(params => this.setParams(params));
 
+  }
+
+  getCourseTitle() {
+    if (this.course) {
+      return this.course.title
+    } else {
+      return '';
+    }
   }
 
   setParams(params) {
