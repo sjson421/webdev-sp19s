@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CourseGridComponentComponent implements OnInit {
 
-  private courses = [];
+  courses = [];
   constructor(private courseService: CourseServiceClientService,
               private route: ActivatedRoute) {
     courseService.findAllCourses()
