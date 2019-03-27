@@ -9,7 +9,7 @@ app.use(express.static('./dist/assignment7-sp19s1-seung-son'));
 
 app.get('/*', function(req,res) {
 
-  res.sendFile(path.join(__dirname,'/dist/assignment7-sp19s1-seung-son/index.html'));
+  res.sendFile(path.join(__dirname,'/dist/assignment7-sp19s1-seung-son'));
 });
 
 // Start the app by listening on the default Heroku port
